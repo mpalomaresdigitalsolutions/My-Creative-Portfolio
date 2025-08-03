@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Research - Marlon Palomares Digital Solutions</title>
+    <meta name="description" content="Professional keyword research services for Google Ads campaigns. Discover high-converting keywords, analyze competition, and optimize your targeting strategy.">
+    <meta name="keywords" content="keyword research, Google Ads keywords, PPC keywords, search terms, keyword analysis, competitive research">
+    <meta name="author" content="Marlon Palomares">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            animation: backgroundShift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            50% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+            100% { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px 20px 0 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .service-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 3;
+        }
+
+        .nav-back:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            animation: expandLine 1s ease-out 0.5s both;
+        }
+
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 60px; }
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .research-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .research-card:hover::before {
+            left: 100%;
+        }
+
+        .research-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .research-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .research-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .keyword-table {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .keyword-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .keyword-row:hover {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            transform: translateX(5px);
+        }
+
+        .keyword-row:last-child {
+            border-bottom: none;
+        }
+
+        .keyword-cell {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .keyword-cell.keyword {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .keyword-cell.volume {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .keyword-cell.competition {
+            font-weight: 500;
+        }
+
+        .competition.low { color: #48bb78; }
+        .competition.medium { color: #ed8936; }
+        .competition.high { color: #e53e3e; }
+
+        .research-process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .process-step {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .process-step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2d3748;
+            margin-left: 20px;
+        }
+
+        .step-description {
+            margin-left: 20px;
+            color: #4a5568;
+        }
+
+        .tools-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .tool-description {
+            font-size: 0.8rem;
+            color: #4a5568;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .service-title {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .research-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .keyword-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .research-process {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="nav-back">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <div class="service-icon">
+                <i class="fas fa-key"></i>
+            </div>
+            <h1 class="service-title">Keyword Research</h1>
+            <p class="service-subtitle">Strategic keyword analysis for maximum campaign performance</p>
+        </header>
+
+        <div class="main-content">
+            <div class="section">
+                <h2 class="section-title">Professional Keyword Research</h2>
+                <p>Our comprehensive keyword research service identifies high-converting search terms, analyzes competition, and uncovers opportunities to maximize your Google Ads performance. We use advanced tools and proven methodologies to build targeted keyword strategies that drive qualified traffic and conversions.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Keywords Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">15K+</div>
+                        <div class="stat-label">Monthly Search Volume</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Relevance Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">$2.45</div>
+                        <div class="stat-label">Average CPC</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Research Services</h2>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="research-title">Primary Keyword Research</h3>
+                        <p>Identify high-volume, relevant keywords that align with your business objectives and target audience search behavior.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="research-title">Long-tail Keywords</h3>
+                        <p>Discover specific, lower-competition phrases that drive highly qualified traffic with better conversion potential.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="research-title">Competitor Analysis</h3>
+                        <p>Analyze competitor keyword strategies to identify gaps and opportunities in your market space.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h3 class="research-title">Negative Keywords</h3>
+                        <p>Identify irrelevant search terms to exclude, reducing wasted spend and improving campaign efficiency.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3 class="research-title">Search Volume Analysis</h3>
+                        <p>Evaluate monthly search volumes, trends, and seasonality patterns for strategic planning.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="research-title">Intent Classification</h3>
+                        <p>Categorize keywords by search intent (informational, navigational, transactional) for targeted campaigns.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Top Performing Keywords</h2>
+                <div class="keyword-table">
+                    <div class="table-header">
+                        Current Campaign Keywords Performance
+                    </div>
+                    <div class="keyword-row">
+                        <div class="keyword-cell keyword">NGO internship</div>
+                        <div class="keyword-cell volume">8,100/mo</div>
+                        <div class="keyword-cell competition medium">Medium</div>
+                        <div class="keyword-cell">$2.45</div>
+                        <div class="keyword-cell">6.30%</div>
+                    </div>
+                    <div class="keyword-row">
+                        <div class="keyword-cell keyword">internship for students</div>
+                        <div class="keyword-cell volume">5,400/mo</div>
+                        <div class="keyword-cell competition low">Low</div>
+                        <div class="keyword-cell">$1.85</div>
+                        <div class="keyword-cell">6.98%</div>
+                    </div>
+                    <div class="keyword-row">
+                        <div class="keyword-cell keyword">human rights internships</div>
+                        <div class="keyword-cell volume">2,900/mo</div>
+                        <div class="keyword-cell competition high">High</div>
+                        <div class="keyword-cell">$3.20</div>
+                        <div class="keyword-cell">13.04%</div>
+                    </div>
+                    <div class="keyword-row">
+                        <div class="keyword-cell keyword">creative internships</div>
+                        <div class="keyword-cell volume">1,600/mo</div>
+                        <div class="keyword-cell competition low">Low</div>
+                        <div class="keyword-cell">$1.65</div>
+                        <div class="keyword-cell">3.23%</div>
+                    </div>
+                    <div class="keyword-row">
+                        <div class="keyword-cell keyword">workshop internship</div>
+                        <div class="keyword-cell volume">880/mo</div>
+                        <div class="keyword-cell competition medium">Medium</div>
+                        <div class="keyword-cell">$2.10</div>
+                        <div class="keyword-cell">6.25%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Research Tools & Platforms</h2>
+                <div class="tools-section">
+                    <h3>Professional Tools We Use</h3>
+                    <div class="tools-grid">
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="tool-name">Google Keyword Planner</div>
+                            <div class="tool-description">Official Google tool for search volume and competition data</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="tool-name">SEMrush</div>
+                            <div class="tool-description">Comprehensive keyword and competitor analysis platform</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                            <div class="tool-name">Ahrefs</div>
+                            <div class="tool-description">Advanced keyword research and backlink analysis tool</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="tool-name">Answer The Public</div>
+                            <div class="tool-description">Question-based keyword discovery and content ideas</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-trending-up"></i>
+                            </div>
+                            <div class="tool-name">Google Trends</div>
+                            <div class="tool-description">Search trend analysis and seasonal pattern identification</div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="tool-name">SpyFu</div>
+                            <div class="tool-description">Competitor keyword and ad copy intelligence</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Research Process</h2>
+                <div class="research-process">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Business Analysis</h3>
+                        <p class="step-description">Understanding your business, target audience, and campaign objectives</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Seed Keyword Generation</h3>
+                        <p class="step-description">Creating initial keyword list based on products, services, and industry terms</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Keyword Expansion</h3>
+                        <p class="step-description">Using tools to discover related keywords, synonyms, and variations</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Competition Analysis</h3>
+                        <p class="step-description">Analyzing competitor keywords and identifying market opportunities</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title">Data Analysis</h3>
+                        <p class="step-description">Evaluating search volume, competition, and cost-per-click metrics</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">6</div>
+                        <h3 class="step-title">Strategic Recommendations</h3>
+                        <p class="step-description">Delivering prioritized keyword lists with implementation strategy</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Discover High-Converting Keywords?</h2>
+                <p>Let's uncover the keywords that will drive qualified traffic and maximize your Google Ads performance.</p>
+                <a href="mailto:mpalomaresdigitalsolutions@gmail.com" class="cta-button">
+                    <i class="fas fa-envelope"></i> Start Keyword Research
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stagger section animations
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.research-card, .process-step, .tool-item');
+            cards.forEach(card => {
+                card.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Animate keyword table rows on scroll
+            const keywordRows = document.querySelectorAll('.keyword-row');
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            keywordRows.forEach(row => {
+                observer.observe(row);
+            });
+
+            // Add typing effect to keyword cells
+            const keywordCells = document.querySelectorAll('.keyword-cell.keyword');
+            keywordCells.forEach((cell, index) => {
+                const originalText = cell.textContent;
+                cell.textContent = '';
+                
+                setTimeout(() => {
+                    let i = 0;
+                    const typeWriter = () => {
+                        if (i < originalText.length) {
+                            cell.textContent += originalText.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 50);
+                        }
+                    };
+                    typeWriter();
+                }, index * 200);
+            });
+        });
+
+        // Add scroll-triggered animations
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${rate}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
+

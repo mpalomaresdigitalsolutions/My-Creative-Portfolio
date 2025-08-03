@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Ads Optimization - Marlon Palomares Digital Solutions</title>
+    <meta name="description" content="Expert Google Ads optimization services to improve campaign performance, reduce costs, and maximize ROI through data-driven strategies.">
+    <meta name="keywords" content="Google Ads optimization, PPC optimization, campaign improvement, bid optimization, performance marketing">
+    <meta name="author" content="Marlon Palomares">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            min-height: 100vh;
+            animation: backgroundShift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+            50% { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+            100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            border-radius: 20px 20px 0 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .service-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 3;
+        }
+
+        .nav-back:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            border-radius: 2px;
+            animation: expandLine 1s ease-out 0.5s both;
+        }
+
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 60px; }
+        }
+
+        .optimization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .optimization-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .optimization-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(67, 233, 123, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .optimization-card:hover::before {
+            left: 100%;
+        }
+
+        .optimization-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .optimization-icon {
+            font-size: 2.5rem;
+            color: #43e97b;
+            margin-bottom: 15px;
+        }
+
+        .optimization-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .comparison-card.before {
+            border-left: 4px solid #e53e3e;
+        }
+
+        .comparison-card.after {
+            border-left: 4px solid #43e97b;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .comparison-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .comparison-title.before {
+            color: #e53e3e;
+        }
+
+        .comparison-title.after {
+            color: #43e97b;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-value.improved {
+            color: #43e97b;
+            font-weight: 600;
+        }
+
+        .metric-value.baseline {
+            color: #e53e3e;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(67, 233, 123, 0.4);
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            border-radius: 4px;
+            animation: fillProgress 2s ease-out;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0; }
+            to { width: var(--progress, 75%); }
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .service-title {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .optimization-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .before-after {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="nav-back">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <div class="service-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h1 class="service-title">Google Ads Optimization</h1>
+            <p class="service-subtitle">Continuous improvement and performance enhancement for maximum ROI</p>
+        </header>
+
+        <div class="main-content">
+            <div class="section">
+                <h2 class="section-title">Campaign Optimization Excellence</h2>
+                <p>Our Google Ads optimization service focuses on continuous improvement of your campaigns through data-driven analysis, strategic adjustments, and performance monitoring. We identify opportunities to reduce costs while increasing conversions and overall campaign effectiveness.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number">+32%</div>
+                        <div class="stat-label">CTR Improvement</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">-28%</div>
+                        <div class="stat-label">Cost Reduction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">+45%</div>
+                        <div class="stat-label">Conversion Increase</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">92.4%</div>
+                        <div class="stat-label">Optimization Score</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Optimization Areas</h2>
+                <div class="optimization-grid">
+                    <div class="optimization-card">
+                        <div class="optimization-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3 class="optimization-title">Bid Optimization</h3>
+                        <p>Strategic bid adjustments based on performance data, device targeting, and time-of-day analysis to maximize cost efficiency.</p>
+                    </div>
+                    <div class="optimization-card">
+                        <div class="optimization-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="optimization-title">Keyword Refinement</h3>
+                        <p>Continuous keyword analysis, negative keyword additions, and search term optimization to improve relevance and reduce waste.</p>
+                    </div>
+                    <div class="optimization-card">
+                        <div class="optimization-icon">
+                            <i class="fas fa-ad"></i>
+                        </div>
+                        <h3 class="optimization-title">Ad Copy Testing</h3>
+                        <p>A/B testing of headlines, descriptions, and call-to-actions to identify top-performing ad variations.</p>
+                    </div>
+                    <div class="optimization-card">
+                        <div class="optimization-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="optimization-title">Audience Optimization</h3>
+                        <p>Refinement of audience targeting, demographic adjustments, and remarketing list optimization for better reach.</p>
+                    </div>
+                    <div class="optimization-card">
+                        <div class="optimization-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="optimization-title">Device Targeting</h3>
+                        <p>Analysis and optimization of device performance with strategic bid adjustments for mobile, desktop, and tablet.</p>
+                    </div>
+                    <div class="optimization-card">
+                        <div class="optimization-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="optimization-title">Schedule Optimization</h3>
+                        <p>Time-of-day and day-of-week analysis to optimize ad scheduling and budget allocation for peak performance periods.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Performance Improvements</h2>
+                <div class="chart-container">
+                    <h3 class="chart-title">Key Metrics Enhancement</h3>
+                    
+                    <div class="progress-label">
+                        <span>Click-Through Rate (CTR)</span>
+                        <span>13.04% (+106%)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 90%;"></div>
+                    </div>
+                    
+                    <div class="progress-label">
+                        <span>Quality Score</span>
+                        <span>9.2/10 (+15%)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 92%;"></div>
+                    </div>
+                    
+                    <div class="progress-label">
+                        <span>Conversion Rate</span>
+                        <span>5.8% (+38%)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 58%;"></div>
+                    </div>
+                    
+                    <div class="progress-label">
+                        <span>Cost Per Conversion</span>
+                        <span>$3.85 (-28%)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 72%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Before vs After Optimization</h2>
+                <div class="before-after">
+                    <div class="comparison-card before">
+                        <h3 class="comparison-title before">Before Optimization</h3>
+                        <div class="metric-item">
+                            <span>CTR</span>
+                            <span class="metric-value baseline">6.30%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Cost per Click</span>
+                            <span class="metric-value baseline">$2.45</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Conversion Rate</span>
+                            <span class="metric-value baseline">4.2%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Cost per Conversion</span>
+                            <span class="metric-value baseline">$5.39</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Quality Score</span>
+                            <span class="metric-value baseline">8.0/10</span>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-card after">
+                        <h3 class="comparison-title after">After Optimization</h3>
+                        <div class="metric-item">
+                            <span>CTR</span>
+                            <span class="metric-value improved">13.04%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Cost per Click</span>
+                            <span class="metric-value improved">$1.76</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Conversion Rate</span>
+                            <span class="metric-value improved">5.8%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Cost per Conversion</span>
+                            <span class="metric-value improved">$3.85</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Quality Score</span>
+                            <span class="metric-value improved">9.2/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Optimize Your Campaigns?</h2>
+                <p>Let's improve your Google Ads performance and maximize your advertising ROI through strategic optimization.</p>
+                <a href="mailto:mpalomaresdigitalsolutions@gmail.com" class="cta-button">
+                    <i class="fas fa-envelope"></i> Start Optimization
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stagger section animations
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Animate progress bars on scroll
+            const progressBars = document.querySelectorAll('.progress-fill');
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fillProgress 2s ease-out forwards';
+                    }
+                });
+            }, observerOptions);
+
+            progressBars.forEach(bar => {
+                observer.observe(bar);
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.optimization-card, .comparison-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Animate comparison cards
+            const comparisonCards = document.querySelectorAll('.comparison-card');
+            const comparisonObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                        }, index * 300);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            comparisonCards.forEach(card => {
+                comparisonObserver.observe(card);
+            });
+        });
+
+        // Add scroll-triggered animations
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${rate}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
+

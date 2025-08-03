@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Tracking Setup - Marlon Palomares Digital Solutions</title>
+    <meta name="description" content="Professional conversion tracking setup for Google Ads campaigns. Implement accurate tracking, measure ROI, and optimize for better performance.">
+    <meta name="keywords" content="conversion tracking, Google Ads tracking, analytics setup, ROI measurement, campaign tracking, Google Analytics">
+    <meta name="author" content="Marlon Palomares">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            animation: backgroundShift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+            50% { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+            100% { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 20px 20px 0 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .service-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 3;
+        }
+
+        .nav-back:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 2px;
+            animation: expandLine 1s ease-out 0.5s both;
+        }
+
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 60px; }
+        }
+
+        .tracking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .tracking-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tracking-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(240, 147, 251, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .tracking-card:hover::before {
+            left: 100%;
+        }
+
+        .tracking-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .tracking-icon {
+            font-size: 2.5rem;
+            color: #f093fb;
+            margin-bottom: 15px;
+        }
+
+        .tracking-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tracking-status {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .status-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .status-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .status-row:hover {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            transform: translateX(5px);
+        }
+
+        .status-row:last-child {
+            border-bottom: none;
+        }
+
+        .status-cell {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .status-cell.name {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-indicator.active {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-indicator.inactive {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .status-indicator.unverified {
+            background: #feebc8;
+            color: #7b341e;
+        }
+
+        .setup-process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .process-step {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #f093fb;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .process-step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #f093fb;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2d3748;
+            margin-left: 20px;
+        }
+
+        .step-description {
+            margin-left: 20px;
+            color: #4a5568;
+        }
+
+        .conversion-types {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .conversion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .conversion-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .conversion-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .conversion-icon {
+            font-size: 2rem;
+            color: #f093fb;
+            margin-bottom: 10px;
+        }
+
+        .conversion-name {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .conversion-description {
+            font-size: 0.8rem;
+            color: #4a5568;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(240, 147, 251, 0.4);
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'HTML';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #f093fb;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .service-title {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .tracking-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .status-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .setup-process {
+                grid-template-columns: 1fr;
+            }
+            
+            .conversion-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .conversion-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="nav-back">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <div class="service-icon">
+                <i class="fas fa-bullseye"></i>
+            </div>
+            <h1 class="service-title">Conversion Tracking Setup</h1>
+            <p class="service-subtitle">Accurate measurement and optimization for maximum ROI</p>
+        </header>
+
+        <div class="main-content">
+            <div class="section">
+                <h2 class="section-title">Professional Conversion Tracking</h2>
+                <p>Our conversion tracking setup service ensures accurate measurement of your Google Ads performance. We implement comprehensive tracking solutions that provide clear insights into campaign effectiveness, ROI, and optimization opportunities for data-driven decision making.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number">38</div>
+                        <div class="stat-label">Total Conversions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">$3.85</div>
+                        <div class="stat-label">Cost Per Conversion</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Tracking Tags Active</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Tracking Accuracy</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Tracking Services</h2>
+                <div class="tracking-grid">
+                    <div class="tracking-card">
+                        <div class="tracking-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="tracking-title">Google Ads Conversion Tags</h3>
+                        <p>Implementation of Google Ads conversion tracking tags to measure campaign performance and ROI accurately.</p>
+                    </div>
+                    <div class="tracking-card">
+                        <div class="tracking-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3 class="tracking-title">Google Analytics Integration</h3>
+                        <p>Seamless integration between Google Ads and Analytics for comprehensive performance insights and attribution.</p>
+                    </div>
+                    <div class="tracking-card">
+                        <div class="tracking-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="tracking-title">E-commerce Tracking</h3>
+                        <p>Advanced e-commerce tracking setup to measure revenue, transactions, and product performance.</p>
+                    </div>
+                    <div class="tracking-card">
+                        <div class="tracking-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3 class="tracking-title">Call Tracking</h3>
+                        <p>Phone call conversion tracking to measure offline conversions generated by online campaigns.</p>
+                    </div>
+                    <div class="tracking-card">
+                        <div class="tracking-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="tracking-title">Cross-Device Tracking</h3>
+                        <p>Implementation of cross-device conversion tracking for accurate customer journey measurement.</p>
+                    </div>
+                    <div class="tracking-card">
+                        <div class="tracking-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3 class="tracking-title">Conversion Value Tracking</h3>
+                        <p>Setup of conversion value tracking to optimize for revenue and business impact, not just volume.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Current Tracking Status</h2>
+                <div class="tracking-status">
+                    <div class="status-header">
+                        Conversion Tracking Overview
+                    </div>
+                    <div class="status-row">
+                        <div class="status-cell name">Website Conversions</div>
+                        <div class="status-cell">
+                            <span class="status-indicator active">
+                                <i class="fas fa-check-circle"></i> Active
+                            </span>
+                        </div>
+                        <div class="status-cell">15 conversions</div>
+                    </div>
+                    <div class="status-row">
+                        <div class="status-cell name">Phone Call Conversions</div>
+                        <div class="status-cell">
+                            <span class="status-indicator active">
+                                <i class="fas fa-check-circle"></i> Active
+                            </span>
+                        </div>
+                        <div class="status-cell">3 conversions</div>
+                    </div>
+                    <div class="status-row">
+                        <div class="status-cell name">Form Submissions</div>
+                        <div class="status-cell">
+                            <span class="status-indicator active">
+                                <i class="fas fa-check-circle"></i> Active
+                            </span>
+                        </div>
+                        <div class="status-cell">10 conversions</div>
+                    </div>
+                    <div class="status-row">
+                        <div class="status-cell name">Newsletter Signups</div>
+                        <div class="status-cell">
+                            <span class="status-indicator active">
+                                <i class="fas fa-check-circle"></i> Active
+                            </span>
+                        </div>
+                        <div class="status-cell">10 conversions</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Conversion Types We Track</h2>
+                <div class="conversion-types">
+                    <h3>Common Conversion Actions</h3>
+                    <div class="conversion-grid">
+                        <div class="conversion-item">
+                            <div class="conversion-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="conversion-name">Purchases</div>
+                            <div class="conversion-description">E-commerce transactions and sales</div>
+                        </div>
+                        <div class="conversion-item">
+                            <div class="conversion-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="conversion-name">Lead Forms</div>
+                            <div class="conversion-description">Contact form submissions</div>
+                        </div>
+                        <div class="conversion-item">
+                            <div class="conversion-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="conversion-name">Phone Calls</div>
+                            <div class="conversion-description">Qualified phone inquiries</div>
+                        </div>
+                        <div class="conversion-item">
+                            <div class="conversion-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="conversion-name">Downloads</div>
+                            <div class="conversion-description">Resource and content downloads</div>
+                        </div>
+                        <div class="conversion-item">
+                            <div class="conversion-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="conversion-name">Appointments</div>
+                            <div class="conversion-description">Booking and scheduling actions</div>
+                        </div>
+                        <div class="conversion-item">
+                            <div class="conversion-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="conversion-name">Signups</div>
+                            <div class="conversion-description">Account registrations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Implementation Example</h2>
+                <p>Here's an example of how we implement conversion tracking code on your website:</p>
+                <div class="code-block">
+&lt;!-- Google Ads Conversion Tracking --&gt;
+&lt;script&gt;
+  gtag('event', 'conversion', {
+    'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXXX',
+    'value': 1.0,
+    'currency': 'USD',
+    'transaction_id': ''
+  });
+&lt;/script&gt;
+
+&lt;!-- Enhanced E-commerce Tracking --&gt;
+&lt;script&gt;
+  gtag('event', 'purchase', {
+    'transaction_id': '12345',
+    'value': 25.42,
+    'currency': 'USD',
+    'items': [{
+      'item_id': 'SKU123',
+      'item_name': 'Product Name',
+      'category': 'Category',
+      'quantity': 1,
+      'price': 25.42
+    }]
+  });
+&lt;/script&gt;
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Setup Process</h2>
+                <div class="setup-process">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Goal Definition</h3>
+                        <p class="step-description">Identify and define conversion actions that align with your business objectives</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Tag Creation</h3>
+                        <p class="step-description">Create conversion tracking tags in Google Ads for each defined action</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Code Implementation</h3>
+                        <p class="step-description">Install tracking codes on relevant pages of your website</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Testing & Verification</h3>
+                        <p class="step-description">Test all tracking implementations to ensure accurate data collection</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title">Analytics Integration</h3>
+                        <p class="step-description">Link Google Ads with Google Analytics for comprehensive reporting</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">6</div>
+                        <h3 class="step-title">Monitoring & Optimization</h3>
+                        <p class="step-description">Ongoing monitoring and optimization based on conversion data</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Track Your Success?</h2>
+                <p>Let's implement comprehensive conversion tracking to measure and optimize your Google Ads performance.</p>
+                <a href="https://calendar.app.google/pBcToQavCMV8bvUGA" class="cta-button" onclick="gtag('event', 'conversion', {'send_to': 'AW-XXXXXXXXX/YYYYYYYYYYYYY'});" target="_blank">
+                    <i class="fas fa-calendar-alt"></i> Book a Consultation
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stagger section animations
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.tracking-card, .process-step, .conversion-item');
+            cards.forEach(card => {
+                card.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Animate status rows on scroll
+            const statusRows = document.querySelectorAll('.status-row');
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            statusRows.forEach(row => {
+                observer.observe(row);
+            });
+
+            // Add code block syntax highlighting effect
+            const codeBlock = document.querySelector('.code-block');
+            if (codeBlock) {
+                const codeText = codeBlock.textContent;
+                codeBlock.innerHTML = codeText
+                    .replace(/(&lt;[^&]*&gt;)/g, '<span style="color: #81c784;">$1</span>')
+                    .replace(/(gtag|event|conversion|purchase)/g, '<span style="color: #64b5f6;">$1</span>')
+                    .replace(/('[^']*')/g, '<span style="color: #ffb74d;">$1</span>');
+            }
+
+            // Animate conversion stats
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                stat.textContent = '0';
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateValue(stat, 0, parseFloat(finalValue.replace(/[^0-9.]/g, '')), 2000, finalValue);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(stat);
+            });
+
+            function animateValue(element, start, end, duration, suffix) {
+                const startTime = performance.now();
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const current = start + (end - start) * progress;
+                    
+                    if (suffix.includes('$')) {
+                        element.textContent = '$' + current.toFixed(2);
+                    } else if (suffix.includes('%')) {
+                        element.textContent = current.toFixed(0) + '%';
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        element.textContent = suffix;
+                    }
+                };
+                requestAnimationFrame(animate);
+            }
+        });
+
+        // Add scroll-triggered animations
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${rate}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

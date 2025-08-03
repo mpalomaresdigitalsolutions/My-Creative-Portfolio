@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Ads Campaign Optimization: A Case Study in Driving ROI for Humanity Impact Institute Org</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            animation: backgroundShift 10s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
+            50% { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #667eea 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 60px 0;
+            position: relative;
+            z-index: 2;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f8ff, #e6f3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)); }
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 0.95; }
+        }
+
+        .content-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .content-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe, #667eea, #764ba2);
+            animation: gradientSlide 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2d3748;
+            position: relative;
+            z-index: 2;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .metrics-section {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #667eea 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metrics-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        .metric-card:nth-child(1) { animation-delay: 0s; }
+        .metric-card:nth-child(2) { animation-delay: 0.5s; }
+        .metric-card:nth-child(3) { animation-delay: 1s; }
+        .metric-card:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .metric-card:hover::before {
+            left: 100%;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .metric-change {
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .positive {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .negative {
+            background: rgba(248, 113, 113, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+
+        .problem-section, .solution-section, .impact-section {
+            padding: 60px;
+            position: relative;
+            background: rgba(255,255,255,0.9);
+            border-radius: 25px;
+            margin-top: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .problem-section h2, .solution-section h2, .impact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2d3748;
+            text-align: center;
+            position: relative;
+        }
+
+        .problem-section h2::after, .solution-section h2::after, .impact-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .problem-section p, .solution-section p, .impact-section p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .strategy-section {
+            padding: 60px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        }
+
+        .strategy-section h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #2d3748;
+            text-align: center;
+            position: relative;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .strategy-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .strategy-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%);
+            padding: 35px;
+            border-radius: 20px;
+            border-left: 5px solid transparent;
+            background-clip: padding-box;
+            border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .strategy-card:hover h3 {
+            color: white;
+        }
+
+        .strategy-card p {
+            color: #4a5568;
+            line-height: 1.7;
+            transition: color 0.3s ease;
+        }
+
+        .strategy-card:hover p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #d299c2 100%);
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            animation: grain 20s linear infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, -5px); }
+            50% { transform: translate(-10px, 5px); }
+            75% { transform: translate(5px, -10px); }
+        }
+
+        .results-section h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #2d3748;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .dashboard-container {
+            position: relative;
+            display: inline-block;
+            margin: 40px 0;
+            z-index: 2;
+        }
+
+        .dashboard-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            border-radius: 25px;
+            z-index: 1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .dashboard-container:hover .dashboard-image {
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .dashboard-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .key-improvements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .improvement-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .improvement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .improvement-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .improvement-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .improvement-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: iconSpin 4s ease-in-out infinite;
+        }
+
+        @keyframes iconSpin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.1); }
+            75% { transform: rotate(-5deg) scale(1.1); }
+        }
+
+        .improvement-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .improvement-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 50px 0;
+            position: relative;
+            z-index: 2;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .strategy-section, .results-section {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .key-improvements {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Google Ads Campaign Optimization: A Case Study</h1>
+            <p>Transforming Challenges into Quantifiable Success for Humanity Impact Institute Org</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="problem-section">
+                <h2>The Challenge: Wasted Spend and Irrelevant Traffic</h2>
+                <p>Humanity Impact Institute Org, a non-profit dedicated to global education initiatives, initially faced significant challenges with their Google Ads campaigns. The primary issue stemmed from default Google Ads settings that led to inefficient spending. Specifically, the use of broad keyword targeting meant ads were triggered for a wide variety of searches, many of which were irrelevant to their mission. Furthermore, the default "Presence or interest" location targeting, while seemingly helpful, was attracting clicks from users merely interested in their service area, not those physically located within it. This combination resulted in a high volume of clicks from unqualified leads outside their target demographic, leading to wasted ad spend and a high effective cost per conversion. They needed a strategic partner to refine their digital outreach, ensuring every advertising dollar contributed directly to high-quality engagement and support for their mission.</p>
+            </div>
+
+
+            <div class="metrics-section">
+                <h2 class="section-title">Quantifiable Impact: Driving Their Mission Forward</h2>
+                <p>My strategic interventions led to significant improvements in Humanity Impact Institute Org's Google Ads performance, directly contributing to their mission. The following metrics highlight the positive shift in campaign efficiency and the increased impact achieved over a 30-day period (July 1 - August 1, 2025) compared to the previous period (May 30 - June 30, 2025):</p>
+                
+                <img src="images/Results.png" alt="Campaign Results" style="max-width: 100%; border-radius: 15px; margin-top: 20px;">
+            </div>
+
+            <div class="strategy-section">
+                <h2>My Strategic Approach: Empowering Non-Profit Outreach</h2>
+                <p>My success with Humanity Impact Institute Org was built upon a systematic application of proven Google Ads optimization techniques, tailored to the unique needs of a non-profit. Each step was carefully executed to maximize their impact and amplify their message:</p>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="strategy-icon">📉</div>
+                        <h3>Precision Targeting for Maximum Reach</h3>
+                        <p>I identified and rectified critical misconfigurations in device targeting, network settings, and location targeting. This ensured Humanity Impact Institute Org's message reached the most relevant audience, maximizing engagement and minimizing wasted ad spend.</p>
+                    </div>
+                    
+                    <div class="strategy-card">
+                        <div class="strategy-icon">💡</div>
+                        <h3>Data-Driven Keyword Refinement</h3>
+                        <p>Leveraging over 30 days of historical data, I meticulously analyzed keyword performance. This allowed me to pause expensive or non-converting keywords, significantly lowering the cost per valuable action (e.g., donation, sign-up) and improving overall campaign efficiency for the non-profit.</p>
+                    </div>
+                    
+                    <div class="strategy-card">
+                        <div class="strategy-icon">🚫</div>
+                        <h3>Focused Network Strategy</h3>
+                        <p>For campaigns aimed at generating support, I strategically turned off Google Search Partners and Display Networks. This critical step prevented the influx of low-quality interactions and ensured that ad spend was directed towards the most impactful traffic sources for Humanity Impact Institute Org.</p>
+                    </div>
+                    
+                    <div class="strategy-card">
+                        <div class="strategy-icon">📍</div>
+                        <h3>Geographic Impact Optimization</h3>
+                        <p>To ensure that outreach efforts were concentrated in areas where Humanity Impact Institute Org could make the most difference, I precisely set location targeting to "people in or regularly in your locations." This ensured that leads were highly relevant to their operational areas.</p>
+                    </div>
+                    
+                    <div class="strategy-card">
+                        <div class="strategy-icon">🔍</div>
+                        <h3>Continuous Performance Monitoring</h3>
+                        <p>I instituted a rigorous weekly search term review process. This allowed me to identify and add new, high-impact keywords while simultaneously excluding irrelevant or low-value traffic through the strategic application of negative keywords, ensuring continuous improvement for the non-profit's campaigns.</p>
+                    </div>
+                    
+                    <div class="strategy-card">
+                        <div class="strategy-icon">⚙️</div>
+                        <h3>Leveraging Advanced Tools for Efficiency</h3>
+                        <p>To streamline the optimization process and ensure maximum efficiency, I utilized specialized tools like Keyword Me. This enabled efficient management of negative keywords and ensured that all keywords were accurately assigned to their respective ad groups, maintaining campaign structure and relevance for Humanity Impact Institute Org's diverse initiatives.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-section">
+                <h2>The Result: Amplified Mission, Sustainable Growth</h2>
+                <p>My strategic optimization efforts led to a remarkable transformation in Humanity Impact Institute Org's Google Ads performance. While the raw numbers for clicks and conversions might appear to have decreased, this was a *deliberate and positive outcome*. By meticulously refining location and keyword targeting, I successfully eliminated a significant volume of irrelevant, low-quality traffic that was previously consuming budget without contributing to the non-profit's mission. The most crucial metric, **Cost per Conversion, saw a significant decrease of $0.50**, indicating that each valuable action (e.g., a donation, a volunteer sign-up) became substantially more efficient to acquire. Furthermore, the **Total Cost decreased by $806**, demonstrating a highly optimized budget allocation. This shift signifies a move from quantity to quality, ensuring that every dollar spent now generates high-converting leads and directly supports Humanity Impact Institute Org's vital work. This case study demonstrates my ability to deliver tangible and impressive results, even for organizations with unique objectives like non-profits, by applying a focused, expert-led optimization strategy that unlocks the full potential of Google Ads for social good.</p>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <p><strong>Key Takeaway:</strong> My data-driven optimization strategies empower non-profits like Humanity Impact Institute Org to achieve their mission more effectively through highly efficient digital outreach.</p>
+            <a href="index.html" style="color: white; text-decoration: none; margin-top: 20px; display: inline-block; padding: 10px 20px; border: 1px solid white; border-radius: 25px;">Back to Portfolio</a>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.querySelector('.floating-particles');
+            
+            // Create additional random particles
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+
+            // Add scroll-triggered animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            document.querySelectorAll('.strategy-card, .improvement-item, .metric-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Add mouse movement parallax effect
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                document.querySelectorAll('.particle').forEach((particle, index) => {
+                    const speed = (index % 3 + 1) * 0.5;
+                    const x = (mouseX - 0.5) * speed * 20;
+                    const y = (mouseY - 0.5) * speed * 20;
+                    particle.style.transform = `translate(${x}px, ${y}px)`;
+                });
+            });
+
+            // Add click ripple effect to cards
+            document.querySelectorAll('.metric-card, .strategy-card, .improvement-item').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const ripple = document.createElement('div');
+                    const rect = card.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        animation: ripple 0.6s ease-out;
+                    `;
+                    
+                    card.style.position = 'relative';
+                    card.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    from {
+                        transform: scale(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
