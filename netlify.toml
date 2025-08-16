@@ -1,0 +1,12 @@
+# This file configures the Netlify deployment.
+
+[build]
+  # This tells Netlify where your site's files are.
+  publish = "."
+  # This tells Netlify where your serverless functions are.
+  functions = "netlify/functions"
+
+[functions]
+  # This ensures Node.js 18 is used for the functions.
+  node_bundler = "esbuild"
+  included_files = ["portfolio_data.json"]
