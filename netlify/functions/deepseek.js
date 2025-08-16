@@ -2,24 +2,63 @@
 // It acts as a secure proxy to the DeepSeek API.
 
 exports.handler = async function(event, context) {
-  // Only allow POST requests
+  // Handle CORS preflight requests
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+
+  // Handle preflight OPTIONS request
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: '',
+    };
+  }
+
+  // Only allow POST requests for actual processing
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: 'Method Not Allowed',
+      headers,
+      body: JSON.stringify({ error: 'Method Not Allowed' }),
     };
   }
 
   // 1. Get the user's message from the request body.
-  const { messages, portfolioContext } = JSON.parse(event.body);
+  let messages, portfolioContext;
+  try {
+    const body = JSON.parse(event.body);
+    messages = body.messages;
+    portfolioContext = body.portfolioContext;
+    
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid request: messages array is required' }),
+      };
+    }
+  } catch (error) {
+    console.error('Error parsing request body:', error);
+    return {
+      statusCode: 400,
+      headers,
+      body: JSON.stringify({ error: 'Invalid JSON in request body' }),
+    };
+  }
 
   // 2. Get the secret API key from environment variables.
   const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
 
   if (!DEEPSEEK_API_KEY) {
+    console.error('DEEPSEEK_API_KEY environment variable is missing');
     return {
       statusCode: 500,
-      body: 'API key is not configured.',
+      headers,
+      body: JSON.stringify({ error: 'AI service is not properly configured. Please contact the administrator.' }),
     };
   }
 
@@ -45,11 +84,24 @@ exports.handler = async function(event, context) {
     body: JSON.stringify(payload),
   });
 
-  // 5. Stream the response back to the client.
+  // 5. Check if the API response is successful
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('DeepSeek API error:', response.status, errorText);
+    return {
+      statusCode: response.status,
+      body: JSON.stringify({ error: `DeepSeek API error: ${response.status} ${response.statusText}` }),
+    };
+  }
+
+  // 6. Stream the response back to the client with proper headers
   return {
     statusCode: 200,
     headers: {
+      ...headers,
       'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
     },
     body: response.body,
   };

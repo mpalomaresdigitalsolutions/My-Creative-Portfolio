@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let fullResponse = '';
         try {
             // Call our secure Netlify serverless function instead of the DeepSeek API directly.
-            const response = await fetch('/api/chatbot', {
+            const response = await fetch('/.netlify/functions/deepseek', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -126,8 +126,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                const error = await response.json();
-                throw new Error(`DeepSeek API error: ${JSON.stringify(error)}`);
+                let errorMessage;
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.error || `Server error: ${response.status}`;
+                } catch {
+                    errorMessage = `Server error: ${response.status} ${response.statusText}`;
+                }
+                throw new Error(errorMessage);
+            }
+
+            // Check if response has a body
+            if (!response.body) {
+                throw new Error('No response body received');
             }
 
             const reader = response.body.getReader();
@@ -138,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const { done, value } = await reader.read();
                 if (done) break;
 
-                const chunk = decoder.decode(value);
-                const lines = chunk.split('\n');
+                const chunk = decoder.decode(value, { stream: true });
+                const lines = chunk.split('\n').filter(line => line.trim() !== '');
                 
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
@@ -149,22 +160,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         try {
                             const parsed = JSON.parse(jsonStr);
-                            const content = parsed.choices[0].delta.content;
+                            const content = parsed.choices?.[0]?.delta?.content;
                             if (content) {
                                 fullResponse += content;
                                 botMessageElement.textContent += content;
                                 chatMessages.scrollTop = chatMessages.scrollHeight;
                             }
                         } catch (e) {
-                            console.error('Error parsing stream JSON:', e, jsonStr);
+                            console.warn('Skipping invalid JSON chunk:', jsonStr);
+                            // Skip invalid JSON chunks instead of failing
                         }
                     }
                 }
             }
+            
+            if (!fullResponse.trim()) {
+                throw new Error('No response received from AI');
+            }
+            
             return fullResponse;
         } catch (error) {
             console.error('Error fetching streaming response from DeepSeek API:', error);
-            const errorMessage = 'Sorry, I am having trouble connecting to my brain right now. Please try again later.';
+            
+            let errorMessage;
+            if (error.message.includes('Failed to fetch')) {
+                errorMessage = 'Connection error: Please check your internet connection or try again later.';
+            } else if (error.message.includes('API key')) {
+                errorMessage = 'Configuration error: AI service is temporarily unavailable.';
+            } else {
+                errorMessage = error.message || 'Sorry, I am having trouble connecting to my brain right now. Please try again later.';
+            }
+            
             botMessageElement.textContent = errorMessage;
             return errorMessage;
         }
