@@ -962,7 +962,137 @@
         </div>
     </div>
 
+    <!-- Chat Interface -->
+    <div id="chat-widget" class="chat-widget">
+        <div id="chat-header" class="chat-header">
+            <span>Chat with Marlon's Assistant</span>
+            <button id="minimize-chat" class="minimize-button">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type your message..." />
+            <button id="send-message" class="send-button">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
     <style>
+        /* Chat Widget Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .minimize-button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin: 5px 0;
+        }
+
+        .user-message {
+            background: #f0f2ff;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background: #f5f5f5;
+            align-self: flex-start;
+        }
+
+        .chat-input-container {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        #chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Chat loading animation */
+        @keyframes thinking {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .bot-message.thinking {
+            animation: thinking 1.5s infinite;
+            color: #666;
+        }
+
         .certificates-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1055,33 +1185,9 @@
         }
     </style>
 
-    <div class="chat-container">
-        <div class="chat-header">
-            <h3>Chat with me</h3>
-            <select id="model-select">
-                <option value="deepseek">DeepSeek</option>
-                <option value="qwen">Qwen Coder</option>
-            </select>
-            <button class="close-chat">-</button>
-        </div>
-        <div class="chat-body">
-            <div class="chat-messages"></div>
-        </div>
-        <div class="chat-footer">
-            <input type="text" id="chat-input" placeholder="Ask me anything...">
-            <button id="send-btn">Send</button>
-        </div>
-    </div>
-    <div class="chat-toggle-wrapper">
-        <div class="chat-label">Chat with me, I'm online!</div>
-        <button class="chat-toggle">
-            <img src="Profile.png" alt="Chat with Marlon" class="chat-profile-pic">
-            <i class="fas fa-comment chat-icon-overlay"></i>
-        </button>
-    </div>
-
     <script src="config.js"></script>
     <script src="chatbot.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         // Add interactive animations
         document.addEventListener('DOMContentLoaded', function() {

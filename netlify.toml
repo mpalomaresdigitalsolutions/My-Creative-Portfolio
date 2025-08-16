@@ -10,3 +10,5 @@
   # This ensures Node.js 18 is used for the functions.
   node_bundler = "esbuild"
   included_files = ["portfolio_data.json"]
+  # Increase timeout for API responses
+  timeout = "30s"
