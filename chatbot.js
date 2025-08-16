@@ -154,10 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let fullResponse = '';
         
-        // Check if we're in local development mode
+        // Check hosting environment
         const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isGitHubPages = window.location.hostname.includes('github.io');
         
-        if (isLocalDevelopment) {
+        // Use mock responses for local development AND GitHub Pages since Netlify functions won't work there
+        if (isLocalDevelopment || isGitHubPages) {
             // Enhanced mock responses that sound more human and use actual portfolio data
             await new Promise(resolve => setTimeout(resolve, 1000)); // Faster response for better UX
             
@@ -204,6 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         try {
+            // Check if we're on Netlify (where functions work) vs GitHub Pages
+            const isNetlify = !isLocalDevelopment && !isGitHubPages;
+            
+            if (!isNetlify) {
+                throw new Error('Netlify functions not available - using fallback responses');
+            }
+            
             // Call our secure Netlify serverless function instead of the DeepSeek API directly.
             const response = await fetch('/.netlify/functions/deepseek', {
                 method: 'POST',
@@ -280,9 +289,19 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error fetching streaming response from DeepSeek API:', error);
             
+            // For GitHub Pages and local development, gracefully fall back to mock responses
+            if (isGitHubPages || isLocalDevelopment) {
+                console.log('Using fallback responses for non-Netlify hosting');
+                // This will be caught and handled by the mock response system above
+                throw error;
+            }
+            
             let errorMessage;
             if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
                 errorMessage = 'Connection error: Please check your internet connection or try again later.';
+            } else if (error.message.includes('405') || error.message.includes('Method Not Allowed')) {
+                errorMessage = 'Service configuration issue. Using fallback responses instead.';
+                console.log('405 error detected - likely GitHub Pages deployment, switching to fallback');
             } else if (error.message.includes('Server error: 502')) {
                 errorMessage = 'The AI service is temporarily unavailable. Please try again in a few moments.';
             } else if (error.message.includes('API key')) {
@@ -335,7 +354,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Initialization ---
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
     console.log('Chatbot initializing...');
+    console.log('Environment:', isLocal ? 'Local Development' : isGitHubPages ? 'GitHub Pages' : 'Netlify');
+    console.log('Netlify functions available:', !isLocal && !isGitHubPages);
+    
     loadPortfolioData();
     
     // More casual welcome message with slight delay for natural feel
