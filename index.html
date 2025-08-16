@@ -666,16 +666,42 @@
         }
 
         .chat-toggle {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            border: 2px solid white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            border: 3px solid white;
             cursor: pointer;
             animation: bounceEffect 2.5s infinite cubic-bezier(0.36, 0.07, 0.19, 0.97);
             position: relative;
             overflow: hidden;
             padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .chat-toggle::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            border: 2px solid white;
+            z-index: 3;
+            animation: pulse-green 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
         }
 
         .chat-profile-pic {
@@ -965,7 +991,17 @@
     <!-- Chat Interface -->
     <div id="chat-widget" class="chat-widget">
         <div id="chat-header" class="chat-header">
-            <span>Chat with Marlon's Assistant</span>
+            <div class="chat-profile-container">
+                <img src="Profile.png" alt="Marlon" class="chat-profile-avatar">
+                <div class="online-status">
+                    <div class="status-dot"></div>
+                    <span class="status-text">Online</span>
+                </div>
+            </div>
+            <div class="chat-header-info">
+                <span class="chat-title">Marlon's Assistant</span>
+                <span class="chat-subtitle">Google Ads Expert</span>
+            </div>
             <button id="minimize-chat" class="minimize-button">
                 <i class="fas fa-minus"></i>
             </button>
@@ -1003,6 +1039,81 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .chat-profile-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .chat-profile-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            object-fit: cover;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .online-status {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 1s ease-in-out 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .chat-header-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .chat-title {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.2;
+        }
+
+        .chat-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 400;
         }
 
         .minimize-button {

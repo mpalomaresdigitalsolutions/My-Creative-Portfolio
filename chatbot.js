@@ -148,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!portfolioContext) {
             botMessageElement.textContent = 'Hey! Let me tell you about Marlon...';
             // Use basic portfolio info if context isn't loaded yet
-            const basicInfo = "So Marlon's this Google Ads guy who's been crushing it - he's actually managing a $10k/month campaign right now for a nonprofit. Pretty cool, right? He's got all the Google certifications and really knows his stuff when it comes to getting results.";
-            return basicInfo;
+        const basicInfo = "Google Ads guy. Managing campaigns right now. Knows his stuff.";
+        return basicInfo;
         }
         
         let fullResponse = '';
@@ -174,20 +174,89 @@ document.addEventListener('DOMContentLoaded', () => {
                 portfolioData = null;
             }
             
-            // Generate contextual responses based on user questions
+            // Generate contextual responses based STRICTLY on portfolio data
             if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('package')) {
-                response = `Hey! So here's the deal with Marlon's pricing - he's got three packages that make total sense:\n\nFor smaller businesses just starting out, there's the "Launchpad" at $150/month. Perfect if you're working with like $200-500 ad budget. You get a solid search campaign, keyword research, ad creatives, the whole setup.\n\nThen there's "Growth" at $300/month for businesses spending $500-1500. This adds extra campaigns like display or remarketing, plus weekly optimization instead of bi-weekly.\n\nAnd for the big players, "Total Control" starts at $500/month. This is when you're spending serious money ($1500+) and want daily monitoring and all the bells and whistles.\n\nHonestly? The pricing is pretty fair for what you get. Which one sounds like it fits your situation?`;
+                const packages = portfolioData?.services?.packages || [
+                    { name: "Launchpad", price: 150, budget: "$200-500", includes: "search campaign, keyword research, ad creatives" },
+                    { name: "Growth", price: 300, budget: "$500-1500", includes: "extra campaigns, weekly optimization" },
+                    { name: "Total Control", price: 500, budget: "$1500+", includes: "daily monitoring, all features" }
+                ];
+                
+                response = `Alright, so Marlon's got three packages - super straightforward:
+
+**Launchpad**: $${packages[0]?.price || 150}/month - perfect if you're spending around ${packages[0]?.budget || "$200-500"} on ads. Gets you ${packages[0]?.includes || "search campaign setup"}.
+
+**Growth**: $${packages[1]?.price || 300}/month - for ${packages[1]?.budget || "$500-1500"} budgets. ${packages[1]?.includes || "more campaigns + weekly tweaks"}.
+
+**Total Control**: Starts at $${packages[2]?.price || 500}/month - when you're spending ${packages[2]?.budget || "$1500+"} and want ${packages[2]?.includes || "daily monitoring"}.
+
+That's literally it. No hidden fees or weird stuff. Which one's calling your name?`;
             } else if (messageLower.includes('service') || messageLower.includes('offer') || messageLower.includes('do')) {
-                response = `Oh man, Marlon does a ton of stuff! His main thing is obviously Google Ads - like full campaign management from start to finish.\n\nBut here's what I think is cool - he's not just some guy who took a Google course. He was actually trained by Ian Baillo, who's like THE Google Ads expert in the Philippines. Plus he's currently managing a $10k/month campaign for a nonprofit, so he's literally doing this stuff right now, not just talking about it.\n\nHis specialties include:\n- Google Ads audits (like figuring out why your campaigns aren't working)\n- Strategy development\n- Campaign optimization\n- Copywriting for ads\n- Keyword research\n- Setting up conversion tracking\n\nBasically, if it's Google Ads related, he's got you covered. What's your biggest challenge with ads right now?`;
+                const services = portfolioData?.services?.specialties || [
+                    "Google Ads audits", "Strategy development", "Campaign optimization", 
+                    "Copywriting for ads", "Keyword research", "Conversion tracking setup"
+                ];
+                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
+                const currentCampaign = portfolioData?.experience?.currentCampaign || "$10k/month nonprofit campaign";
+                
+                response = `So what Marlon actually does is pretty straightforward - Google Ads management from A to Z.
+
+Real talk though - he learned from ${training.split("'s")[0]} (legit Google Ads guru), and right now he's running ${currentCampaign}. Not theory, happening right now.
+
+Here's what he handles:
+${services.map(service => `- ${service}`).join('\n')}
+
+That's pretty much it. No fluff, just Google Ads that actually work. What's bugging you about your current setup?`;
             } else if (messageLower.includes('experience') || messageLower.includes('background') || messageLower.includes('qualified')) {
-                response = `So Marlon's got this interesting background - he's been working with US clients for like 4 years in customer service and tech support, so he really gets how American businesses think.\n\nBut the Google Ads stuff? That's more recent and super legit. He got his Google certifications in 2024, then did advanced training with Ian Baillo's academy (this guy's basically a legend in the Philippines Google Ads scene).\n\nRight now he's volunteering managing a $10k/month search campaign for a nonprofit through VolunteerMatch. I mean, that's real-world experience happening as we speak.\n\nPlus he's done freelance work for organizations like the Humanity Impacts Institute, so it's not just theory - he's been in the trenches actually making campaigns work.\n\nWhat specific experience are you looking for? Like, what kind of campaigns are you running?`;
+                const yearsUS = portfolioData?.experience?.yearsUS || "4 years";
+                const certifications = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
+                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
+                const currentWork = portfolioData?.experience?.current || "managing $10k/month nonprofit campaign";
+                
+                response = `Dude's got the receipts:
+
+- ${yearsUS} working with US clients (gets how we think)
+- Google certified in ${certifications.length} areas (${certifications.join(', ')})
+- Trained by ${training.split("'s")[0]} (the guy literally wrote the book on this stuff)
+- Right now: ${currentWork}
+
+That's not LinkedIn fluff - that's actual work happening today. What you running these days?`;
             } else if (messageLower.includes('certification') || messageLower.includes('certified')) {
-                response = `Oh yeah, Marlon's got all his ducks in a row when it comes to certifications!\n\nHe's Google Ads certified across the board - Search, Display, Video, and Shopping. Got that in 2024.\n\nBut here's what's actually impressive - he did advanced Google Ads training with Ian Baillo's Pass Academy. Ian's like the top Google Ads expert in the Philippines, so that's legit training, not just some online course.\n\nHe also did Virtual Assistant training with The VA BAR in 2025, and even Facebook Ads mastery training with Negosyo Network Academy.\n\nSo yeah, he's got the papers, but more importantly, he's got the training from people who actually know what they're doing. The Google certification is great, but that advanced training is where the real knowledge comes from.`;
+                const certs = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
+                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
+                const year = portfolioData?.experience?.certYear || "2024";
+                
+                response = `Certs? Yeah, he's got 'em:
+
+- ${certs.join(', ')}
+- Got 'em in ${year}
+- Advanced training with ${training}
+
+That's the real deal, not some weekend course. You good with that?`;
             } else if (messageLower.includes('hello') || messageLower.includes('hi') || messageLower.includes('hey')) {
-                response = `Hey there! 👋\n\nSo you're looking to learn more about Marlon? Nice choice - he's honestly one of the good ones in the Google Ads space.\n\nInstead of giving you the boring resume spiel, how about I just tell you what's actually cool about him? He's literally managing a $10k/month campaign right now for a nonprofit, so he's not just talking theory. Plus he was trained by this guy Ian Baillo who's like the Google Ads whisperer of the Philippines.\n\nWant to know about his services, pricing, or what makes him different from the million other "Google Ads experts" out there?`;
+                const currentWork = portfolioData?.experience?.current || "managing $10k/month nonprofit campaign";
+                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
+                
+                response = `Yo! 👋
+
+Marlon's the guy running ${currentWork} right now. Learned from ${training.split("'s")[0]} - that's the guy everyone copies.
+
+Want pricing, services, or what's wrong with your current setup?`;
             } else {
-                // Default friendly response with key info
-                response = `Hey! So Marlon's basically your go-to guy if you want Google Ads that actually work. Here's the quick version:\n\nHe's managing a $10k/month campaign right now (like, literally as we speak) for a nonprofit, so he's in the trenches doing this stuff. Got trained by Ian Baillo - if you know Google Ads in the Philippines, you know Ian's the real deal.\n\nHis sweet spots are Google Ads audits, strategy, optimization, and making sure you're actually tracking conversions properly (because what's the point if you don't know what's working?).\n\nHe's got three service packages starting at $150/month, depending on your ad budget and how hands-on you want him to be.\n\nWhat do you want to know more about? The services, pricing, or maybe what's wrong with your current campaigns?`;
+                // Default response strictly based on portfolio data
+                const packages = portfolioData?.services?.packages || [
+                    { name: "Launchpad", price: 150 }
+                ];
+                const services = portfolioData?.services?.specialties || ["Google Ads management"];
+                const currentWork = portfolioData?.experience?.current || "Google Ads campaigns";
+                
+                response = `Quick version:
+
+- ${services.join(', ')}
+- Packages start at $${packages[0]?.price || 150}/month
+- Currently doing ${currentWork}
+
+What specifically you wanna know?`;
             }
             
             // Simulate typing with more natural pauses
@@ -363,9 +432,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     loadPortfolioData();
     
-    // More casual welcome message with slight delay for natural feel
+    // Casual welcome message
     setTimeout(() => {
-        displayMessage('Hey there! 👋 So you want to know about Marlon? Cool - I can definitely help with that.\n\nInstead of boring you with a wall of text, what are you actually curious about? His Google Ads services, what he charges, or maybe his experience managing those big campaigns? Just ask away!', 'bot');
+        displayMessage("Hey! 👋\n\nMarlon's the Google Ads guy. Ask me about pricing, services, or what's broken with your ads. Keep it simple.", 'bot');
     }, 800);
     
     console.log('Chatbot initialized and ready for interaction');
