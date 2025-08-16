@@ -75,26 +75,136 @@ exports.handler = async function(event, context) {
   };
 
   // 4. Call the DeepSeek API.
-  const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${DEEPSEEK_API_KEY}`,
-    },
-    body: JSON.stringify(payload),
-  });
+  let response;
+  try {
+    console.log('Calling DeepSeek API...');
+    response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`,
+      },
+      body: JSON.stringify(payload),
+      // Add timeout to prevent hanging requests
+      signal: AbortSignal.timeout(30000)
+    });
+    console.log('DeepSeek API response status:', response.status);
 
-  // 5. Check if the API response is successful
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error('DeepSeek API error:', response.status, errorText);
+    // Check if we got HTML instead of JSON
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('text/html')) {
+      throw new Error('Received HTML response instead of JSON stream');
+    }
+  } catch (error) {
+    console.error('Failed to call DeepSeek API:', error);
+    let errorMessage = 'Failed to connect to AI service. Please try again later.';
+    let statusCode = 500;
+
+    if (error.name === 'TimeoutError' || error.name === 'AbortError') {
+      errorMessage = 'Request timed out. Please try again.';
+      statusCode = 504;
+    } else if (error.message.includes('fetch failed')) {
+      errorMessage = 'Network connection error. Please check your internet connection.';
+      statusCode = 502;
+    }
+
     return {
-      statusCode: response.status,
-      body: JSON.stringify({ error: `DeepSeek API error: ${response.status} ${response.statusText}` }),
+      statusCode: statusCode,
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ error: errorMessage }),
     };
   }
 
-  // 6. Stream the response back to the client with proper headers
+  // 5. Check if the API response is successful
+  if (!response.ok) {
+    let errorMessage;
+    try {
+      const errorText = await response.text();
+      console.error('DeepSeek API error:', response.status, errorText);
+      
+      // Try to parse error as JSON
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.error || errorJson.message || 'Unknown API error';
+      } catch {
+        errorMessage = `API error: ${response.status} ${response.statusText}`;
+      }
+    } catch (error) {
+      console.error('Error reading error response:', error);
+      errorMessage = 'Failed to process API error response';
+    }
+
+    return {
+      statusCode: response.status,
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ error: errorMessage }),
+    };
+  }
+
+  // 6. Stream the response back to the client
+  const stream = response.body;
+  if (!stream) {
+    console.error('No response body stream available');
+    return {
+      statusCode: 502,
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ error: 'Failed to establish streaming connection' }),
+    };
+  }
+
+  const reader = stream.getReader();
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+
+  const readable = new ReadableStream({
+    async start(controller) {
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          // Decode the chunk and process it
+          const chunk = decoder.decode(value);
+          const lines = chunk.split('\n');
+
+          for (const line of lines) {
+            if (line.trim().startsWith('data:')) {
+              // Forward the data line as-is
+              controller.enqueue(encoder.encode(line + '\n\n'));
+            }
+          }
+        }
+        controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+        controller.close();
+      } catch (error) {
+        console.error('Stream processing error:', error);
+        // Send a more specific error message to the client
+        const errorMessage = error.name === 'NetworkError' 
+          ? 'Network connection lost during streaming'
+          : 'Error processing response stream';
+        controller.enqueue(encoder.encode(`data: {"error":"${errorMessage}"}
+
+`));
+        controller.close();
+      } finally {
+        try {
+          reader.releaseLock();
+        } catch (e) {
+          console.error('Error releasing reader lock:', e);
+        }
+      }
+    },
+  });
+
   return {
     statusCode: 200,
     headers: {
@@ -103,6 +213,6 @@ exports.handler = async function(event, context) {
       'Cache-Control': 'no-cache',
       'Connection': 'keep-alive',
     },
-    body: response.body,
+    body: readable,
   };
 };

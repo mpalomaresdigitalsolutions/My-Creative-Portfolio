@@ -1,4 +1,12 @@
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Headers: Content-Type, Authorization
+  Access-Control-Allow-Methods: GET, POST, OPTIONS
+
 /.netlify/functions/deepseek
   Access-Control-Allow-Origin: *
-  Access-Control-Allow-Headers: Content-Type
+  Access-Control-Allow-Headers: Content-Type, Authorization
   Access-Control-Allow-Methods: POST, OPTIONS
+  Content-Type: text/event-stream
+  Cache-Control: no-cache
+  Connection: keep-alive

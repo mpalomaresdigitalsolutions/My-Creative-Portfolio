@@ -144,20 +144,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             botMessageElement.textContent = ''; // Clear the '...'
+            let buffer = '';
 
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
+            try {
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
 
-                const chunk = decoder.decode(value, { stream: true });
-                const lines = chunk.split('\n').filter(line => line.trim() !== '');
-                
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const jsonStr = line.substring(6);
-                        if (jsonStr.trim() === '[DONE]') {
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || ''; // Keep the last incomplete line in the buffer
+
+                    for (const line of lines) {
+                        const trimmedLine = line.trim();
+                        if (!trimmedLine || !trimmedLine.startsWith('data: ')) continue;
+
+                        const jsonStr = trimmedLine.substring(5).trim();
+                        if (jsonStr === '[DONE]') {
+                            console.log('Stream completed');
                             break;
                         }
+
                         try {
                             const parsed = JSON.parse(jsonStr);
                             const content = parsed.choices?.[0]?.delta?.content;
@@ -167,11 +174,17 @@ document.addEventListener('DOMContentLoaded', () => {
                                 chatMessages.scrollTop = chatMessages.scrollHeight;
                             }
                         } catch (e) {
-                            console.warn('Skipping invalid JSON chunk:', jsonStr);
-                            // Skip invalid JSON chunks instead of failing
+                            console.warn('Invalid JSON chunk:', e.message);
+                            continue;
                         }
                     }
                 }
+            } catch (streamError) {
+                console.error('Error processing stream:', streamError);
+                throw new Error('Failed to process the AI response stream');
+            } finally {
+                reader.releaseLock();
+            }
             }
             
             if (!fullResponse.trim()) {
