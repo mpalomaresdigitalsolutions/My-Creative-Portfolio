@@ -16,4 +16,3 @@
   to = "/.netlify/functions/deepseek"
   status = 200
   force = true
-  conditions = {Method = ["POST"]}
