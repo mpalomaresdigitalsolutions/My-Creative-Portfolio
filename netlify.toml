@@ -10,3 +10,10 @@
   # This ensures Node.js 18 is used for the functions.
   node_bundler = "esbuild"
   included_files = ["portfolio_data.json"]
+
+[[redirects]]
+  from = "/api/chatbot"
+  to = "/.netlify/functions/deepseek"
+  status = 200
+  force = true
+  conditions = {Role = ["admin"], Method = ["POST"]}

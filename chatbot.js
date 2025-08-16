@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let fullResponse = '';
         try {
             // Call our secure Netlify serverless function instead of the DeepSeek API directly.
-            const response = await fetch('/.netlify/functions/deepseek', {
+            const response = await fetch('/api/chatbot', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
