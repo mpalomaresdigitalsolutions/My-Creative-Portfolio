@@ -247,7 +247,7 @@ Straight up Google Ads that make money. What's your current headache?`;
 - Learned from ${training.split("'s")[0]} - dude's the real deal
 - Right now: ${currentWork}
 
-This ain't some side hustle - this is Marlon's actual work. Want to see if he can do the same for you? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9`;
+This ain't some side hustle - this is Marlon's actual work. Want to see if he can do the same for you? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6`;
             } else if (messageLower.includes('certification') || messageLower.includes('certified')) {
                 const certs = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
@@ -259,7 +259,7 @@ This ain't some side hustle - this is Marlon's actual work. Want to see if he ca
 - Certified ${year}
 - Advanced training with ${training}
 
-Not some YouTube "expert" - actual Google certs. Ready to put these skills to work for you? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9`;
+Not some YouTube "expert" - actual Google certs. Ready to put these skills to work for you? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6`;
             } else if (messageLower.includes('hello') || messageLower.includes('hi') || messageLower.includes('hey')) {
                 const currentWork = portfolioData?.experience?.current || "managing $10k/month nonprofit campaign";
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
@@ -268,7 +268,7 @@ Not some YouTube "expert" - actual Google certs. Ready to put these skills to wo
 
 Marlon's the Google Ads guy running ${currentWork} right now. Learned from ${training.split("'s")[0]} - dude literally wrote the book on this stuff.
 
-I'm here to chat about Google Ads, business growth, getting more leads, or whatever's on your mind. Ready to see what Marlon can do for you? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9`;
+I'm here to chat about Google Ads, business growth, getting more leads, or whatever's on your mind. Ready to see what Marlon can do for you? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6`;
             } else {
                 // Default response strictly based on portfolio data
                 const packages = portfolioData?.services?.packages || [
@@ -283,7 +283,7 @@ I'm here to chat about Google Ads, business growth, getting more leads, or whate
 - Starts at $${packages[0]?.price || 150}/month
 - Marlon's currently: ${currentWork}
 
-Want to see how this could work for your business? Book a free strategy call and let's talk specifics: https://calendar.app.google/bR9DH6y53S7divDZ9`;
+Want to see how this could work for your business? Book a free strategy call and let's talk specifics: https://calendar.app.google/ecrh372MbNbBHbSf6`;
             }
             
             // Simulate typing with more natural pauses
@@ -461,7 +461,7 @@ Want to see how this could work for your business? Book a free strategy call and
     
     // Casual welcome message
     setTimeout(() => {
-        displayMessage("Yo! 👋\n\nWhat's up? I'm Marlon's chatbot - here to chat about Google Ads, business growth, and getting you real results. Ask me about pricing, services, or what's broken with your campaigns.\n\nReady to level up? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9", 'bot');
+        displayMessage("Yo! 👋\n\nWhat's up? I'm Marlon's chatbot - here to chat about Google Ads, business growth, and getting you real results. Ask me about pricing, services, or what's broken with your campaigns.\n\nReady to level up? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6", 'bot');
     }, 800);
     
     console.log('Chatbot initialized and ready for interaction');
