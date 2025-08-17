@@ -139,6 +139,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
+     * Checks if a question is related to Marlon's portfolio services or relevant business topics.
+     * @param {string} message - The user's message.
+     * @returns {boolean} True if related to portfolio/business, false otherwise.
+     */
+    function isQuestionPortfolioRelated(message) {
+        const portfolioKeywords = [
+            'google ads', 'google', 'ads', 'campaign', 'marketing', 'advertising',
+            'price', 'cost', 'package', 'pricing', 'budget', 'money', 'dollar',
+            'service', 'services', 'offer', 'offers', 'what do', 'what does',
+            'experience', 'background', 'qualified', 'certified', 'certification',
+            'marlon', 'he', 'his', 'guy', 'specialist', 'expert',
+            'keyword', 'research', 'strategy', 'audit', 'optimization', 'tracking',
+            'conversion', 'copywriting', 'setup', 'launch', 'manage',
+            'meeting', 'call', 'consultation', 'schedule', 'appointment', 'book',
+            'business', 'client', 'results', 'performance', 'roi', 'leads',
+            'hello', 'hi', 'hey', 'yo', 'sup', 'help', 'question'
+        ];
+        
+        const messageLower = message.toLowerCase();
+        return portfolioKeywords.some(keyword => messageLower.includes(keyword));
+    }
+
+    /**
      * Gets a streaming response from the DeepSeek API and updates the UI in real-time.
      * @param {string} userMessage - The user's message.
      * @param {HTMLElement} botMessageElement - The UI element for the bot's message.
@@ -146,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function getBotResponse(userMessage, botMessageElement) {
         if (!portfolioContext) {
-            botMessageElement.textContent = 'Hey! Let me tell you about Marlon...';
+            botMessageElement.textContent = "Hold up...";
             // Use basic portfolio info if context isn't loaded yet
-        const basicInfo = "Google Ads guy. Managing campaigns right now. Knows his stuff.";
+        const basicInfo = "Look, I'm Marlon's chatbot and I only talk about his Google Ads work. Campaign management, pricing, services - that's it. Nothing else.";
         return basicInfo;
         }
         
@@ -174,23 +197,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 portfolioData = null;
             }
             
-            // Generate contextual responses based STRICTLY on portfolio data
-            if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('package')) {
+            // Check if message is portfolio-related before responding
+            const isPortfolioRelated = isQuestionPortfolioRelated(messageLower);
+            
+            if (!isPortfolioRelated) {
+                response = "Hey! I only chat about Marlon's Google Ads services - pricing, what he does, his experience, that kind of stuff. What's up with your ads?";
+            } else if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('package')) {
                 const packages = portfolioData?.services?.packages || [
                     { name: "Launchpad", price: 150, budget: "$200-500", includes: "search campaign, keyword research, ad creatives" },
                     { name: "Growth", price: 300, budget: "$500-1500", includes: "extra campaigns, weekly optimization" },
                     { name: "Total Control", price: 500, budget: "$1500+", includes: "daily monitoring, all features" }
                 ];
                 
-                response = `Alright, so Marlon's got three packages - super straightforward:
+                response = `Yo, pricing is dead simple:
 
-**Launchpad**: $${packages[0]?.price || 150}/month - perfect if you're spending around ${packages[0]?.budget || "$200-500"} on ads. Gets you ${packages[0]?.includes || "search campaign setup"}.
+**Launchpad**: $${packages[0]?.price || 150}/month - for ${packages[0]?.budget || "$200-500"} ad budgets. Gets you ${packages[0]?.includes || "search campaign setup"}.
 
-**Growth**: $${packages[1]?.price || 300}/month - for ${packages[1]?.budget || "$500-1500"} budgets. ${packages[1]?.includes || "more campaigns + weekly tweaks"}.
+**Growth**: $${packages[1]?.price || 300}/month - when you're spending ${packages[1]?.budget || "$500-1500"}. ${packages[1]?.includes || "more campaigns + weekly tweaks"}.
 
-**Total Control**: Starts at $${packages[2]?.price || 500}/month - when you're spending ${packages[2]?.budget || "$1500+"} and want ${packages[2]?.includes || "daily monitoring"}.
+**Total Control**: $${packages[2]?.price || 500}+/month - for ${packages[2]?.budget || "$1500+"} budgets. ${packages[2]?.includes || "daily monitoring"}.
 
-That's literally it. No hidden fees or weird stuff. Which one's calling your name?`;
+No BS, no hidden fees. What you see is what you get. Which one fits?`;
             } else if (messageLower.includes('service') || messageLower.includes('offer') || messageLower.includes('do')) {
                 const services = portfolioData?.services?.specialties || [
                     "Google Ads audits", "Strategy development", "Campaign optimization", 
@@ -199,49 +226,49 @@ That's literally it. No hidden fees or weird stuff. Which one's calling your nam
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
                 const currentCampaign = portfolioData?.experience?.currentCampaign || "$10k/month nonprofit campaign";
                 
-                response = `So what Marlon actually does is pretty straightforward - Google Ads management from A to Z.
+                response = `Real talk - Marlon's your Google Ads guy, period.
 
-Real talk though - he learned from ${training.split("'s")[0]} (legit Google Ads guru), and right now he's running ${currentCampaign}. Not theory, happening right now.
+Learned from ${training.split("'s")[0]} (dude knows his stuff), and right now he's crushing it with ${currentCampaign}. This ain't theory - it's happening live.
 
-Here's what he handles:
+Here's what he actually does:
 ${services.map(service => `- ${service}`).join('\n')}
 
-That's pretty much it. No fluff, just Google Ads that actually work. What's bugging you about your current setup?`;
+Straight up Google Ads that make money. What's your current headache?`;
             } else if (messageLower.includes('experience') || messageLower.includes('background') || messageLower.includes('qualified')) {
                 const yearsUS = portfolioData?.experience?.yearsUS || "4 years";
                 const certifications = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
                 const currentWork = portfolioData?.experience?.current || "managing $10k/month nonprofit campaign";
                 
-                response = `Dude's got the receipts:
+                response = `Real talk:
 
-- ${yearsUS} working with US clients (gets how we think)
+- ${yearsUS} crushing it with US clients
 - Google certified in ${certifications.length} areas (${certifications.join(', ')})
-- Trained by ${training.split("'s")[0]} (the guy literally wrote the book on this stuff)
+- Learned from ${training.split("'s")[0]} - dude's the real deal
 - Right now: ${currentWork}
 
-That's not LinkedIn fluff - that's actual work happening today. What you running these days?`;
+This ain't some side hustle - this is Marlon's actual work. Want to see if he can do the same for you? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9`;
             } else if (messageLower.includes('certification') || messageLower.includes('certified')) {
                 const certs = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
                 const year = portfolioData?.experience?.certYear || "2024";
                 
-                response = `Certs? Yeah, he's got 'em:
+                response = `Certs? Dude's legit:
 
 - ${certs.join(', ')}
-- Got 'em in ${year}
+- Certified ${year}
 - Advanced training with ${training}
 
-That's the real deal, not some weekend course. You good with that?`;
+Not some YouTube "expert" - actual Google certs. Ready to put these skills to work for you? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9`;
             } else if (messageLower.includes('hello') || messageLower.includes('hi') || messageLower.includes('hey')) {
                 const currentWork = portfolioData?.experience?.current || "managing $10k/month nonprofit campaign";
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
                 
                 response = `Yo! 👋
 
-Marlon's the guy running ${currentWork} right now. Learned from ${training.split("'s")[0]} - that's the guy everyone copies.
+Marlon's the Google Ads guy running ${currentWork} right now. Learned from ${training.split("'s")[0]} - dude literally wrote the book on this stuff.
 
-Want pricing, services, or what's wrong with your current setup?`;
+I'm here to chat about Google Ads, business growth, getting more leads, or whatever's on your mind. Ready to see what Marlon can do for you? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9`;
             } else {
                 // Default response strictly based on portfolio data
                 const packages = portfolioData?.services?.packages || [
@@ -250,13 +277,13 @@ Want pricing, services, or what's wrong with your current setup?`;
                 const services = portfolioData?.services?.specialties || ["Google Ads management"];
                 const currentWork = portfolioData?.experience?.current || "Google Ads campaigns";
                 
-                response = `Quick version:
+                response = `Here's the deal:
 
 - ${services.join(', ')}
-- Packages start at $${packages[0]?.price || 150}/month
-- Currently doing ${currentWork}
+- Starts at $${packages[0]?.price || 150}/month
+- Marlon's currently: ${currentWork}
 
-What specifically you wanna know?`;
+Want to see how this could work for your business? Book a free strategy call and let's talk specifics: https://calendar.app.google/bR9DH6y53S7divDZ9`;
             }
             
             // Simulate typing with more natural pauses
@@ -265,7 +292,7 @@ What specifically you wanna know?`;
             let currentText = '';
             
             for (let i = 0; i < words.length; i++) {
-                await new Promise(resolve => setTimeout(resolve, 80 + Math.random() * 100));
+                await new Promise(resolve => setTimeout(resolve, 60 + Math.random() * 80));
                 currentText += (i === 0 ? '' : ' ') + words[i];
                 botMessageElement.textContent = currentText;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -434,7 +461,7 @@ What specifically you wanna know?`;
     
     // Casual welcome message
     setTimeout(() => {
-        displayMessage("Hey! 👋\n\nMarlon's the Google Ads guy. Ask me about pricing, services, or what's broken with your ads. Keep it simple.", 'bot');
+        displayMessage("Yo! 👋\n\nWhat's up? I'm Marlon's chatbot - here to chat about Google Ads, business growth, and getting you real results. Ask me about pricing, services, or what's broken with your campaigns.\n\nReady to level up? Book a free strategy call: https://calendar.app.google/bR9DH6y53S7divDZ9", 'bot');
     }, 800);
     
     console.log('Chatbot initialized and ready for interaction');
