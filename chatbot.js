@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Initialize chat widget
     const chatWidget = document.getElementById('chat-widget');
     const minimizeBtn = document.getElementById('minimize-chat');
@@ -6,12 +6,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('send-message');
     const chatMessages = document.getElementById('chat-messages');
 
-    // Add minimize functionality
-    let isMinimized = false;
+    // Start with chat widget minimized
+    let isMinimized = true;
+    chatWidget.style.height = '50px';
+    minimizeBtn.innerHTML = '<i class="fas fa-plus"></i>';
+
+    // Add minimize/maximize functionality
     minimizeBtn.addEventListener('click', () => {
         isMinimized = !isMinimized;
         chatWidget.style.height = isMinimized ? '50px' : '500px';
         minimizeBtn.innerHTML = isMinimized ? '<i class="fas fa-plus"></i>' : '<i class="fas fa-minus"></i>';
+        
+        // Show welcome message when opening for the first time
+        if (!isMinimized && chatMessages.children.length === 0) {
+            setTimeout(() => {
+                typeMessage(`🎯 **EXCLUSIVE OFFER: FREE Google Ads + Website Audit!** 🎯
+
+Hi! I'm Marlon's AI assistant, and I'm excited to offer you something special today.
+
+**Get a comprehensive audit worth $200 absolutely FREE!** I'll analyze:
+✅ Your Google Ads account structure & performance
+✅ Keyword targeting effectiveness  
+✅ Landing page optimization opportunities
+✅ Competitor analysis insights
+✅ Actionable recommendations to boost ROI
+
+**No strings attached** - just pure value to help your business grow.
+
+Ready to unlock your campaign's potential? Just ask me anything about Google Ads, digital marketing, or let's schedule your free audit! What's on your mind?`, 'bot');
+            }, 500);
+        }
     });
 
     // Add enter key functionality
@@ -34,16 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
      * Ends the chat session due to inactivity.
      */
     function endChatSession() {
-        displayMessage("Your session has ended due to inactivity.", "bot");
-        chatInput.disabled = true;
-        sendBtn.disabled = true;
-        // Optionally, close the chat window after a delay
-        setTimeout(() => {
-            chatWidget.style.display = 'none';
-            // Re-enable input for the next session
-            chatInput.disabled = false;
-            sendBtn.disabled = false;
-        }, 4000);
+        displayMessage("Session paused due to inactivity. Click to continue chatting!", "bot");
+        chatInput.disabled = false;
+        sendBtn.disabled = false;
+        // Reset idle timer when user interacts again
+        chatInput.addEventListener('focus', resetIdleTimer, { once: true });
     }
 
     /**
@@ -51,32 +70,46 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function resetIdleTimer() {
         clearTimeout(idleTimer);
-        idleTimer = setTimeout(endChatSession, 5 * 60 * 1000); // 5 minutes
+        idleTimer = setTimeout(endChatSession, 15 * 60 * 1000); // 15 minutes
     }
 
     /**
-     * Fetches portfolio data to be used as context for the chatbot.
+     * Fetches FAQ knowledge base to be used as context for the chatbot.
      */
     async function loadPortfolioData() {
         try {
-            const response = await fetch('portfolio_data.json');
+            const response = await fetch('faq.file');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const data = await response.json();
-            portfolioContext = JSON.stringify(data, null, 2);
-            console.log('Portfolio data loaded successfully.');
+            const data = await response.text();
+            portfolioContext = data;
+            console.log('FAQ knowledge base loaded successfully.');
         } catch (error) {
-            console.error('Error loading portfolio data:', error);
+            console.error('Error loading FAQ knowledge base:', error);
             // Use fallback context for local development
-            portfolioContext = JSON.stringify({
-                name: "Marlon Palomares",
-                title: "Google Ads Specialist",
-                summary: "A results-driven Google Ads specialist with hands-on campaign management experience.",
-                core_competencies: ["Google Ads Audit", "Google Ad Strategy", "Google Ads Optimization", "Copywriting", "Keyword Research", "Conversion Tracking Setup"],
-                key_achievements: ["Managing a $10,000/month Google Ads campaign for a nonprofit", "Google Ads certified with advanced optimization training"]
-            }, null, 2);
-            console.log('Using fallback portfolio context for local development');
+            portfolioContext = `# Marlon Palomares Portfolio - FAQ Knowledge Base
+
+## Personal Information
+**Name:** Marlon Palomares  
+**Title:** Google Ads Specialist  
+**Email:** Mpalomaresdigital@gmail.com  
+**Website:** https://mpalomaresdigitalsolutions.github.io/MPDIGITAL/
+
+## Professional Summary
+A results-driven Google Ads specialist with hands-on campaign management experience, trained by Ian Baillo, the Philippines' top Google Ads expert. Currently managing a $10,000 monthly search campaign for a nonprofit through VolunteerMatch. Over 4 years of experience with US-based clients.
+
+## Service Packages
+- Launchpad: $150/month (small businesses, $200-500 ad budget)
+- Growth: $300/month (growing businesses, $500-1,500 ad budget)  
+- Total Control: $500+/month (established businesses, $1,500+ ad budget)
+
+## Key Achievements
+- Managing $10,000/month Google Ads campaign for nonprofit
+- Trained by Ian Baillo (Philippines' top Google Ads expert)
+- Google Ads certified with advanced optimization training
+- 4+ years experience with US-based clients`;
+            console.log('Using fallback FAQ context for local development');
         }
     }
 
@@ -97,6 +130,56 @@ document.addEventListener('DOMContentLoaded', () => {
             
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to the latest message
+    }
+
+    /**
+     * Types out a message with a typing effect.
+     * @param {string} message - The message content.
+     * @param {('user'|'bot')} sender - The sender of the message.
+     */
+    function typeMessage(message, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('chat-message', `${sender}-message`);
+        chatMessages.appendChild(messageDiv);
+        
+        let index = 0;
+        const typingSpeed = 20; // milliseconds per character
+        
+        function typeNextCharacter() {
+            if (index < message.length) {
+                const char = message[index];
+                if (char === '\n') {
+                    messageDiv.innerHTML += '<br>';
+                } else if (char === '*' && message[index + 1] === '*') {
+                    // Handle bold formatting
+                    const endIndex = message.indexOf('**', index + 2);
+                    if (endIndex !== -1) {
+                        const boldText = message.substring(index + 2, endIndex);
+                        messageDiv.innerHTML += `<strong>${boldText}</strong>`;
+                        index = endIndex + 1;
+                    } else {
+                        messageDiv.innerHTML += '*';
+                    }
+                } else if (char === '*' && message[index + 1] !== '*') {
+                    // Handle italic formatting
+                    const endIndex = message.indexOf('*', index + 1);
+                    if (endIndex !== -1) {
+                        const italicText = message.substring(index + 1, endIndex);
+                        messageDiv.innerHTML += `<em>${italicText}</em>`;
+                        index = endIndex;
+                    } else {
+                        messageDiv.innerHTML += '*';
+                    }
+                } else {
+                    messageDiv.innerHTML += char;
+                }
+                index++;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                setTimeout(typeNextCharacter, typingSpeed);
+            }
+        }
+        
+        typeNextCharacter();
     }
 
     /**
@@ -168,11 +251,29 @@ document.addEventListener('DOMContentLoaded', () => {
      * @returns {Promise<string>} The full bot response for saving.
      */
     async function getBotResponse(userMessage, botMessageElement) {
+        const systemPrompt = `You are Marlon Palomares, a friendly and knowledgeable Google Ads specialist. You have access to a comprehensive FAQ knowledge base containing detailed information about my portfolio, services, experience, and capabilities. Use this knowledge base to provide accurate, helpful, and engaging responses to all user inquiries.
+
+FAQ Knowledge Base:
+${portfolioContext}
+
+When responding to questions:
+- Always base your answers on the FAQ knowledge base above
+- Maintain a warm, friendly, and conversational tone - like talking to a helpful friend who happens to be a Google Ads expert
+- Use emojis occasionally to add personality and warmth (but don't overdo it)
+- Provide detailed, accurate information about services, pricing, experience, and achievements
+- Reference specific facts, metrics, and details from the knowledge base
+- Be genuinely helpful and thorough in your explanations
+- If information isn't available in the knowledge base, acknowledge this honestly and offer to help find the answer
+- Use examples and specific details from the FAQ when relevant
+- Always look for opportunities to provide value and build trust
+- End responses with engaging questions or clear next steps when appropriate
+- Make the user feel heard and valued`;
+
         if (!portfolioContext) {
             botMessageElement.textContent = "Hold up...";
             // Use basic portfolio info if context isn't loaded yet
-        const basicInfo = "Look, I'm Marlon's chatbot and I only talk about his Google Ads work. Campaign management, pricing, services - that's it. Nothing else.";
-        return basicInfo;
+            const basicInfo = systemPrompt;
+            return basicInfo;
         }
         
         let fullResponse = '';
@@ -183,8 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Use mock responses for local development AND GitHub Pages since Netlify functions won't work there
         if (isLocalDevelopment || isGitHubPages) {
-            // Enhanced mock responses that sound more human and use actual portfolio data
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Faster response for better UX
+            // Enhanced friendly mock responses that use actual portfolio data
+            await new Promise(resolve => setTimeout(resolve, 800)); // Quick response for better UX
             
             const messageLower = userMessage.toLowerCase();
             let response = '';
@@ -201,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isPortfolioRelated = isQuestionPortfolioRelated(messageLower);
             
             if (!isPortfolioRelated) {
-                response = "Hey! I only chat about Marlon's Google Ads services - pricing, what he does, his experience, that kind of stuff. What's up with your ads?";
+                response = "Hey there! 👋 I'm here to help with anything related to Google Ads, digital marketing, or Marlon's services. I specialize in Google Ads strategy, campaign optimization, and helping businesses like yours grow. What's on your mind today?";
             } else if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('package')) {
                 const packages = portfolioData?.services?.packages || [
                     { name: "Launchpad", price: 150, budget: "$200-500", includes: "search campaign, keyword research, ad creatives" },
@@ -209,66 +310,84 @@ document.addEventListener('DOMContentLoaded', () => {
                     { name: "Total Control", price: 500, budget: "$1500+", includes: "daily monitoring, all features" }
                 ];
                 
-                response = `Yo, pricing is dead simple:
+                response = `I'd love to share Marlon's transparent pricing! 💰
 
-**Launchpad**: $${packages[0]?.price || 150}/month - for ${packages[0]?.budget || "$200-500"} ad budgets. Gets you ${packages[0]?.includes || "search campaign setup"}.
+**🚀 Launchpad Package** - $${packages[0]?.price || 150}/month
+Perfect for businesses with ${packages[0]?.budget || "$200-500"} ad budgets. Includes ${packages[0]?.includes || "search campaign setup, keyword research, and compelling ad creatives"}.
 
-**Growth**: $${packages[1]?.price || 300}/month - when you're spending ${packages[1]?.budget || "$500-1500"}. ${packages[1]?.includes || "more campaigns + weekly tweaks"}.
+**📈 Growth Package** - $${packages[1]?.price || 300}/month  
+Ideal for growing businesses spending ${packages[1]?.budget || "$500-1500"}. Features ${packages[1]?.includes || "additional campaign types and weekly optimization"}.
 
-**Total Control**: $${packages[2]?.price || 500}+/month - for ${packages[2]?.budget || "$1500+"} budgets. ${packages[2]?.includes || "daily monitoring"}.
+**🎯 Total Control Package** - $${packages[2]?.price || 500}+/month
+For established businesses with ${packages[2]?.budget || "$1500+"} budgets. ${packages[2]?.includes || "Daily monitoring and comprehensive campaign management"}.
 
-No BS, no hidden fees. What you see is what you get. Which one fits?`;
+✨ **No hidden fees, ever!** What budget range are you working with? I'd be happy to recommend the best fit for your goals!`;
             } else if (messageLower.includes('service') || messageLower.includes('offer') || messageLower.includes('do')) {
                 const services = portfolioData?.services?.specialties || [
                     "Google Ads audits", "Strategy development", "Campaign optimization", 
                     "Copywriting for ads", "Keyword research", "Conversion tracking setup"
                 ];
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
-                const currentCampaign = portfolioData?.experience?.currentCampaign || "$10k/month nonprofit campaign";
+                const currentCampaign = portfolioData?.experience?.current || "$10k/month nonprofit campaign";
                 
-                response = `Real talk - Marlon's your Google Ads guy, period.
+                response = `Great question! Marlon is your dedicated Google Ads specialist 🎯
 
-Learned from ${training.split("'s")[0]} (dude knows his stuff), and right now he's crushing it with ${currentCampaign}. This ain't theory - it's happening live.
+**His expertise includes:**
+${services.map(service => `• ${service}`).join('\n')}
 
-Here's what he actually does:
-${services.map(service => `- ${service}`).join('\n')}
+**Real-world experience:** Currently managing ${currentCampaign} and learned directly from ${training.split("'s")[0]} - recognized as the Philippines' top Google Ads expert.
 
-Straight up Google Ads that make money. What's your current headache?`;
+This isn't just theory - Marlon applies proven strategies that deliver real results for businesses just like yours. What specific challenge are you facing with your ads? I'd love to help!`;
             } else if (messageLower.includes('experience') || messageLower.includes('background') || messageLower.includes('qualified')) {
                 const yearsUS = portfolioData?.experience?.yearsUS || "4 years";
                 const certifications = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
-                const currentWork = portfolioData?.experience?.current || "managing $10k/month nonprofit campaign";
+                const currentWork = portfolioData?.experience?.current || "managing $10k/month Google Ads campaign";
                 
-                response = `Real talk:
+                response = `Absolutely! Here's Marlon's impressive track record 📊
 
-- ${yearsUS} crushing it with US clients
-- Google certified in ${certifications.length} areas (${certifications.join(', ')})
-- Learned from ${training.split("'s")[0]} - dude's the real deal
-- Right now: ${currentWork}
+**Experience Highlights:**
+• ${yearsUS} of hands-on experience with US-based clients
+• Google certified in ${certifications.length} key areas: ${certifications.join(', ')}
+• Advanced training from ${training} - the Philippines' leading Google Ads authority
+• Currently: ${currentWork}
 
-This ain't some side hustle - this is Marlon's actual work. Want to see if he can do the same for you? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6`;
+**What this means for you:** You're working with someone who's been in the trenches, managing real campaigns with real budgets and delivering measurable results.
+
+Ready to see how this expertise can transform your business? Let's discuss your specific goals!`;
             } else if (messageLower.includes('certification') || messageLower.includes('certified')) {
                 const certs = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
                 const year = portfolioData?.experience?.certYear || "2024";
                 
-                response = `Certs? Dude's legit:
+                response = `Marlon's credentials are rock-solid! 🏆
 
-- ${certs.join(', ')}
-- Certified ${year}
-- Advanced training with ${training}
+**Google Certifications:**
+• ${certs.join('\n• ')}
 
-Not some YouTube "expert" - actual Google certs. Ready to put these skills to work for you? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6`;
+**Advanced Training:**
+• Certified ${year} with continuous updates
+• Completed intensive training with ${training} - the Philippines' top Google Ads expert
+
+These aren't just certificates - they represent proven expertise in managing successful campaigns across different industries and budgets. When you work with Marlon, you're getting Google-approved strategies that actually work.
+
+Want to discuss how these skills can benefit your specific business?`;
             } else if (messageLower.includes('hello') || messageLower.includes('hi') || messageLower.includes('hey')) {
-                const currentWork = portfolioData?.experience?.current || "managing $10k/month nonprofit campaign";
+                const currentWork = portfolioData?.experience?.current || "managing a $10k/month Google Ads campaign";
                 const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
                 
-                response = `Yo! 👋
+                response = `Hello! 👋 Welcome! I'm Marlon's AI assistant, and I'm thrilled you're here!
 
-Marlon's the Google Ads guy running ${currentWork} right now. Learned from ${training.split("'s")[0]} - dude literally wrote the book on this stuff.
+Marlon is currently ${currentWork} and brings expertise from training with ${training.split("'s")[0]} - the Philippines' leading Google Ads authority.
 
-I'm here to chat about Google Ads, business growth, getting more leads, or whatever's on your mind. Ready to see what Marlon can do for you? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6`;
+**I'm here to help you with:**
+• Understanding Google Ads strategies
+• Pricing and service packages
+• Campaign optimization tips
+• Scheduling your FREE audit
+• Any questions about growing your business with Google Ads
+
+What brings you here today? Whether you're struggling with your current campaigns or just exploring options, I'm here to help!`;
             } else {
                 // Default response strictly based on portfolio data
                 const packages = portfolioData?.services?.packages || [
@@ -277,13 +396,17 @@ I'm here to chat about Google Ads, business growth, getting more leads, or whate
                 const services = portfolioData?.services?.specialties || ["Google Ads management"];
                 const currentWork = portfolioData?.experience?.current || "Google Ads campaigns";
                 
-                response = `Here's the deal:
+                response = `I'd be happy to help! Here's what I can tell you:
 
-- ${services.join(', ')}
-- Starts at $${packages[0]?.price || 150}/month
-- Marlon's currently: ${currentWork}
+**Marlon specializes in:** ${services.join(', ')}
 
-Want to see how this could work for your business? Book a free strategy call and let's talk specifics: https://calendar.app.google/ecrh372MbNbBHbSf6`;
+**Pricing starts at:** $${packages[0]?.price || 150}/month
+
+**Current work:** ${currentWork}
+
+**Next steps:** The best way to see how this can work for your specific business is through a free strategy call. No sales pressure - just honest advice about your Google Ads opportunities.
+
+What specific challenge or goal would you like to discuss? I'm here to help!`;
             }
             
             // Simulate typing with more natural pauses
@@ -291,13 +414,16 @@ Want to see how this could work for your business? Book a free strategy call and
             const words = response.split(' ');
             let currentText = '';
             
-            for (let i = 0; i < words.length; i++) {
-                await new Promise(resolve => setTimeout(resolve, 60 + Math.random() * 80));
-                currentText += (i === 0 ? '' : ' ') + words[i];
-                botMessageElement.textContent = currentText;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+            async function typeWords() {
+                for (let i = 0; i < words.length; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 60 + Math.random() * 80));
+                    currentText += (i === 0 ? '' : ' ') + words[i];
+                    botMessageElement.textContent = currentText;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
             }
             
+            await typeWords();
             return response;
         }
         
@@ -442,10 +568,12 @@ Want to see how this could work for your business? Book a free strategy call and
             console.error('Error in chat interaction:', error);
             botMessageElement.textContent = 'Sorry, I encountered an error. Please try again.';
         } finally {
-            // Re-enable input controls
-            chatInput.disabled = false;
-            sendBtn.disabled = false;
-            chatInput.focus();
+            // Always re-enable input controls, even if there's an error
+            setTimeout(() => {
+                chatInput.disabled = false;
+                sendBtn.disabled = false;
+                chatInput.focus();
+            }, 100); // Small delay to ensure UI updates
         }
     }
 
@@ -461,8 +589,13 @@ Want to see how this could work for your business? Book a free strategy call and
     
     // Casual welcome message
     setTimeout(() => {
-        displayMessage("Yo! 👋\n\nWhat's up? I'm Marlon's chatbot - here to chat about Google Ads, business growth, and getting you real results. Ask me about pricing, services, or what's broken with your campaigns.\n\nReady to level up? Book a free strategy call: https://calendar.app.google/ecrh372MbNbBHbSf6", 'bot');
+        const welcomeMessage = "Hello! I am Marlon's chatbot. How can I help you today?";
+        displayMessage(welcomeMessage, 'bot');
     }, 800);
+    
+    // Ensure chat controls are enabled on initialization
+    chatInput.disabled = false;
+    sendBtn.disabled = false;
     
     console.log('Chatbot initialized and ready for interaction');
 });
