@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marlon Palomares - GHL Work Samples</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            animation: backgroundShift 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            100% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+            transform: translateX(-5px);
+        }
+
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .sample-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #667eea, #764ba2) border-box;
+        }
+
+        .sample-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .sample-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sample-item:hover .sample-image {
+            transform: scale(1.05);
+        }
+
+        .sample-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .sample-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .image-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            text-align: center;
+        }
+        
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .lightbox-close:hover {
+            color: #ff6b6b;
+        }
+
+        @media (max-width: 768px) {
+            .samples-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>GoHighLevel (GHL) Work Samples</h1>
+            <p>Explore my GoHighLevel implementation samples showcasing email automations, sales funnels, and website development for service businesses.</p>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Resume
+            </a>
+        </header>
+
+        <div class="samples-grid">
+            <div class="sample-item">
+                <img src="./GHL images/Email Automation.png" alt="Email Automation Implementation" class="sample-image">
+                <div class="sample-title">Email Automation Implementation</div>
+                <div class="sample-description">
+                    Automated email sequences designed to nurture leads through the customer journey, with personalized messaging and strategic timing for maximum engagement.
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="./GHL images/funnels.png" alt="Sales Funnel Creation" class="sample-image">
+                <div class="sample-title">Sales Funnel Creation</div>
+                <div class="sample-description">
+                    High-converting sales funnels built specifically for service businesses, optimized for lead generation and customer acquisition through strategic landing pages.
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="./GHL images/Sample_Email.png" alt="Sample Email Campaigns" class="sample-image">
+                <div class="sample-title">Sample Email Campaigns</div>
+                <div class="sample-description">
+                    Professionally crafted email campaigns with compelling copy and strategic call-to-actions, designed to improve open rates and drive conversions for service-based businesses.
+                </div>
+            </div>
+
+            <div class="sample-item">
+                <img src="./GHL images/website.jpg" alt="GHL Website Development" class="sample-image">
+                <div class="sample-title">GHL Website Development</div>
+                <div class="sample-description">
+                    Custom website development within GoHighLevel platform, featuring responsive design, lead capture forms, and seamless integration with CRM and automation workflows.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="image-lightbox" class="image-lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-image" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Image lightbox functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.sample-image');
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = lightbox.querySelector('.lightbox-image');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+            images.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    lightbox.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closeLightbox() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

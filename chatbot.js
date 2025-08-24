@@ -49,6 +49,9 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
     // Add click handler for send button
     sendBtn.addEventListener('click', handleSendMessage);
 
+    // Add image viewing functionality for GHL samples
+    setupImageViewer();
+
     let portfolioContext = '';
     let idleTimer;
 
@@ -180,6 +183,129 @@ A results-driven Google Ads specialist with hands-on campaign management experie
         }
         
         typeNextCharacter();
+}
+
+    /**
+     * Sets up image viewing functionality for GHL sample images
+     */
+    function setupImageViewer() {
+        // Create lightbox modal HTML
+        const lightboxHTML = `
+            <div id="image-lightbox" class="image-lightbox" style="display: none;">
+                <div class="lightbox-content">
+                    <span class="lightbox-close">&times;</span>
+                    <img class="lightbox-image" src="" alt="">
+                    <div class="lightbox-caption"></div>
+                </div>
+            </div>
+        `;
+        
+        // Add lightbox CSS
+        const lightboxCSS = `
+            .image-lightbox {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                z-index: 1000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+            
+            .lightbox-content {
+                position: relative;
+                max-width: 90%;
+                max-height: 90%;
+                text-align: center;
+            }
+            
+            .lightbox-image {
+                max-width: 100%;
+                max-height: 80vh;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            }
+            
+            .lightbox-close {
+                position: absolute;
+                top: -40px;
+                right: 0;
+                color: white;
+                font-size: 35px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1001;
+            }
+            
+            .lightbox-close:hover {
+                color: #ff6b6b;
+            }
+            
+            .lightbox-caption {
+                color: white;
+                margin-top: 15px;
+                font-size: 16px;
+                max-width: 600px;
+            }
+            
+            .cert-preview img {
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+            
+            .cert-preview img:hover {
+                transform: scale(1.05);
+            }
+        `;
+        
+        // Add lightbox to body
+        document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+        
+        // Add CSS to head
+        const style = document.createElement('style');
+        style.textContent = lightboxCSS;
+        document.head.appendChild(style);
+        
+        // Get all GHL images
+        const ghlImages = document.querySelectorAll('.cert-preview img[src*="GHL images"]');
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImg = lightbox.querySelector('.lightbox-image');
+        const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+        
+        // Add click handlers to images
+        ghlImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxCaption.textContent = img.alt;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close lightbox handlers
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                closeLightbox();
+            }
+        });
+        
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     }
 
     /**
