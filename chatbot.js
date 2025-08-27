@@ -562,7 +562,7 @@ What specific challenge or goal would you like to discuss? I'm here to help!`;
             }
             
             // Call our secure Netlify serverless function instead of the DeepSeek API directly.
-            const response = await fetch('/.netlify/functions/deepseek', {
+            const response = await fetch('https://mpalomaresdigitalsolutions.netlify.app/.netlify/functions/deepseek', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
