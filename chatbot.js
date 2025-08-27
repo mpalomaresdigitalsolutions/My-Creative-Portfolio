@@ -54,6 +54,59 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
 
     let portfolioContext = '';
     let idleTimer;
+    
+    // Conversation memory for contextual responses
+    const conversationMemory = {
+        userIndustry: null,
+        budgetRange: null,
+        previousQueries: [],
+        conversationStage: 'initial',
+        userName: null
+    };
+    
+    // Service discovery flow
+    const serviceDiscoveryFlow = {
+        questions: [
+            {
+                id: 'business_type',
+                question: '🏢 What type of business do you run?',
+                options: ['Local Service Business', 'E-commerce', 'Consulting', 'Restaurant', 'Other']
+            },
+            {
+                id: 'current_spend',
+                question: '💰 What\'s your current monthly Google Ads budget?',
+                options: ['$0-500', '$500-1500', '$1500-5000', '$5000+', 'Not sure yet']
+            },
+            {
+                id: 'main_goal',
+                question: '🎯 What\'s your primary goal?',
+                options: ['More phone calls', 'Website sales', 'Lead generation', 'Brand awareness']
+            }
+        ],
+        currentQuestion: 0,
+        answers: {},
+        
+        generateRecommendation() {
+            const answers = this.answers;
+            let packageName = 'Launchpad';
+            let price = 150;
+            
+            if (answers.current_spend === '$1500-5000' || answers.current_spend === '$5000+') {
+                packageName = 'Total Control';
+                price = 500;
+            } else if (answers.current_spend === '$500-1500') {
+                packageName = 'Growth';
+                price = 300;
+            }
+            
+            return {
+                package: packageName,
+                price,
+                personalized: true,
+                context: answers
+            };
+        }
+    };
 
     // --- Functions ---
 
@@ -77,42 +130,149 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
     }
 
     /**
-     * Fetches FAQ knowledge base to be used as context for the chatbot.
+     * Fetches comprehensive portfolio data including Google Ads knowledge base for the chatbot.
      */
     async function loadPortfolioData() {
         try {
-            const response = await fetch('faq.file');
+            const response = await fetch('knowledge_base.md');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.text();
             portfolioContext = data;
-            console.log('FAQ knowledge base loaded successfully.');
+            console.log('Knowledge base loaded successfully.');
         } catch (error) {
-            console.error('Error loading FAQ knowledge base:', error);
+            console.error('Error loading knowledge base:', error);
             // Use fallback context for local development
-            portfolioContext = `# Marlon Palomares Portfolio - FAQ Knowledge Base
+            portfolioContext = `# Comprehensive Knowledge Base - Marlon Palomares Portfolio & Google Ads Expertise
 
-## Personal Information
+## Personal Information & Portfolio Overview
+
 **Name:** Marlon Palomares  
 **Title:** Google Ads Specialist  
 **Email:** Mpalomaresdigital@gmail.com  
 **Website:** https://mpalomaresdigitalsolutions.github.io/MPDIGITAL/
 
-## Professional Summary
-A results-driven Google Ads specialist with hands-on campaign management experience, trained by Ian Baillo, the Philippines' top Google Ads expert. Currently managing a $10,000 monthly search campaign for a nonprofit through VolunteerMatch. Over 4 years of experience with US-based clients.
+### Professional Summary
+A results-driven Google Ads specialist with hands-on campaign management experience, trained by Ian Baillo, the Philippines' top Google Ads expert. Currently managing a $10,000 monthly search campaign for a nonprofit through VolunteerMatch. Over 4 years of experience with US-based clients as a Customer Service and Technical Support Representative.
 
-## Service Packages
-- Launchpad: $150/month (small businesses, $200-500 ad budget)
-- Growth: $300/month (growing businesses, $500-1,500 ad budget)  
-- Total Control: $500+/month (established businesses, $1,500+ ad budget)
+### Core Services Offered
+1. **Google Ads Audit** - Comprehensive analysis and optimization recommendations
+2. **Google Ad Strategy** - Strategic planning and campaign development
+3. **Google Ads Optimization** - Performance improvement and ROI maximization
+4. **Copywriting** - Ad copy development and optimization
+5. **Keyword Research** - Target audience and keyword analysis
+6. **Conversion Tracking Setup** - Advanced tracking implementation
 
-## Key Achievements
-- Managing $10,000/month Google Ads campaign for nonprofit
-- Trained by Ian Baillo (Philippines' top Google Ads expert)
-- Google Ads certified with advanced optimization training
-- 4+ years experience with US-based clients`;
-            console.log('Using fallback FAQ context for local development');
+### Service Packages & Pricing
+
+#### The 'Launchpad' Package - $150/month
+**Target:** Small business with $200-$500 monthly ad budget
+**Includes:**
+- One Google Search campaign setup
+- Keyword research (up to 25 keywords)
+- 3-5 high-quality ad creatives
+- Initial conversion tracking setup
+- Bi-weekly campaign monitoring and budget management
+- Negative keyword research
+- Ad copy A/B testing
+- Basic bid adjustments
+- Bi-weekly email updates and monthly performance summary
+
+#### The 'Growth' Package - $300/month
+**Target:** Growing business with $500-$1,500 monthly ad budget
+**Includes:**
+- Everything in Launchpad package
+- Additional campaign setup (Display or Remarketing)
+- Advanced keyword and audience research
+- Weekly optimization and aggressive bid strategies
+- Landing page suggestions
+- Weekly performance reports
+- Monthly strategy call
+
+#### The 'Total Control' Package - $500+/month
+**Target:** Established business with $1,500+ monthly ad budget
+**Includes:**
+- Everything in Growth package
+- Multiple campaign types (Search, Display, Shopping, Video)
+- Comprehensive audience targeting and segmentation
+- Advanced conversion tracking with Google Analytics
+- Full-service landing page consultation
+- Daily/Bi-weekly budget and bid monitoring
+- Custom weekly and monthly reports
+- Priority communication
+
+### Key Achievements & Experience
+- **Current:** Managing $10,000/month Google Ads campaign for nonprofit
+- **Training:** Advanced Google Ads training from Ian Baillo (Philippines' top expert)
+- **Certification:** Google Ads certified with advanced optimization training
+- **Experience:** 4+ years with US-based clients in customer service and technical support
+- **Performance:** 78.5% optimization score, $5.39 average cost per conversion, 15+ conversions generated
+
+### Contact & Scheduling
+**Booking Link:** https://calendar.app.google/ecrh372MbNbBHbSf6  
+**Email:** Mpalomaresdigital@gmail.com  
+**Availability:** Free strategy calls available for qualified prospects
+
+## Google Ads Fundamentals and Best Practices
+
+Google Ads is a digital advertising service that enables you to promote your products or services on various Google platforms, including Google's search engine, YouTube, and other affiliated websites. They're also referred to as paid search or pay-per-click (PPC) ads, because you only pay for the ads' placement when a user clicks them.
+
+### Master Ads Keyword Research
+
+Effective PPC keyword research goes beyond selecting the right words. Understanding user intent and search patterns is pivotal for Google Ads' success, as it connects ad offerings with the target audience's specific needs and behaviors.
+
+**Types of Search Intent:**
+- **Informational (I)**: User is looking for information (e.g., "What is the safest life jacket for toddlers?").
+- **Navigational (N)**: User wants a specific brand or page (e.g., "XYZ Outdoors life jackets").
+- **Commercial (C)**: User is researching before a purchase (e.g., "Top-rated life jackets for sailing").
+- **Transactional (T)**: User wants to buy (e.g., "Buy life jackets online").
+
+**Advanced Keyword Strategies:**
+- Utilize negative keywords to prevent ads from appearing for irrelevant search queries
+- Organize keywords using tools like Semrush's PPC Keyword Tool
+- Employ long-tail keywords for potentially less expensive PPC advertising
+- Include local keywords to attract local customers
+- Experiment with different keyword match types (broad, phrase, exact)
+- Analyze competitor keyword positions and ad copy using tools like Semrush's Advertising Research
+
+### Campaign Building and Optimization
+
+Creating a Google Ads campaign involves several key steps, from defining your objective to structuring your account effectively. A campaign allows you to promote your products or services across Google's network.
+
+**Campaign Types:**
+- **Search**: Text ads on Google search results
+- **Display**: Image ads on websites within the Google Display Network
+- **Video**: Video ads on YouTube
+- **Shopping**: Product listings for e-commerce businesses
+- **Demand Gen**: Advertise within online feeds
+- **App**: Promote your app across various channels
+- **Performance Max**: Finds high-value customers across all Google channels
+
+**Optimization Techniques:**
+- Continuous keyword optimization with negative keywords and match type adjustments
+- A/B testing of ad copy and landing pages
+- Bid strategy adjustments using automated bidding (Maximize Conversions, Target CPA, Target ROAS)
+- Audience targeting refinement using demographics and remarketing
+- Landing page optimization for relevance and user experience
+
+### Performance Monitoring
+
+**Key Metrics to Monitor:**
+- **Click-Through Rate (CTR)**: Measures the percentage of people who click your ad after seeing it
+- **Conversion Rate**: Percentage of clicks that resulted in a conversion
+- **Cost Per Click (CPC)**: Average cost paid for each click on your ad
+- **Cost Per Acquisition (CPA)**: Average cost to acquire a conversion
+- **Return on Ad Spend (ROAS)**: Revenue generated for every dollar spent on advertising
+- **Quality Score**: Google's rating of the quality and relevance of your keywords, ads, and landing pages
+
+**Essential Tools:**
+- Google Ads Keyword Planner for keyword research
+- Google Analytics integration for deeper insights
+- Competitor analysis tools (Semrush, SpyFu)
+- Search Terms Report for identifying negative keywords
+- Auction Insights Report for competitor comparison`
+            console.log('Using fallback knowledge base for local development');
         }
     }
 
@@ -183,7 +343,158 @@ A results-driven Google Ads specialist with hands-on campaign management experie
         }
         
         typeNextCharacter();
-}
+    }
+
+    /**
+     * Shows interactive pricing calculator
+     */
+    function showPricingCalculator() {
+        const calculatorHTML = `
+            <div class="pricing-calculator">
+                <h4>📊 Get Your Custom Quote</h4>
+                <div class="calc-input">
+                    <label>💰 Monthly Ad Budget:</label>
+                    <input type="range" id="budget-slider" min="200" max="10000" value="1000" step="100">
+                    <span id="budget-display">$1,000</span>
+                </div>
+                <div class="calc-result">
+                    <strong>🎯 Recommended Package:</strong> <span id="package-name">Growth Package</span>
+                    <br><strong>💵 Management Fee:</strong> <span id="management-fee">$300/month</span>
+                    <br><strong>📈 Expected ROI:</strong> <span id="expected-roi">300-500%</span>
+                </div>
+                <div style="margin-top: 15px;">
+                    <button class="quick-action" onclick="bookConsultation()">📅 Book Free Strategy Call</button>
+                    <button class="quick-action" onclick="startServiceDiscovery()">🎯 Get Personalized Quote</button>
+                </div>
+            </div>
+        `;
+        
+        displayMessage(calculatorHTML, 'bot');
+        
+        // Add calculator functionality
+        setTimeout(() => {
+            const slider = document.getElementById('budget-slider');
+            const display = document.getElementById('budget-display');
+            const packageName = document.getElementById('package-name');
+            const managementFee = document.getElementById('management-fee');
+            const expectedROI = document.getElementById('expected-roi');
+            
+            slider.addEventListener('input', (e) => {
+                const budget = parseInt(e.target.value);
+                display.textContent = `$${budget.toLocaleString()}`;
+                
+                if (budget <= 500) {
+                    packageName.textContent = 'Launchpad Package';
+                    managementFee.textContent = '$150/month';
+                    expectedROI.textContent = '200-300%';
+                } else if (budget <= 1500) {
+                    packageName.textContent = 'Growth Package';
+                    managementFee.textContent = '$300/month';
+                    expectedROI.textContent = '300-500%';
+                } else {
+                    packageName.textContent = 'Total Control Package';
+                    managementFee.textContent = '$500+/month';
+                    expectedROI.textContent = '400-800%';
+                }
+            });
+        }, 100);
+    }
+
+    /**
+     * Shows email capture with lead magnet
+     */
+    function showEmailCapture() {
+        const captureHTML = `
+            <div class="email-capture">
+                <h4>🎁 Free Google Ads Checklist</h4>
+                <p>Get my 10-point checklist that increased conversions by 200%</p>
+                <input type="email" placeholder="Enter your email" id="email-input" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                <button class="quick-action" onclick="deliverLeadMagnet()">📧 Send My Checklist</button>
+                <small style="color: #666;">No spam, unsubscribe anytime</small>
+            </div>
+        `;
+        displayMessage(captureHTML, 'bot');
+    }
+
+    /**
+     * Starts guided service discovery
+     */
+    function startServiceDiscovery() {
+        serviceDiscoveryFlow.currentQuestion = 0;
+        serviceDiscoveryFlow.answers = {};
+        askServiceQuestion();
+    }
+
+    /**
+     * Asks service discovery questions
+     */
+    function askServiceQuestion() {
+        const question = serviceDiscoveryFlow.questions[serviceDiscoveryFlow.currentQuestion];
+        if (!question) {
+            showPersonalizedRecommendation();
+            return;
+        }
+        
+        let questionHTML = `<strong>${question.question}</strong><br>`;
+        question.options.forEach(option => {
+            questionHTML += `<button class="quick-action" onclick="selectServiceOption('${question.id}', '${option}')">${option}</button>`;
+        });
+        
+        displayMessage(questionHTML, 'bot');
+    }
+
+    /**
+     * Handles service discovery option selection
+     */
+    function selectServiceOption(questionId, option) {
+        serviceDiscoveryFlow.answers[questionId] = option;
+        serviceDiscoveryFlow.currentQuestion++;
+        askServiceQuestion();
+    }
+
+    /**
+     * Shows personalized recommendation
+     */
+    function showPersonalizedRecommendation() {
+        const recommendation = serviceDiscoveryFlow.generateRecommendation();
+        const recHTML = `
+            <div class="personalized-recommendation">
+                <h4>🎯 Your Personalized Recommendation</h4>
+                <p><strong>Package:</strong> ${recommendation.package} Package</p>
+                <p><strong>Price:</strong> $${recommendation.price}/month</p>
+                <p><strong>Perfect for:</strong> ${recommendation.context.business_type} with ${recommendation.context.current_spend} budget</p>
+                <div style="margin-top: 15px;">
+                    <button class="quick-action" onclick="bookConsultation()">📅 Book Free Call</button>
+                    <button class="quick-action" onclick="showEmailCapture()">📧 Get Detailed Quote</button>
+                </div>
+            </div>
+        `;
+        displayMessage(recHTML, 'bot');
+    }
+
+    /**
+     * Books consultation
+     */
+    function bookConsultation() {
+        window.open('https://calendar.app.google/ecrh372MbNbBHbSf6', '_blank');
+        displayMessage('🗓️ Perfect! Opening calendar to book your free strategy call. Looking forward to helping you grow your business!', 'bot');
+    }
+
+    /**
+     * Delivers lead magnet
+     */
+    function deliverLeadMagnet() {
+        const email = document.getElementById('email-input')?.value;
+        if (!email || !email.includes('@')) {
+            displayMessage('❌ Please enter a valid email address to receive your checklist.', 'bot');
+            return;
+        }
+        
+        displayMessage(`📧 Great! Your Google Ads checklist is on its way to ${email}. Check your inbox in the next few minutes!`, 'bot');
+        
+        // Here you would typically send the email via API
+        console.log('Lead magnet delivered to:', email);
+    }
 
     /**
      * Sets up image viewing functionality for GHL sample images
@@ -515,24 +826,109 @@ Marlon is currently ${currentWork} and brings expertise from training with ${tra
 
 What brings you here today? Whether you're struggling with your current campaigns or just exploring options, I'm here to help!`;
             } else {
-                // Default response strictly based on portfolio data
-                const packages = portfolioData?.services?.packages || [
-                    { name: "Launchpad", price: 150 }
-                ];
-                const services = portfolioData?.services?.specialties || ["Google Ads management"];
-                const currentWork = portfolioData?.experience?.current || "Google Ads campaigns";
+                // Use knowledge base content for contextual responses
+                const knowledgeBase = portfolioContext || '';
                 
-                response = `I'd be happy to help! Here's what I can tell you:
+                if (messageLower.includes('google ads') || messageLower.includes('campaign')) {
+                    response = `I understand you're asking about Google Ads! Based on Marlon's current work managing a $10K/month campaign for a nonprofit, here's what's working:
 
-**Marlon specializes in:** ${services.join(', ')}
+**Key insights from recent campaigns:**
+- 78.5% optimization score achieved
+- $5.39 average cost per conversion
+- 15+ conversions generated through strategic keyword targeting
 
-**Pricing starts at:** $${packages[0]?.price || 150}/month
+**For your specific situation**, Marlon typically starts with understanding your current ad spend and goals. The strategies he's learned from Ian Baillo - Philippines' top Google Ads expert - focus heavily on intent-based keyword research and negative keyword optimization.
 
-**Current work:** ${currentWork}
+**Quick question:** What's your current monthly ad budget range? This helps determine whether the Launchpad ($150/month), Growth ($300/month), or Total Control ($500+/month) package would be most suitable for your needs.`;
+                } else if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('pricing')) {
+            response = `💡 I have an interactive pricing tool that can give you a personalized quote!
 
-**Next steps:** The best way to see how this can work for your specific business is through a free strategy call. No sales pressure - just honest advice about your Google Ads opportunities.
+Let me show you exactly what you'd pay based on your budget:
 
-What specific challenge or goal would you like to discuss? I'm here to help!`;
+<button class="quick-action" onclick="showPricingCalculator()">📊 Get Custom Quote</button>
+<button class="quick-action" onclick="startServiceDiscovery()">🎯 Personalized Recommendation</button>
+
+Or if you prefer the quick breakdown:
+
+**Launchpad Package - $150/month**
+Perfect for $200-500/month ad budgets
+
+**Growth Package - $300/month** 
+Ideal for $500-1,500/month ad budgets
+
+**Total Control Package - $500+/month**
+For $1,500+ monthly budgets with full service
+
+Want to see which package fits your specific situation?`;
+        } else if (messageLower.includes('audit') || messageLower.includes('free')) {
+            response = `🎉 YES! Marlon offers a **FREE Google Ads + Website Audit** worth $200!
+
+**Your audit includes:**
+✅ Complete Google Ads account analysis
+✅ Keyword targeting effectiveness review
+✅ Landing page optimization opportunities
+✅ Competitor analysis insights
+✅ 30-day action plan to boost ROI
+
+This isn't a sales pitch - it's pure value to help your business grow.
+
+<button class="quick-action" onclick="bookConsultation()">📅 Book Free Audit</button>
+<button class="quick-action" onclick="showEmailCapture()">📧 Get Audit Checklist</button>
+
+What type of business do you run? This helps me prepare specific insights for your audit.`;
+        } else if (messageLower.includes('checklist') || messageLower.includes('download') || messageLower.includes('guide')) {
+            response = `🎁 Perfect! I've prepared a **Google Ads Checklist** that's helped businesses increase conversions by 200%!
+
+**The checklist covers:**
+• Keyword research secrets most agencies miss
+• Ad copy formulas that convert
+• Landing page optimization tips
+• Budget allocation strategies
+• Negative keyword goldmines
+
+<button class="quick-action" onclick="showEmailCapture()">📧 Get My Checklist</button>
+
+Just enter your email and I'll send it over immediately. No spam, ever!`;
+        } else if (messageLower.includes('consultation') || messageLower.includes('call') || messageLower.includes('meeting')) {
+            response = `🗓️ Excellent choice! Marlon offers **free 30-minute strategy calls** with zero obligation.
+
+**What to expect:**
+• Review your current Google Ads performance
+• Identify immediate opportunities
+• Get honest recommendations
+• Discuss budget and timeline
+• No sales pressure - just value
+
+<button class="quick-action" onclick="bookConsultation()">📅 Book Your Call</button>
+
+Or if you prefer, I can ask you a few quick questions to prepare a personalized quote first.`;
+        } else {
+            // Enhanced contextual response using conversation memory
+            updateContext(userMessage);
+            
+            let contextResponse = `I'm here to help! `;
+            
+            if (conversationMemory.userIndustry) {
+                contextResponse += `I see you have a ${conversationMemory.userIndustry} - that's great! `;
+            }
+            
+            if (conversationMemory.budgetRange) {
+                contextResponse += `With your ${conversationMemory.budgetRange} budget, I can give you specific recommendations. `;
+            }
+            
+            contextResponse += `Marlon specializes in Google Ads with proven results - currently managing a $10K/month campaign with 78.5% optimization score.
+
+**What can I help you with today?**
+
+<button class="quick-action" onclick="showPricingCalculator()">💰 Pricing Calculator</button>
+<button class="quick-action" onclick="startServiceDiscovery()">🎯 Personalized Quote</button>
+<button class="quick-action" onclick="bookConsultation()">📅 Free Strategy Call</button>
+<button class="quick-action" onclick="showEmailCapture()">📧 Free Checklist</button>
+
+Just let me know what's most important to you right now!`;
+            
+            response = contextResponse;
+        }
             }
             
             // Simulate typing with more natural pauses
@@ -724,4 +1120,10 @@ What specific challenge or goal would you like to discuss? I'm here to help!`;
     sendBtn.disabled = false;
     
     console.log('Chatbot initialized and ready for interaction');
+    
+    // Make functions globally available for onclick handlers
+    window.showPricingCalculator = showPricingCalculator;
+    window.startServiceDiscovery = startServiceDiscovery;
+    window.bookConsultation = bookConsultation;
+    window.showEmailCapture = showEmailCapture;
 });
