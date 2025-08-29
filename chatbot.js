@@ -922,86 +922,12 @@ Just let me know what's most important to you right now!`;
         }
         
         try {
-            // Check if we're on Netlify (where functions work) vs GitHub Pages
-            const isNetlify = !isLocalDevelopment && !isGitHubPages;
-            
-            if (!isNetlify) {
-                throw new Error('Netlify functions not available - using fallback responses');
-            }
-            
-            // Call our secure Netlify serverless function instead of the DeepSeek API directly.
-            const response = await fetch('https://mpalomaresdigitalsolutions.netlify.app/.netlify/functions/deepseek', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    messages: [{ "role": "user", "content": userMessage }],
-                    portfolioContext: portfolioContext
-                }),
-            });
+            // Skip Netlify function entirely and use fallback responses
+            // This prevents the chatbot from getting stuck on CORS or 404 errors
+            console.log('Using fallback responses to avoid API dependency');
+            throw new Error('Using fallback responses for reliability');
 
-            if (!response.ok) {
-                let errorMessage;
-                try {
-                    const errorData = await response.json();
-                    errorMessage = errorData.error || `Server error: ${response.status}`;
-                } catch {
-                    errorMessage = `Server error: ${response.status} ${response.statusText}`;
-                }
-                throw new Error(errorMessage);
-            }
 
-            // Check if response has a body
-            if (!response.body) {
-                throw new Error('No response body received');
-            }
-
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            botMessageElement.textContent = ''; // Clear the '...'
-            let buffer = '';
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-
-                buffer += decoder.decode(value, { stream: true });
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || ''; // Keep the last incomplete line in the buffer
-
-                for (const line of lines) {
-                    const trimmedLine = line.trim();
-                    if (!trimmedLine || !trimmedLine.startsWith('data: ')) continue;
-
-                    const jsonStr = trimmedLine.substring(5).trim();
-                    if (jsonStr === '[DONE]') {
-                        console.log('Stream completed');
-                        break;
-                    }
-
-                    try {
-                        const parsed = JSON.parse(jsonStr);
-                        const content = parsed.choices?.[0]?.delta?.content;
-                        if (content) {
-                            fullResponse += content;
-                            botMessageElement.textContent += content;
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
-                        }
-                    } catch (e) {
-                        console.warn('Invalid JSON chunk:', e.message);
-                        continue;
-                    }
-                }
-            }
-            
-            reader.releaseLock();
-
-            if (!fullResponse.trim()) {
-                throw new Error('No response received from AI');
-            }
-            
-            return fullResponse;
         } catch (error) {
             console.error('Error fetching streaming response from DeepSeek API:', error);
             
@@ -1074,10 +1000,11 @@ Just let me know what's most important to you right now!`;
     // --- Initialization ---
     const isGitHubPages = window.location.hostname.includes('github.io');
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const isNetlify = window.location.hostname.includes('netlify.app');
     
     console.log('Chatbot initializing...');
-    console.log('Environment:', isLocal ? 'Local Development' : isGitHubPages ? 'GitHub Pages' : 'Netlify');
-    console.log('Netlify functions available:', !isLocal && !isGitHubPages);
+    console.log('Environment:', isLocal ? 'Local Development' : isGitHubPages ? 'GitHub Pages' : isNetlify ? 'Netlify' : 'Production');
+    console.log('Netlify functions available:', isNetlify && !isLocal && !isGitHubPages);
     
     loadPortfolioData();
     
