@@ -625,37 +625,9 @@ Creating a Google Ads campaign involves several key steps, from defining your ob
      * @param {string} botResponse - The bot's response.
      */
     async function saveMessageToSupabase(userMessage, botResponse) {
-        // Skip Supabase save in local development to prevent CORS/auth issues
-        const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        
-        if (isLocalDevelopment) {
-            console.log('Skipping Supabase save in local development');
-            return;
-        }
-        
-        try {
-            const response = await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
-                method: 'POST',
-                headers: {
-                    'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                    'Content-Type': 'application/json',
-                    'Prefer': 'return=minimal',
-                },
-                body: JSON.stringify({
-                    user_message: userMessage,
-                    bot_response: botResponse,
-                }),
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(`Supabase error: ${JSON.stringify(error)}`);
-            }
-            console.log('Message saved to Supabase successfully.');
-        } catch (error) {
-            console.error('Error saving message to Supabase:', error);
-        }
+        // Skip Supabase save - works without database
+        console.log('Chatbot running in standalone mode - no database required');
+        return;
     }
 
     /**
