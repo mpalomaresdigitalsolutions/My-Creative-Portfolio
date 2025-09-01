@@ -20,41 +20,36 @@ A results-driven Google Ads specialist with hands-on campaign management experie
 
 ### Service Packages & Pricing
 
-#### The 'Launchpad' Package - $150/month
+#### Package A - Starter - $197 (One-time Setup)
 **Target:** Small business with $200-$500 monthly ad budget
+**Total Hours:** 5 hours
 **Includes:**
-- One Google Search campaign setup
-- Keyword research (up to 25 keywords)
-- 3-5 high-quality ad creatives
-- Initial conversion tracking setup
-- Bi-weekly campaign monitoring and budget management
-- Negative keyword research
-- Ad copy A/B testing
-- Basic bid adjustments
-- Bi-weekly email updates and monthly performance summary
+- **Account Setup & Configuration:** 1 hour
+- **Keyword Research & Selection:** 1 hour
+- **Ad Copy Creation & Variations:** 1 hour
+- **Campaign Setup & Launch:** 1 hour
+- **Basic Tracking & Optimization:** 1 hour
 
-#### The 'Growth' Package - $300/month
+#### Package B - Growth - $497 (One-time Setup)
 **Target:** Growing business with $500-$1,500 monthly ad budget
+**Total Hours:** 12 hours
 **Includes:**
-- Everything in Launchpad package
-- Additional campaign setup (Display or Remarketing)
-- Advanced keyword and audience research
-- Weekly optimization and aggressive bid strategies
-- Landing page suggestions
-- Weekly performance reports
-- Monthly strategy call
+- **Advanced Keyword Research:** 3 hours
+- **Multiple Campaign Types Setup:** 4 hours
+- **Ad Variations & A/B Testing:** 2 hours
+- **Landing Page Optimization:** 2 hours
+- **Advanced Tracking Setup:** 1 hour
 
-#### The 'Total Control' Package - $500+/month
+#### Package C - Premium - $997 (One-time Setup)
 **Target:** Established business with $1,500+ monthly ad budget
+**Total Hours:** 25 hours
 **Includes:**
-- Everything in Growth package
-- Multiple campaign types (Search, Display, Shopping, Video)
-- Comprehensive audience targeting and segmentation
-- Advanced conversion tracking with Google Analytics
-- Full-service landing page consultation
-- Daily/Bi-weekly budget and bid monitoring
-- Custom weekly and monthly reports
-- Priority communication
+- **Comprehensive Account Audit:** 3 hours
+- **Multi-Channel Campaign Strategy:** 8 hours
+- **Advanced Keyword & Competitor Research:** 5 hours
+- **Landing Page & Funnel Optimization:** 4 hours
+- **Advanced Analytics & Tracking:** 3 hours
+- **Performance Monitoring Setup:** 2 hours
 
 ### Key Achievements & Experience
 - **Current:** Managing $10,000/month Google Ads campaign for nonprofit

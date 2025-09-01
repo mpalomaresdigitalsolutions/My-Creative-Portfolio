@@ -88,15 +88,15 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
         
         generateRecommendation() {
             const answers = this.answers;
-            let packageName = 'Launchpad';
-            let price = 150;
+            let packageName = 'Package A - Starter';
+            let price = 197;
             
             if (answers.current_spend === '$1500-5000' || answers.current_spend === '$5000+') {
-                packageName = 'Total Control';
-                price = 500;
+                packageName = 'Package C - Premium';
+                price = 997;
             } else if (answers.current_spend === '$500-1500') {
-                packageName = 'Growth';
-                price = 300;
+                packageName = 'Package B - Growth';
+                price = 497;
             }
             
             return {
@@ -460,8 +460,8 @@ Creating a Google Ads campaign involves several key steps, from defining your ob
         const recHTML = `
             <div class="personalized-recommendation">
                 <h4>🎯 Your Personalized Recommendation</h4>
-                <p><strong>Package:</strong> ${recommendation.package} Package</p>
-                <p><strong>Price:</strong> $${recommendation.price}/month</p>
+                <p><strong>Package:</strong> ${recommendation.package}</p>
+                <p><strong>Price:</strong> $${recommendation.price} one-time setup</p>
                 <p><strong>Perfect for:</strong> ${recommendation.context.business_type} with ${recommendation.context.current_spend} budget</p>
                 <div style="margin-top: 15px;">
                     <button class="quick-action" onclick="bookConsultation()">📅 Book Free Call</button>
