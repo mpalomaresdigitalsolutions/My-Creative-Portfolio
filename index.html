@@ -2,1128 +2,206 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Marlon Palomares - Google Ads Specialist Resume</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marlon Palomares - Google Ads Specialist</title>
     <link rel="stylesheet" href="styles.min.css">
     <link rel="stylesheet" href="responsive.css">
     <link rel="stylesheet" href="chatbot-enhanced.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            body {
-                animation: backgroundShift 15s ease-in-out infinite alternate;
-            }
-
-            @keyframes backgroundShift {
-                0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-                100% { background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); }
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            .container {
-                animation: slideUp 0.6s ease-out;
-            }
-
-            @keyframes slideUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        }
-
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px 20px 0 0;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            .header::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-                animation: rotate 30s linear infinite;
-            }
-
-            @keyframes rotate {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        }
-
-        .profile-section {
-            position: relative;
-            z-index: 2;
-        }
-
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 8px solid rgba(255, 255, 255, 0.4);
-            margin: 0 auto 25px;
-            display: block;
-            object-fit: cover;
-            box-shadow: 
-                0 0 30px rgba(255, 255, 255, 0.3),
-                0 15px 35px rgba(0, 0, 0, 0.2),
-                0 0 0 3px rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            z-index: 10;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 
-                0 0 40px rgba(255, 255, 255, 0.5),
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 0 5px rgba(255, 255, 255, 0.2);
-        }
-
-        .profile-image::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
-            z-index: -1;
-            opacity: 0.7;
-            animation: rotate 8s linear infinite;
-        }
-
-        .profile-image::after {
-            content: '';
-            position: absolute;
-            top: -25px;
-            left: -25px;
-            right: -25px;
-            bottom: -25px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            z-index: -2;
-            animation: rotate 12s linear infinite reverse;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            .profile-image {
-                animation: profileGlow 3s ease-in-out infinite alternate;
-            }
-
-            .profile-image:hover {
-                animation: profileHover 0.6s ease-in-out infinite alternate;
-            }
-
-            @keyframes profileGlow {
-                0% { 
-                    box-shadow: 
-                        0 0 30px rgba(255, 255, 255, 0.3),
-                        0 15px 35px rgba(0, 0, 0, 0.2),
-                        0 0 0 3px rgba(255, 255, 255, 0.1);
-                }
-                100% { 
-                    box-shadow: 
-                        0 0 50px rgba(255, 255, 255, 0.6),
-                        0 15px 35px rgba(0, 0, 0, 0.2),
-                        0 0 0 8px rgba(255, 255, 255, 0.2);
-                }
-            }
-
-            @keyframes profileHover {
-                0% { transform: scale(1.1) rotate(5deg); }
-                100% { transform: scale(1.15) rotate(-5deg); }
-            }
-
-            @keyframes rotate {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        }
-
-        .name {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            .name {
-                animation: textGlow 3s ease-in-out infinite alternate;
-            }
-
-            @keyframes textGlow {
-                from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
-                to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 255, 255, 0.3); }
-            }
-        }
-
-        .title {
-            font-size: 1.4rem;
-            font-weight: 400;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            margin-bottom: 20px;
-        }
-
-        .contact-details, .contact-actions {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: scale(1.1);
-        }
-
-        .contact-item i {
-            font-size: 1.2rem;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            .contact-item i {
-                animation: bounce 3s infinite;
-            }
-
-            @keyframes bounce {
-                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-                40% { transform: translateY(-3px); }
-                60% { transform: translateY(-2px); }
-            }
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 50%;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .social-icons a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
-            padding: 40px;
-        }
-
-        .sidebar {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .content {
-            padding: 0 20px;
-        }
-
-        .section {
-            margin-bottom: 35px;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            .section {
-                animation: fadeInUp 0.5s ease-out;
-                animation-fill-mode: both;
-            }
-
-            .section:nth-child(1) { animation-delay: 0.1s; }
-            .section:nth-child(2) { animation-delay: 0.2s; }
-            .section:nth-child(3) { animation-delay: 0.3s; }
-            .section:nth-child(4) { animation-delay: 0.4s; }
-
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-            animation: expandLine 1s ease-out 0.5s both;
-        }
-
-        @keyframes expandLine {
-            from { width: 0; }
-            to { width: 50px; }
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 10px;
-        }
-
-        .experience-item {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .experience-item:hover::before {
-            left: 100%;
-        }
-
-        .experience-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-
-        .job-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-
-        .company-date {
-            font-size: 0.9rem;
-            color: #667eea;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .skill-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .skill-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .skill-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-        }
-
-        .skill-item i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #667eea;
-            transition: color 0.3s ease;
-        }
-
-        .skill-item:hover i {
-            color: white;
-        }
-
-        .certifications-preview {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .cert-count {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 10px 0;
-            color: #4a5568;
-        }
-
-        .cert-preview {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .cert-preview img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            border-radius: 5px;
-            border: 1px solid #e2e8f0;
-            transition: transform 0.3s ease;
-        }
-
-        .cert-preview img:hover {
-            transform: scale(1.1);
-        }
-
-        .view-all-link {
-            display: inline-block;
-            margin-top: 10px;
-            color: #667eea;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .view-all-link:hover {
-            color: #764ba2;
-            transform: translateX(5px);
-        }
-
-        .achievement-item {
-            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border-left: 4px solid #48bb78;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .achievement-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.2);
-        }
-
-        .achievement-item::before {
-            content: '✓';
-            position: absolute;
-            left: -15px;
-            top: 15px;
-            background: #48bb78;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .typing-speed {
-            background: linear-gradient(135deg, #fff5cd 0%, #fffbe6 100%);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            border: 2px solid #f6e05e;
-            margin-top: 20px;
-        }
-
-        .typing-speed strong {
-            color: #d69e2e;
-            font-size: 1.2rem;
-        }
-
-        .portfolio-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .references {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-
-        .reference-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .reference-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .loading-bar {
-            width: 100%;
-            height: 4px;
-            background: #e2e8f0;
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-
-        .loading-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-            animation: fillBar 2s ease-out;
-        }
-
-        @keyframes fillBar {
-            from { width: 0; }
-            to { width: var(--progress, 90%); }
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px;
-            }
-            
-            .name {
-                font-size: 2rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .social-icons {
-                gap: 15px;
-            }
-            
-            .social-icons a {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .floating-icon {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.1);
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
-        .floating-icon:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 2s; }
-        .floating-icon:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 3s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
-
-        .chat-container {
-            position: fixed;
-            bottom: 120px;
-            right: 40px;
-            width: 350px;
-            height: 450px;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 0 128px 0 rgba(0,0,0,0.1), 0 32px 64px -48px rgba(0,0,0,0.5);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            padding: 20px;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-chat {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .chat-body {
-            flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .chat-messages {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chat-message {
-            padding: 10px;
-            border-radius: 10px;
-            max-width: 80%;
-        }
-
-        .user-message {
-            background-color: #f0f0f0;
-            align-self: flex-end;
-        }
-
-        .bot-message {
-            background-color: #e0e0e0;
-            align-self: flex-start;
-        }
-
-        .chat-footer {
-            padding: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        #chat-input {
-            flex-grow: 1;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        #send-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-
-        .chat-toggle-wrapper {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .chat-label {
-            background-color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            font-weight: 500;
-            color: #333;
-            opacity: 0;
-            transform: translateX(10px);
-            animation: fadeInLabel 1s ease 2s forwards;
-            white-space: nowrap;
-        }
-
-        @keyframes fadeInLabel {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .chat-toggle {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            border: 3px solid white;
-            cursor: pointer;
-            animation: bounceEffect 2.5s infinite cubic-bezier(0.36, 0.07, 0.19, 0.97);
-            position: relative;
-            overflow: hidden;
-            padding: 0;
-            transition: all 0.3s ease;
-        }
-
-        .chat-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-
-        .chat-toggle::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            width: 12px;
-            height: 12px;
-            background: #4CAF50;
-            border-radius: 50%;
-            border: 2px solid white;
-            z-index: 3;
-            animation: pulse-green 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-green {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
-            70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
-        }
-
-        .chat-profile-pic {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .chat-toggle:hover .chat-profile-pic {
-            transform: scale(1.1);
-        }
-
-        .chat-icon-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 24px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-            pointer-events: none;
-        }
-
-        @keyframes bounceEffect {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="floating-elements">
-        <i class="floating-icon fas fa-chart-line"></i>
-        <i class="floating-icon fab fa-google"></i>
-        <i class="floating-icon fas fa-target"></i>
-        <i class="floating-icon fas fa-laptop-code"></i>
-    </div>
-
     <div class="container">
-        <header class="header">
-            <div class="profile-section">
-                <img src="Profile.png" alt="Profile Picture" width="200">
-
-                <h1 class="name">Marlon Palomares</h1>
-                <p class="title">GOOGLE ADS SPECIALIST </p>
-                
-                <div class="contact-info">
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>Mpalomaresdigital@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-keyboard"></i>
-                            <span>35 WPM (Improving to 55+)</span>
-                        </div>
-                    </div>
-                    <div class="contact-actions">
-                        <a href="https://mpalomaresdigitalsolutions.github.io/MPDIGITAL/" class="portfolio-link" target="_blank"><i class="fas fa-globe"></i> View My Website</a>
-                        <a href="case_study.html" class="portfolio-link" target="_blank"><i class="fas fa-file-alt"></i> View My Case Study</a>
-                        <a href="package-pricing.html" class="portfolio-link" target="_blank"><i class="fas fa-dollar-sign"></i> View Service Packages</a>
-                    </div>
-                </div>
-
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/marlon.palomares.2024/" target="_blank" title="Follow on Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.linkedin.com/in/mpdigital/" target="_blank" title="Connect on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.instagram.com/palomares523/" target="_blank" title="Follow on Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://x.com/marlonpalo64854" target="_blank" title="Follow on X"><i class="fab fa-x-twitter"></i></a>
-                    <a href="https://github.com/mpalomaresdigitalsolutions" target="_blank" title="View on GitHub"><i class="fab fa-github"></i></a>
-                </div>
+        <div class="profile-section">
+            <img src="Profile.png" alt="Profile Picture" class="profile-img">
+            <h1>Marlon Palomares</h1>
+            <p class="title">GOOGLE ADS SPECIALIST</p>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> Mpalomaresdigital@gmail.com</p>
+                <p><a href="#" onclick="showSection('website')"><i class="fas fa-globe"></i> View My Website</a></p>
+                <p><a href="#" onclick="showSection('case-study')"><i class="fas fa-chart-line"></i> View My Case Study</a></p>
+                <p><a href="#" onclick="showSection('pricing')"><i class="fas fa-tags"></i> View Service Packages</a></p>
             </div>
-        </header>
+        </div>
 
-        <div class="main-content">
-            <aside class="sidebar">
-                <div class="section">
-                    <h2 class="section-title">Core Competencies</h2>
-                    <div class="skill-grid">
-                        <a href="Google Ads Audit.html" class="skill-item">
-                            <i class="fas fa-search-dollar"></i>
-                            <div>Google Ads Audit</div>
-                        </a>
-                        <a href="Google Ad Strategy.html" class="skill-item">
-                            <i class="fas fa-chess"></i>
-                            <div>Google Ad Strategy</div>
-                        </a>
-                        <a href="Google Ads Optimization.html" class="skill-item">
-                            <i class="fas fa-chart-line"></i>
-                            <div>Google Ads Optimization</div>
-                        </a>
-                        <a href="Copywriting.html" class="skill-item">
-                            <i class="fas fa-pen-fancy"></i>
-                            <div>Copywriting</div>
-                        </a>
-                        <a href="Keyword Research.html" class="skill-item">
-                            <i class="fas fa-key"></i>
-                            <div>Keyword Research</div>
-                        </a>
-                        <a href="Conversion Tracking Setup.html" class="skill-item">
-                            <i class="fas fa-bullseye"></i>
-                            <div>Conversion Tracking Setup</div>
-                        </a>
+        <div class="content-section">
+            <h2>Core Competencies</h2>
+            <ul>
+                <li>Google Ads Audit</li>
+                <li>Google Ad Strategy</li>
+                <li>Google Ads Optimization</li>
+                <li>Copywriting</li>
+                <li>Keyword Research</li>
+                <li>Conversion Tracking Setup</li>
+            </ul>
+        </div>
 
-                    </div>
-                </div>
+        <div class="content-section">
+            <h2>Key Achievements</h2>
+            <ul>
+                <li>Successfully managing $10,000/month Google Ads campaign generating consistent valuable leads</li>
+                <li>Personally trained by Ian Baillo, one of Philippines' top Google Ads experts</li>
+                <li>4+ years experience working directly with U.S. clients, crafting ad copy that connects</li>
+                <li>Expert in maximizing ad spend for junk removal & plumbing businesses</li>
+                <li>Basic GoHighLevel (GHL) knowledge for lead nurturing & automations</li>
+                <li>Google Ads certified with advanced optimization training</li>
+            </ul>
+        </div>
 
-                <div class="section">
-                    <h2 class="section-title">Key Achievements</h2>
-                    <div class="achievement-item">
-                        Successfully managing $10,000/month Google Ads campaign generating consistent valuable leads
-                    </div>
-                    <div class="achievement-item">
-                        Personally trained by Ian Baillo, one of Philippines' top Google Ads experts
-                    </div>
-                    <div class="achievement-item">
-                        4+ years experience working directly with U.S. clients, crafting ad copy that connects
-                    </div>
-                    <div class="achievement-item">
-                        Expert in maximizing ad spend for junk removal & plumbing businesses
-                    </div>
-                    <div class="achievement-item">
-                        Basic GoHighLevel (GHL) knowledge for lead nurturing & automations
-                    </div>
-                    <div class="achievement-item">
-                        Google Ads certified with advanced optimization training
-                    </div>
-                </div>
+        <div class="content-section">
+            <h2>Technical Proficiencies</h2>
+            <ul>
+                <li>Google Ads Ecosystem</li>
+                <li>Analytics & Reporting</li>
+                <li>Client Communication</li>
+                <li>Campaign Optimization</li>
+            </ul>
+        </div>
 
-                <div class="section">
-                    <h2 class="section-title">Technical Proficiencies</h2>
-                    <div class="section-subtitle">Google Ads Ecosystem</div>
-                    <div class="loading-bar">
-                        <div class="loading-fill" style="--progress: 95%;"></div>
-                    </div>
-                    
-                    <div class="section-subtitle">Analytics & Reporting</div>
-                    <div class="loading-bar">
-                        <div class="loading-fill" style="--progress: 90%;"></div>
-                    </div>
-                    
-                    <div class="section-subtitle">Client Communication</div>
-                    <div class="loading-bar">
-                        <div class="loading-fill" style="--progress: 98%;"></div>
-                    </div>
-                    
-                    <div class="section-subtitle">Campaign Optimization</div>
-                    <div class="loading-bar">
-                        <div class="loading-fill" style="--progress: 92%;"></div>
-                    </div>
-                </div>
+        <div class="content-section">
+            <h2>Languages</h2>
+            <ul>
+                <li><strong>English:</strong> Conversational fluency (4+ years US client experience)</li>
+                <li><strong>Tagalog:</strong> Native speaker</li>
+            </ul>
+        </div>
 
-                <div class="section">
-                    <h2 class="section-title">Languages</h2>
-                    <div class="section-subtitle">English</div>
-                    <p>Conversational fluency (4+ years US client experience)</p>
-                    <div class="section-subtitle">Tagalog</div>
-                    <p>Native speaker</p>
-                </div>
+        <div class="content-section">
+            <h2>Certifications</h2>
+            <p>7 Professional Certifications - <a href="certifications.html">View All Certifications</a></p>
+            <ul>
+                <li>Google Ads</li>
+                <li>Analytics</li>
+                <li>Search Ads</li>
+            </ul>
+        </div>
 
-                <div class="section">
-                    <h2 class="section-title">Certifications</h2>
-                    <div class="certifications-frame">
-                        <div class="certifications-preview">
-                            <i class="fas fa-certificate"></i>
-                            <div class="cert-count">7 Professional Certifications</div>
-                            <div class="cert-preview">
-                                <img src="./images/Certificate.jpg" alt="Google Ads">
-                                <img src="./images/Google Analytics.png" alt="Analytics">
-                                <img src="./images/Google Search.png" alt="Search Ads">
-                            </div>
-                            <a href="certifications.html" class="view-all-link">
-                                View All Certifications <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <div class="content-section">
+            <h2>GoHighLevel (GHL) Samples</h2>
+            <p>4 GHL Implementation Samples - <a href="GHL Work samples.html">View All GHL Samples</a></p>
+            <ul>
+                <li>Email Automation</li>
+                <li>Sales Funnels</li>
+                <li>Sample Email</li>
+                <li>GHL Website</li>
+            </ul>
+        </div>
 
-                <div class="section">
-                    <h2 class="section-title">GoHighLevel (GHL) Samples</h2>
-                    <div class="certifications-frame">
-                        <div class="certifications-preview">
-                            <i class="fas fa-funnel-dollar"></i>
-                            <div class="cert-count">4 GHL Implementation Samples</div>
-                            <div class="cert-preview">
-                                <img src="./GHL images/Email Automation.png" alt="Email Automation">
-                                <img src="./GHL images/funnels.png" alt="Sales Funnels">
-                                <img src="./GHL images/Sample_Email.png" alt="Sample Email">
-                                <img src="./GHL images/website.jpg" alt="GHL Website">
-                            </div>
-                            <a href="GHL Work samples.html" class="view-all-link">
-                                View All GHL Samples <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+        <div class="content-section">
+            <h2>Professional Profile</h2>
+            <p>I help businesses get more customers from Google. Right now, I'm managing a $10,000/month Google Ads campaign that consistently generates valuable leads. I was personally trained by Ian Baillo, one of the Philippines' top Google Ads experts, in advanced strategies for local lead generation.</p>
+            
+            <p>With over 4 years of experience working directly with U.S. clients, I've developed a strong ability to craft ad copy and strategies that truly connect with an American audience. In my current role managing a $10k/month budget, I focus on maximizing every ad dollar to reach highly motivated individuals actively searching for specific services—skills that directly translate into generating high-intent leads for businesses like junk removal and plumbing.</p>
+            
+            <p>I also have basic knowledge of GoHighLevel (GHL), which I use to support lead nurturing through funnels and simple automations that improve follow-ups and increase conversions.</p>
+        </div>
 
-            <main class="content">
-                <div class="section">
-                    <h2 class="section-title">Professional Profile</h2>
-                    <p>I help businesses get more customers from Google. Right now, I'm managing a $10,000/month Google Ads campaign that consistently generates valuable leads. I was personally trained by Ian Baillo, one of the Philippines' top Google Ads experts, in advanced strategies for local lead generation.</p>
-                    
-                    <p>With over 4 years of experience working directly with U.S. clients, I've developed a strong ability to craft ad copy and strategies that truly connect with an American audience. In my current role managing a $10k/month budget, I focus on maximizing every ad dollar to reach highly motivated individuals actively searching for specific services—skills that directly translate into generating high-intent leads for businesses like junk removal and plumbing.</p>
-                    
-                    <p>I also have basic knowledge of GoHighLevel (GHL), which I use to support lead nurturing through funnels and simple automations that improve follow-ups and increase conversions.</p>
-                </div>
+        <div class="content-section">
+            <h2>Current Experience</h2>
+            <div class="experience-item">
+                <h3>Google Ads Campaign Manager/Sustainable Living Association</h3>
+                <p><strong>Catchafire Freelance Non Profit.Org | 2025-Present</strong></p>
+                <p><em>Managing $10,000 monthly search campaign budget generating consistent valuable leads</em></p>
+                <ul>
+                    <li>Develop and optimize Google Ads search campaigns for nonprofit organization</li>
+                    <li>Conduct keyword research and implement advanced local lead generation strategies learned from Ian Baillo</li>
+                    <li>Monitor daily performance metrics (CTR, CPC, conversion rates) and make data-driven optimizations</li>
+                    <li>Create detailed performance reports showing campaign ROI and optimization insights</li>
+                    <li>Apply expertise in maximizing ad spend to reach highly motivated individuals searching for specific services</li>
+                    <li>Utilize GoHighLevel (GHL) for basic lead nurturing through funnels and simple automations</li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="content-section">
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <h3>Google Ads Manager & Copy Writer /Hummanity Impacts Institute</h3>
+                <p><strong>Catchafire Freelance Non Profit.Org |2025 -Present</strong></p>
+                <ul>
+                    <li>Specialized in Google Ads campaign creation and management</li>
+                    <li>Conducted comprehensive keyword research for various industries</li>
+                    <li>Developed ad copy that improved CTR and conversion rates</li>
+                    <li>Implemented API integrations for enhanced campaign tracking</li>
+                </ul>
+            </div>
 
+            <div class="experience-item">
+                <h3>Customer Service and Technical Support</h3>
+                <p><strong>Concentrix Dash Inc | 2020-2022</strong></p>
+                <ul>
+                    <li>Managed high-volume client communications for US-based businesses</li>
+                    <li>Demonstrated consistent performance in fast-paced, results-driven environment</li>
+                    <li>Developed strong relationship management skills working with diverse clientele</li>
+                </ul>
+            </div>
 
-                <div class="section">
-                    <h2 class="section-title">Current Experience</h2>
-                    <div class="experience-item">
-                        <div class="job-title">Google Ads Campaign Manager/Sustainable Living Association </div>
-                        <div class="company-date">Catchafire Freelance  Non Profit.Org  | 2025-Present</div>
-                        <p><strong>Managing $10,000 monthly search campaign budget generating consistent valuable leads</strong></p>
-                        <ul>
-                            <li>Develop and optimize Google Ads search campaigns for nonprofit organization</li>
-                            <li>Conduct keyword research and implement advanced local lead generation strategies learned from Ian Baillo</li>
-                            <li>Monitor daily performance metrics (CTR, CPC, conversion rates) and make data-driven optimizations</li>
-                            <li>Create detailed performance reports showing campaign ROI and optimization insights</li>
-                            <li>Apply expertise in maximizing ad spend to reach highly motivated individuals searching for specific services</li>
-                            <li>Utilize GoHighLevel (GHL) for basic lead nurturing through funnels and simple automations</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="experience-item">
+                <h3>Collection Specialist</h3>
+                <p><strong>Admerex Solution Inc | 2018-2020</strong></p>
+                <ul>
+                    <li>Exceeded collection targets through strategic communication and negotiation</li>
+                    <li>Maintained detailed performance analytics and reporting</li>
+                    <li>Built expertise in customer relationship management and problem resolution</li>
+                </ul>
+            </div>
+        </div>
 
-                <div class="section">
-                    <h2 class="section-title">Professional Experience</h2>
-                    <div class="experience-item">
-                        <div class="job-title">Google Ads Manager & Copy Writer /Hummanity Impacts Institute </div>
-                        <div class="company-date">Catchafire Freelance  Non Profit.Org |2025 -Present</div>
-                        <ul>
-                            <li>Specialized in Google Ads campaign creation and management</li>
-                            <li>Conducted comprehensive keyword research for various industries</li>
-                            <li>Developed ad copy that improved CTR and conversion rates</li>
-                            <li>Implemented API integrations for enhanced campaign tracking</li>
-                        </ul>
-                    </div>
+        <div class="content-section">
+            <h2>Education & Certifications</h2>
+            
+            <div class="experience-item">
+                <h3>Google Ads Certification</h3>
+                <p><strong>Google | 2024</strong></p>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Advanced Google Ads Training - Local Lead Generation Specialist</h3>
+                <p><strong>Pass Academy Philippines (Ian Baillo) | 2024</strong></p>
+                <p><em>Personally trained by Ian Baillo, one of the Philippines' top Google Ads experts, in advanced strategies for local lead generation and maximizing ad spend for service businesses</em></p>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Virtual Assistant Training</h3>
+                <p><strong>The VA BAR | 2025</strong></p>
+            </div>
+            
+            <div class="experience-item">
+                <h3>Facebook Ads Mastery Training</h3>
+                <p><strong>Negosyo Network Academy | 2025</strong></p>
+            </div>
+        </div>
 
-                    <div class="experience-item">
-                        <div class="job-title">Customer Service and Technical Support</div>
-                        <div class="company-date">Concentrix Dash Inc | 2020-2022</div>
-                        <ul>
-                            <li>Managed high-volume client communications for US-based businesses</li>
-                            <li>Demonstrated consistent performance in fast-paced, results-driven environment</li>
-                            <li>Developed strong relationship management skills working with diverse clientele</li>
-                        </ul>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="job-title">Collection Specialist</div>
-                        <div class="company-date">Admerex Solution Inc | 2018-2020</div>
-                        <ul>
-                            <li>Exceeded collection targets through strategic communication and negotiation</li>
-                            <li>Maintained detailed performance analytics and reporting</li>
-                            <li>Built expertise in customer relationship management and problem resolution</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h2 class="section-title">Education & Certifications</h2>
-                    <div class="experience-item">
-                        <div class="job-title">Google Ads Certification</div>
-                        <div class="company-date">Google | 2024</div>
-                    </div>
-                    
-                    <div class="experience-item">
-                        <div class="job-title">Advanced Google Ads Training - Local Lead Generation Specialist</div>
-                        <div class="company-date">Pass Academy Philippines (Ian Baillo) | 2024</div>
-                        <p><em>Personally trained by Ian Baillo, one of the Philippines' top Google Ads experts, in advanced strategies for local lead generation and maximizing ad spend for service businesses</em></p>
-                    </div>
-                    
-                    <div class="experience-item">
-                        <div class="job-title">Virtual Assistant Training</div>
-                        <div class="company-date">The VA BAR | 2025</div>
-                    </div>
-                    
-                    <div class="experience-item">
-                        <div class="job-title">Facebook Ads Mastery Training</div>
-                        <div class="company-date">Negosyo Network Academy | 2025</div>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h2 class="section-title">Character References</h2>
-                    <div class="references">
-                        <div class="reference-item">
-                            <strong>Ian Baillo</strong><br>
-                            <em>CEO/Founder, Pass Academy Philippines</em><br>
-                            <em>Top Google Ads Expert, Philippines</em><br>
-                            Google Ads Management Training & Mentorship
-                        </div>
-                        <div class="reference-item">
-                            <strong>Girly L. Feratero</strong><br>
-                            <em>CEO/Founder, The VA BAR</em><br>
-                            <em>Virtual Assistant Trainer</em><br>
-                            +63-950-9299-059
-                        </div>
-                        <div class="reference-item">
-                            <strong>Jay Gregorio</strong><br>
-                            <em>CEO/Founder, Negosyo Network Academy</em><br>
-                            Facebook Ads Training & Business Development
-                        </div>
-                    </div>
-                </div>
-
-            </main>
+        <div class="content-section">
+            <h2>Character References</h2>
+            
+            <div class="reference-item">
+                <h3>Ian Baillo</h3>
+                <p>CEO/Founder, Pass Academy Philippines<br>
+                Top Google Ads Expert, Philippines<br>
+                Google Ads Management Training & Mentorship</p>
+            </div>
+            
+            <div class="reference-item">
+                <h3>Girly L. Feratero</h3>
+                <p>CEO/Founder, The VA BAR<br>
+                Virtual Assistant Trainer<br>
+                +63-950-9299-059</p>
+            </div>
+            
+            <div class="reference-item">
+                <h3>Jay Gregorio</h3>
+                <p>CEO/Founder, Negosyo Network Academy<br>
+                Facebook Ads Training & Business Development</p>
+            </div>
         </div>
     </div>
 
-    <!-- Chat Interface -->
+    <!-- Chat Widget -->
     <div id="chat-widget" class="chat-widget">
         <div id="chat-header" class="chat-header">
             <div class="chat-profile-container">
@@ -1134,8 +212,8 @@
                 </div>
             </div>
             <div class="chat-header-info">
-                <span class="chat-title">Marlon's Assistant</span>
-                <span class="chat-subtitle">Google Ads Expert</span>
+                <span class="chat-title">Marlon</span>
+                <span class="chat-subtitle">Online</span>
             </div>
             <button id="minimize-chat" class="minimize-button">
                 <i class="fas fa-minus"></i>
@@ -1150,421 +228,17 @@
         </div>
     </div>
 
-    <style>
-        /* Chat Widget Styles */
-        .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 1000;
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chat-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .chat-profile-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-        }
-
-        .chat-profile-avatar {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.9);
-            object-fit: cover;
-            box-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.3),
-                0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: enhancedPulse 2.5s ease-in-out infinite;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .chat-profile-avatar:hover {
-            transform: scale(1.1);
-            box-shadow: 
-                0 0 30px rgba(255, 255, 255, 0.5),
-                0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes enhancedPulse {
-            0% { 
-                transform: scale(1); 
-                box-shadow: 
-                    0 0 20px rgba(255, 255, 255, 0.3),
-                    0 4px 15px rgba(0, 0, 0, 0.2),
-                    0 0 0 0 rgba(255, 255, 255, 0.4);
-            }
-            50% { 
-                transform: scale(1.08); 
-                box-shadow: 
-                    0 0 30px rgba(255, 255, 255, 0.5),
-                    0 6px 20px rgba(0, 0, 0, 0.3),
-                    0 0 0 15px rgba(255, 255, 255, 0);
-            }
-            100% { 
-                transform: scale(1); 
-                box-shadow: 
-                    0 0 20px rgba(255, 255, 255, 0.3),
-                    0 4px 15px rgba(0, 0, 0, 0.2),
-                    0 0 0 0 rgba(255, 255, 255, 0.4);
-            }
-        }
-
-        .online-status {
-            position: absolute;
-            bottom: -8px;
-            right: -8px;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            padding: 6px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 700;
-            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.4);
-            backdrop-filter: blur(10px);
-            animation: statusAppear 1s ease-in-out 0.5s forwards;
-            opacity: 0;
-            z-index: 3;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        @keyframes statusAppear {
-            0% { 
-                opacity: 0; 
-                transform: scale(0.8) translateY(5px); 
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1) translateY(0); 
-            }
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #4CAF50;
-            border-radius: 50%;
-            margin-right: 4px;
-            animation: blink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .chat-header-info {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .chat-title {
-            font-weight: 700;
-            font-size: 18px;
-            line-height: 1.2;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.5px;
-        }
-
-        .chat-subtitle {
-            font-size: 13px;
-            opacity: 0.9;
-            font-weight: 500;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            letter-spacing: 0.3px;
-        }
-
-        .minimize-button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .minimize-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .chat-messages {
-            flex-grow: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chat-message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 15px;
-            margin: 5px 0;
-        }
-
-        .user-message {
-            background: #f0f2ff;
-            align-self: flex-end;
-        }
-
-        .bot-message {
-            background: #f5f5f5;
-            align-self: flex-start;
-        }
-
-        .chat-input-container {
-            padding: 15px;
-            display: flex;
-            gap: 10px;
-            border-top: 1px solid #eee;
-        }
-
-        #chat-input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            outline: none;
-        }
-
-        #chat-input:focus {
-            border-color: #667eea;
-        }
-
-        .send-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-
-        .send-button:hover {
-            transform: scale(1.1);
-        }
-
-        .send-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Chat loading animation */
-        @keyframes thinking {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        .bot-message.thinking {
-            animation: thinking 1.5s infinite;
-            color: #666;
-        }
-
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .certificate-card {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(135deg, #667eea, #764ba2) border-box;
-        }
-
-        .certificate-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .certificate-image-container {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .certificate-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .certificate-card:hover .certificate-image {
-            transform: scale(1.1);
-        }
-
-        .certificate-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(102, 126, 234, 0.9), transparent);
-            color: white;
-            padding: 20px;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .certificate-card:hover .certificate-overlay {
-            transform: translateY(0);
-        }
-
-        .certificate-overlay h3 {
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .certificate-overlay p {
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .certificate-cta {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-        }
-
-        .certificate-cta:hover {
-            background: #f8f9ff;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .certificates-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 20px;
-            }
-        }
-    </style>
-
-    <script src="config.js"></script>
-    <script src="chatbot.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="chatbot.min.js"></script>
     <script>
-        // Add interactive animations
-        document.addEventListener('DOMContentLoaded', function() {
-            // Stagger section animations
-            const sections = document.querySelectorAll('.section');
-            sections.forEach((section, index) => {
-                section.style.animationDelay = `${index * 0.1}s`;
-            });
-
-            // Add hover effects to experience items
-            const experienceItems = document.querySelectorAll('.experience-item');
-            experienceItems.forEach(item => {
-                item.addEventListener('mouseover', function() {
-                    this.style.transform = 'translateY(-5px) scale(1.02)';
-                });
-                
-                item.addEventListener('mouseout', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-
-            // Animate progress bars on scroll
-            const progressBars = document.querySelectorAll('.loading-fill');
-            const observerOptions = {
-                threshold: 0.5,
-                rootMargin: '0px 0px -100px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fillBar 2s ease-out forwards';
-                    }
-                });
-            }, observerOptions);
-
-            progressBars.forEach(bar => {
-                observer.observe(bar);
-            });
-        });
-
-        // Add scroll-triggered animations
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            
-            document.querySelector('.header::before') && 
-            (document.querySelector('.header').style.transform = `translateY(${rate}px)`);
-        });
+        function showSection(section) {
+            if (section === 'website') {
+                window.open('https://mpalomaresdigitalsolutions.github.io/MPDIGITAL/', '_blank');
+            } else if (section === 'case-study') {
+                window.open('case_study.html', '_blank');
+            } else if (section === 'pricing') {
+                window.open('package-pricing.html', '_blank');
+            }
+        }
     </script>
 </body>
 </html>

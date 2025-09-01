@@ -921,39 +921,35 @@ Just let me know what's most important to you right now!`;
             return response;
         }
         
+        // For GitHub Pages and local development, skip API calls and use mock responses
+        if (isGitHubPages || isLocalDevelopment) {
+            console.log('Using intelligent fallback responses for GitHub Pages');
+            return await getMockBotResponse(userMessage, botMessageElement);
+        }
+        
+        // Only attempt API calls for Netlify deployment
         try {
-            // Skip Netlify function entirely and use fallback responses
-            // This prevents the chatbot from getting stuck on CORS or 404 errors
-            console.log('Using fallback responses to avoid API dependency');
-            throw new Error('Using fallback responses for reliability');
-
-
+            const response = await fetch('/.netlify/functions/deepseek', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: userMessage,
+                    context: portfolioData
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            return data.response;
+            
         } catch (error) {
-            console.log('Using intelligent fallback responses (no API required)');
-            
-            // For GitHub Pages and local development, gracefully fall back to mock responses
-            if (isGitHubPages || isLocalDevelopment) {
-                console.log('Using fallback responses for non-Netlify hosting');
-                // This will be caught and handled by the mock response system above
-                throw error;
-            }
-            
-            let errorMessage;
-            if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                errorMessage = 'Connection error: Please check your internet connection or try again later.';
-            } else if (error.message.includes('405') || error.message.includes('Method Not Allowed')) {
-                errorMessage = 'Service configuration issue. Using fallback responses instead.';
-                console.log('405 error detected - likely GitHub Pages deployment, switching to fallback');
-            } else if (error.message.includes('Server error: 502')) {
-                errorMessage = 'The AI service is temporarily unavailable. Please try again in a few moments.';
-            } else if (error.message.includes('API key')) {
-                errorMessage = 'Configuration error: AI service is temporarily unavailable.';
-            } else {
-                errorMessage = error.message || 'Sorry, I am having trouble connecting to my brain right now. Please try again later.';
-            }
-            
-            botMessageElement.textContent = errorMessage;
-            return errorMessage;
+            console.log('Using fallback responses for reliability');
+            return await getMockBotResponse(userMessage, botMessageElement);
         }
     }
 
