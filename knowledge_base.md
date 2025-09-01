@@ -20,36 +20,64 @@ A results-driven Google Ads specialist with hands-on campaign management experie
 
 ### Service Packages & Pricing
 
-#### Package A - Starter - $197 (One-time Setup)
-**Target:** Small business with $200-$500 monthly ad budget
-**Total Hours:** 5 hours
-**Includes:**
-- **Account Setup & Configuration:** 1 hour
-- **Keyword Research & Selection:** 1 hour
-- **Ad Copy Creation & Variations:** 1 hour
-- **Campaign Setup & Launch:** 1 hour
-- **Basic Tracking & Optimization:** 1 hour
+#### Package A - Starter Package - $197 (One-Time Setup)
+**Target:** Google Ads newbies and small businesses starting out
+**Total Hours:** 5 hours dedicated work
+**Hour Breakdown:**
+- Account setup & structure: 1.5 hours
+- Keyword research & selection: 1.5 hours
+- Ad copy variations (3-5 ads): 1 hour
+- Conversion tracking setup: 0.5 hours
+- Campaign launch & initial optimization: 0.5 hours
 
-#### Package B - Growth - $497 (One-time Setup)
-**Target:** Growing business with $500-$1,500 monthly ad budget
-**Total Hours:** 12 hours
 **Includes:**
-- **Advanced Keyword Research:** 3 hours
-- **Multiple Campaign Types Setup:** 4 hours
-- **Ad Variations & A/B Testing:** 2 hours
-- **Landing Page Optimization:** 2 hours
-- **Advanced Tracking Setup:** 1 hour
+- Complete Google Ads account setup
+- Strategic keyword research (up to 25 keywords)
+- 3-5 high-converting ad variations
+- Conversion tracking implementation
+- Campaign launch and initial optimization
+- Perfect for businesses with $200-$500 monthly ad budget
 
-#### Package C - Premium - $997 (One-time Setup)
-**Target:** Established business with $1,500+ monthly ad budget
-**Total Hours:** 25 hours
+#### Package B - Growth Package - $497 (One-Time Setup)
+**Target:** Growing businesses ready to scale
+**Total Hours:** 12 hours dedicated work
+**Hour Breakdown:**
+- Account setup & advanced structure: 2 hours
+- Comprehensive keyword research: 3 hours
+- Multiple ad variations (8-10 ads): 2 hours
+- Advanced conversion tracking: 1 hour
+- Display/remarketing campaign setup: 2 hours
+- Landing page recommendations: 1.5 hours
+- Campaign optimization & testing: 1.5 hours
+
 **Includes:**
-- **Comprehensive Account Audit:** 3 hours
-- **Multi-Channel Campaign Strategy:** 8 hours
-- **Advanced Keyword & Competitor Research:** 5 hours
-- **Landing Page & Funnel Optimization:** 4 hours
-- **Advanced Analytics & Tracking:** 3 hours
-- **Performance Monitoring Setup:** 2 hours
+- Everything in Package A
+- Additional Display and Remarketing campaigns
+- Advanced audience targeting
+- Landing page optimization suggestions
+- Perfect for businesses with $500-$1,500 monthly ad budget
+
+#### Package C - Premium Package - $997 (One-Time Setup)
+**Target:** Established businesses ready for comprehensive campaigns
+**Total Hours:** 25 hours dedicated work
+**Hour Breakdown:**
+- Complete account overhaul/setup: 4 hours
+- Extensive keyword research & competitor analysis: 5 hours
+- Advanced ad variations (15-20 ads): 4 hours
+- Sophisticated conversion tracking: 2 hours
+- Multiple campaign types setup: 4 hours
+- Shopping/Video campaign setup: 3 hours
+- Advanced audience segmentation: 2 hours
+- Comprehensive testing & optimization: 3 hours
+- Strategy documentation: 2 hours
+
+**Includes:**
+- Everything in Packages A & B
+- Shopping campaigns for e-commerce
+- Video campaigns for YouTube
+- Advanced audience segmentation
+- Comprehensive strategy documentation
+- Perfect for businesses with $1,500+ monthly ad budget
 
 ### Key Achievements & Experience
 - **Current:** Managing $10,000/month Google Ads campaign for nonprofit

@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Initialize chat widget
-    const chatWidget = document.getElementById('chat-widget');
-    const minimizeBtn = document.getElementById('minimize-chat');
-    const chatInput = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-message');
-    const chatMessages = document.getElementById('chat-messages');
+    const chatWidget = document.getElementById('chatbot-window');
+    const minimizeBtn = document.getElementById('chatbot-toggle');
+    const closeBtn = document.getElementById('chatbot-close');
+    const chatInput = document.getElementById('chatbot-input');
+    const sendBtn = document.getElementById('chatbot-send');
+    const chatMessages = document.getElementById('chatbot-messages');
 
     // Start with chat widget minimized
     let isMinimized = true;
-    chatWidget.style.height = '50px';
-    minimizeBtn.innerHTML = '<i class="fas fa-plus"></i>';
+    chatWidget.style.display = 'none';
 
-    // Add minimize/maximize functionality
+    // Add toggle functionality
     minimizeBtn.addEventListener('click', () => {
         isMinimized = !isMinimized;
-        chatWidget.style.height = isMinimized ? '50px' : '500px';
-        minimizeBtn.innerHTML = isMinimized ? '<i class="fas fa-plus"></i>' : '<i class="fas fa-minus"></i>';
+        chatWidget.style.display = isMinimized ? 'none' : 'flex';
+        minimizeBtn.style.display = isMinimized ? 'block' : 'none';
         
         // Show welcome message when opening for the first time
-        if (!isMinimized && chatMessages.children.length === 0) {
+        if (!isMinimized && chatMessages.children.length <= 1) {
             setTimeout(() => {
                 typeMessage(`🎯 **EXCLUSIVE OFFER: FREE Google Ads + Website Audit!** 🎯
 
@@ -38,6 +38,13 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
         }
     });
 
+    // Add close functionality
+    closeBtn.addEventListener('click', () => {
+        isMinimized = true;
+        chatWidget.style.display = 'none';
+        minimizeBtn.style.display = 'block';
+    });
+
     // Add enter key functionality
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -49,64 +56,34 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
     // Add click handler for send button
     sendBtn.addEventListener('click', handleSendMessage);
 
-    // Add image viewing functionality for GHL samples
-    setupImageViewer();
-
+    // Initialize portfolio context
     let portfolioContext = '';
-    let idleTimer;
     
-    // Conversation memory for contextual responses
-    const conversationMemory = {
-        userIndustry: null,
-        budgetRange: null,
-        previousQueries: [],
-        conversationStage: 'initial',
-        userName: null
+    // Conversation memory for context
+    let conversationMemory = {
+        userIndustry: '',
+        budgetRange: '',
+        goals: '',
+        timeline: ''
     };
-    
+
     // Service discovery flow
     const serviceDiscoveryFlow = {
         questions: [
-            {
-                id: 'business_type',
-                question: '🏢 What type of business do you run?',
-                options: ['Local Service Business', 'E-commerce', 'Consulting', 'Restaurant', 'Other']
-            },
-            {
-                id: 'current_spend',
-                question: '💰 What\'s your current monthly Google Ads budget?',
-                options: ['$0-500', '$500-1500', '$1500-5000', '$5000+', 'Not sure yet']
-            },
-            {
-                id: 'main_goal',
-                question: '🎯 What\'s your primary goal?',
-                options: ['More phone calls', 'Website sales', 'Lead generation', 'Brand awareness']
-            }
+            "What type of business do you run? (e.g., e-commerce, local service, SaaS, etc.)",
+            "What's your current monthly ad budget range?",
+            "What are your main goals? (leads, sales, brand awareness)",
+            "What's your timeline to see results?"
         ],
         currentQuestion: 0,
-        answers: {},
-        
-        generateRecommendation() {
-            const answers = this.answers;
-            let packageName = 'Package A - Starter';
-            let price = 197;
-            
-            if (answers.current_spend === '$1500-5000' || answers.current_spend === '$5000+') {
-                packageName = 'Package C - Premium';
-                price = 997;
-            } else if (answers.current_spend === '$500-1500') {
-                packageName = 'Package B - Growth';
-                price = 497;
-            }
-            
-            return {
-                package: packageName,
-                price,
-                personalized: true,
-                context: answers
-            };
-        }
+        answers: {}
     };
+
+    // Load portfolio data on startup
+    loadPortfolioData();
+
+    // Idle timer for session management
+    let idleTimer;
 
     // --- Functions ---
 
@@ -127,6 +104,40 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
     function resetIdleTimer() {
         clearTimeout(idleTimer);
         idleTimer = setTimeout(endChatSession, 15 * 60 * 1000); // 15 minutes
+    }
+
+    /**
+     * Updates conversation memory with user context.
+     */
+    function updateContext(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Detect business type
+        if (lowerMessage.includes('ecommerce') || lowerMessage.includes('shop') || lowerMessage.includes('store')) {
+            conversationMemory.userIndustry = 'e-commerce business';
+        } else if (lowerMessage.includes('local') || lowerMessage.includes('service')) {
+            conversationMemory.userIndustry = 'local service business';
+        } else if (lowerMessage.includes('saas') || lowerMessage.includes('software')) {
+            conversationMemory.userIndustry = 'SaaS business';
+        }
+
+        // Detect budget range
+        if (lowerMessage.includes('$200') || lowerMessage.includes('200')) {
+            conversationMemory.budgetRange = '$200-500 budget';
+        } else if (lowerMessage.includes('$500') || lowerMessage.includes('500')) {
+            conversationMemory.budgetRange = '$500-1500 budget';
+        } else if (lowerMessage.includes('$1000') || lowerMessage.includes('1000')) {
+            conversationMemory.budgetRange = '$1000+ budget';
+        }
+
+        // Detect goals
+        if (lowerMessage.includes('lead') || lowerMessage.includes('customer')) {
+            conversationMemory.goals = 'generating leads';
+        } else if (lowerMessage.includes('sale') || lowerMessage.includes('revenue')) {
+            conversationMemory.goals = 'increasing sales';
+        } else if (lowerMessage.includes('brand') || lowerMessage.includes('awareness')) {
+            conversationMemory.goals = 'building brand awareness';
+        }
     }
 
     /**
@@ -271,7 +282,7 @@ Creating a Google Ads campaign involves several key steps, from defining your ob
 - Google Analytics integration for deeper insights
 - Competitor analysis tools (Semrush, SpyFu)
 - Search Terms Report for identifying negative keywords
-- Auction Insights Report for competitor comparison`
+- Auction Insights Report for competitor comparison`;
             console.log('Using fallback knowledge base for local development');
         }
     }
@@ -422,536 +433,86 @@ Creating a Google Ads campaign involves several key steps, from defining your ob
     function startServiceDiscovery() {
         serviceDiscoveryFlow.currentQuestion = 0;
         serviceDiscoveryFlow.answers = {};
-        askServiceQuestion();
-    }
-
-    /**
-     * Asks service discovery questions
-     */
-    function askServiceQuestion() {
-        const question = serviceDiscoveryFlow.questions[serviceDiscoveryFlow.currentQuestion];
-        if (!question) {
-            showPersonalizedRecommendation();
-            return;
-        }
         
-        let questionHTML = `<strong>${question.question}</strong><br>`;
-        question.options.forEach(option => {
-            questionHTML += `<button class="quick-action" onclick="selectServiceOption('${question.id}', '${option}')">${option}</button>`;
-        });
-        
-        displayMessage(questionHTML, 'bot');
-    }
-
-    /**
-     * Handles service discovery option selection
-     */
-    function selectServiceOption(questionId, option) {
-        serviceDiscoveryFlow.answers[questionId] = option;
-        serviceDiscoveryFlow.currentQuestion++;
-        askServiceQuestion();
-    }
-
-    /**
-     * Shows personalized recommendation
-     */
-    function showPersonalizedRecommendation() {
-        const recommendation = serviceDiscoveryFlow.generateRecommendation();
-        const recHTML = `
-            <div class="personalized-recommendation">
-                <h4>🎯 Your Personalized Recommendation</h4>
-                <p><strong>Package:</strong> ${recommendation.package}</p>
-                <p><strong>Price:</strong> $${recommendation.price} one-time setup</p>
-                <p><strong>Perfect for:</strong> ${recommendation.context.business_type} with ${recommendation.context.current_spend} budget</p>
-                <div style="margin-top: 15px;">
-                    <button class="quick-action" onclick="bookConsultation()">📅 Book Free Call</button>
-                    <button class="quick-action" onclick="showEmailCapture()">📧 Get Detailed Quote</button>
+        const discoveryHTML = `
+            <div class="service-discovery">
+                <h4>🎯 Let's Find Your Perfect Package</h4>
+                <p>I'll ask you a few questions to provide a personalized recommendation.</p>
+                <div id="discovery-content">
+                    <p><strong>Question 1:</strong> ${serviceDiscoveryFlow.questions[0]}</p>
+                    <input type="text" id="discovery-input" placeholder="Type your answer..." style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <button class="quick-action" onclick="processDiscoveryAnswer()">Next →</button>
                 </div>
             </div>
         `;
-        displayMessage(recHTML, 'bot');
+        displayMessage(discoveryHTML, 'bot');
     }
 
     /**
-     * Books consultation
+     * Processes service discovery answers
      */
-    function bookConsultation() {
-        window.open('https://calendar.app.google/ecrh372MbNbBHbSf6', '_blank');
-        displayMessage('🗓️ Perfect! Opening calendar to book your free strategy call. Looking forward to helping you grow your business!', 'bot');
-    }
+    window.processDiscoveryAnswer = function() {
+        const input = document.getElementById('discovery-input');
+        const answer = input.value.trim();
+        if (!answer) return;
+
+        serviceDiscoveryFlow.answers[serviceDiscoveryFlow.currentQuestion] = answer;
+        serviceDiscoveryFlow.currentQuestion++;
+
+        if (serviceDiscoveryFlow.currentQuestion < serviceDiscoveryFlow.questions.length) {
+            const discoveryContent = document.getElementById('discovery-content');
+            discoveryContent.innerHTML = `
+                <p><strong>Question ${serviceDiscoveryFlow.currentQuestion + 1}:</strong> ${serviceDiscoveryFlow.questions[serviceDiscoveryFlow.currentQuestion]}</p>
+                <input type="text" id="discovery-input" placeholder="Type your answer..." style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                <button class="quick-action" onclick="processDiscoveryAnswer()">Next →</button>
+            `;
+            document.getElementById('discovery-input').focus();
+        } else {
+            // Generate personalized recommendation
+            const businessType = serviceDiscoveryFlow.answers[0];
+            const budget = serviceDiscoveryFlow.answers[1];
+            const goals = serviceDiscoveryFlow.answers[2];
+            const timeline = serviceDiscoveryFlow.answers[3];
+
+            let recommendation = `🎯 **Your Personalized Recommendation**\n\n`;
+            
+            if (budget.includes('200') || budget.includes('500')) {
+                recommendation += `**Recommended: Launchpad Package ($150/month)**\nPerfect for your ${budget} budget and ${goals} goals.\n\n`;
+            } else if (budget.includes('500') || budget.includes('1000')) {
+                recommendation += `**Recommended: Growth Package ($300/month)**\nIdeal for your ${budget} budget and ${goals} goals.\n\n`;
+            } else {
+                recommendation += `**Recommended: Total Control Package ($500+/month)**\nBest for your ${budget} budget and ${goals} goals.\n\n`;
+            }
+
+            recommendation += `**Next Steps:**\n📅 Book a free strategy call to discuss your specific needs\n💰 Get a detailed quote with timeline: ${timeline}\n\n<button class="quick-action" onclick="bookConsultation()">📅 Book Free Call</button>`;
+
+            displayMessage(recommendation, 'bot');
+        }
+    };
+
+    /**
+     * Books consultation via Calendly
+     */
+    window.bookConsultation = function() {
+        displayMessage("🗓️ **Opening booking page...**\n\nYou'll be redirected to Calendly to schedule your free 30-minute strategy call with Marlon.", 'bot');
+        setTimeout(() => {
+            window.open('https://calendar.app.google/ecrh372MbNbBHbSf6', '_blank');
+        }, 1500);
+    };
 
     /**
      * Delivers lead magnet
      */
-    function deliverLeadMagnet() {
-        const email = document.getElementById('email-input')?.value;
+    window.deliverLeadMagnet = function() {
+        const emailInput = document.getElementById('email-input');
+        const email = emailInput ? emailInput.value : '';
         if (!email || !email.includes('@')) {
-            displayMessage('❌ Please enter a valid email address to receive your checklist.', 'bot');
+            displayMessage("❌ Please enter a valid email address to receive your checklist.", 'bot');
             return;
         }
         
-        displayMessage(`📧 Great! Your Google Ads checklist is on its way to ${email}. Check your inbox in the next few minutes!`, 'bot');
-        
-        // Here you would typically send the email via API
-        console.log('Lead magnet delivered to:', email);
-    }
-
-    /**
-     * Sets up image viewing functionality for GHL sample images
-     */
-    function setupImageViewer() {
-        // Create lightbox modal HTML
-        const lightboxHTML = `
-            <div id="image-lightbox" class="image-lightbox" style="display: none;">
-                <div class="lightbox-content">
-                    <span class="lightbox-close">&times;</span>
-                    <img class="lightbox-image" src="" alt="">
-                    <div class="lightbox-caption"></div>
-                </div>
-            </div>
-        `;
-        
-        // Add lightbox CSS
-        const lightboxCSS = `
-            .image-lightbox {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.9);
-                z-index: 1000;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-            }
-            
-            .lightbox-content {
-                position: relative;
-                max-width: 90%;
-                max-height: 90%;
-                text-align: center;
-            }
-            
-            .lightbox-image {
-                max-width: 100%;
-                max-height: 80vh;
-                border-radius: 8px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            }
-            
-            .lightbox-close {
-                position: absolute;
-                top: -40px;
-                right: 0;
-                color: white;
-                font-size: 35px;
-                font-weight: bold;
-                cursor: pointer;
-                z-index: 1001;
-            }
-            
-            .lightbox-close:hover {
-                color: #ff6b6b;
-            }
-            
-            .lightbox-caption {
-                color: white;
-                margin-top: 15px;
-                font-size: 16px;
-                max-width: 600px;
-            }
-            
-            .cert-preview img {
-                cursor: pointer;
-                transition: transform 0.3s ease;
-            }
-            
-            .cert-preview img:hover {
-                transform: scale(1.05);
-            }
-        `;
-        
-        // Add lightbox to body
-        document.body.insertAdjacentHTML('beforeend', lightboxHTML);
-        
-        // Add CSS to head
-        const style = document.createElement('style');
-        style.textContent = lightboxCSS;
-        document.head.appendChild(style);
-        
-        // Get all GHL images
-        const ghlImages = document.querySelectorAll('.cert-preview img[src*="GHL images"]');
-        const lightbox = document.getElementById('image-lightbox');
-        const lightboxImg = lightbox.querySelector('.lightbox-image');
-        const lightboxCaption = lightbox.querySelector('.lightbox-caption');
-        const lightboxClose = lightbox.querySelector('.lightbox-close');
-        
-        // Add click handlers to images
-        ghlImages.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightboxCaption.textContent = img.alt;
-                lightbox.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        // Close lightbox handlers
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-        
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-                closeLightbox();
-            }
-        });
-        
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    }
-
-    /**
-     * Saves a conversation to the Supabase database.
-     * @param {string} userMessage - The user's message.
-     * @param {string} botResponse - The bot's response.
-     */
-    async function saveMessageToSupabase(userMessage, botResponse) {
-        // Skip Supabase save - works without database
-        console.log('Chatbot running in standalone mode - no database required');
-        return;
-    }
-
-    /**
-     * Checks if a question is related to Marlon's portfolio services or relevant business topics.
-     * @param {string} message - The user's message.
-     * @returns {boolean} True if related to portfolio/business, false otherwise.
-     */
-    function isQuestionPortfolioRelated(message) {
-        const portfolioKeywords = [
-            'google ads', 'google', 'ads', 'campaign', 'marketing', 'advertising',
-            'price', 'cost', 'package', 'pricing', 'budget', 'money', 'dollar',
-            'service', 'services', 'offer', 'offers', 'what do', 'what does',
-            'experience', 'background', 'qualified', 'certified', 'certification',
-            'marlon', 'he', 'his', 'guy', 'specialist', 'expert',
-            'keyword', 'research', 'strategy', 'audit', 'optimization', 'tracking',
-            'conversion', 'copywriting', 'setup', 'launch', 'manage',
-            'meeting', 'call', 'consultation', 'schedule', 'appointment', 'book',
-            'business', 'client', 'results', 'performance', 'roi', 'leads',
-            'hello', 'hi', 'hey', 'yo', 'sup', 'help', 'question'
-        ];
-        
-        const messageLower = message.toLowerCase();
-        return portfolioKeywords.some(keyword => messageLower.includes(keyword));
-    }
-
-    /**
-     * Gets a streaming response from the DeepSeek API and updates the UI in real-time.
-     * @param {string} userMessage - The user's message.
-     * @param {HTMLElement} botMessageElement - The UI element for the bot's message.
-     * @returns {Promise<string>} The full bot response for saving.
-     */
-    async function getBotResponse(userMessage, botMessageElement) {
-        const systemPrompt = `You are Marlon Palomares, a friendly and knowledgeable Google Ads specialist. You have access to a comprehensive FAQ knowledge base containing detailed information about my portfolio, services, experience, and capabilities. Use this knowledge base to provide accurate, helpful, and engaging responses to all user inquiries.
-
-FAQ Knowledge Base:
-${portfolioContext}
-
-When responding to questions:
-- Always base your answers on the FAQ knowledge base above
-- Maintain a warm, friendly, and conversational tone - like talking to a helpful friend who happens to be a Google Ads expert
-- Use emojis occasionally to add personality and warmth (but don't overdo it)
-- Provide detailed, accurate information about services, pricing, experience, and achievements
-- Reference specific facts, metrics, and details from the knowledge base
-- Be genuinely helpful and thorough in your explanations
-- If information isn't available in the knowledge base, acknowledge this honestly and offer to help find the answer
-- Use examples and specific details from the FAQ when relevant
-- Always look for opportunities to provide value and build trust
-- End responses with engaging questions or clear next steps when appropriate
-- Make the user feel heard and valued`;
-
-        if (!portfolioContext) {
-            botMessageElement.textContent = "Hold up...";
-            // Use basic portfolio info if context isn't loaded yet
-            const basicInfo = systemPrompt;
-            return basicInfo;
-        }
-        
-        let fullResponse = '';
-        
-        // Check hosting environment
-        const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const isGitHubPages = window.location.hostname.includes('github.io');
-        
-        // Use mock responses for local development AND GitHub Pages since Netlify functions won't work there
-        if (isLocalDevelopment || isGitHubPages) {
-            // Enhanced friendly mock responses that use actual portfolio data
-            await new Promise(resolve => setTimeout(resolve, 800)); // Quick response for better UX
-            
-            const messageLower = userMessage.toLowerCase();
-            let response = '';
-            
-            // Parse portfolio data for personalized responses
-            let portfolioData;
-            try {
-                portfolioData = JSON.parse(portfolioContext);
-            } catch (e) {
-                portfolioData = null;
-            }
-            
-            // Check if message is portfolio-related before responding
-            const isPortfolioRelated = isQuestionPortfolioRelated(messageLower);
-            
-            if (!isPortfolioRelated) {
-                response = "Hey there! 👋 I'm here to help with anything related to Google Ads, digital marketing, or Marlon's services. I specialize in Google Ads strategy, campaign optimization, and helping businesses like yours grow. What's on your mind today?";
-            } else if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('package')) {
-                const packages = portfolioData?.services?.packages || [
-                    { name: "Launchpad", price: 150, budget: "$200-500", includes: "search campaign, keyword research, ad creatives" },
-                    { name: "Growth", price: 300, budget: "$500-1500", includes: "extra campaigns, weekly optimization" },
-                    { name: "Total Control", price: 500, budget: "$1500+", includes: "daily monitoring, all features" }
-                ];
-                
-                response = `I'd love to share Marlon's transparent pricing! 💰
-
-**🚀 Launchpad Package** - $${packages[0]?.price || 150}/month
-Perfect for businesses with ${packages[0]?.budget || "$200-500"} ad budgets. Includes ${packages[0]?.includes || "search campaign setup, keyword research, and compelling ad creatives"}.
-
-**📈 Growth Package** - $${packages[1]?.price || 300}/month  
-Ideal for growing businesses spending ${packages[1]?.budget || "$500-1500"}. Features ${packages[1]?.includes || "additional campaign types and weekly optimization"}.
-
-**🎯 Total Control Package** - $${packages[2]?.price || 500}+/month
-For established businesses with ${packages[2]?.budget || "$1500+"} budgets. ${packages[2]?.includes || "Daily monitoring and comprehensive campaign management"}.
-
-✨ **No hidden fees, ever!** What budget range are you working with? I'd be happy to recommend the best fit for your goals!`;
-            } else if (messageLower.includes('service') || messageLower.includes('offer') || messageLower.includes('do')) {
-                const services = portfolioData?.services?.specialties || [
-                    "Google Ads audits", "Strategy development", "Campaign optimization", 
-                    "Copywriting for ads", "Keyword research", "Conversion tracking setup"
-                ];
-                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
-                const currentCampaign = portfolioData?.experience?.current || "$10k/month nonprofit campaign";
-                
-                response = `Great question! Marlon is your dedicated Google Ads specialist 🎯
-
-**His expertise includes:**
-${services.map(service => `• ${service}`).join('\n')}
-
-**Real-world experience:** Currently managing ${currentCampaign} and learned directly from ${training.split("'s")[0]} - recognized as the Philippines' top Google Ads expert.
-
-This isn't just theory - Marlon applies proven strategies that deliver real results for businesses just like yours. What specific challenge are you facing with your ads? I'd love to help!`;
-            } else if (messageLower.includes('experience') || messageLower.includes('background') || messageLower.includes('qualified')) {
-                const yearsUS = portfolioData?.experience?.yearsUS || "4 years";
-                const certifications = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
-                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
-                const currentWork = portfolioData?.experience?.current || "managing $10k/month Google Ads campaign";
-                
-                response = `Absolutely! Here's Marlon's impressive track record 📊
-
-**Experience Highlights:**
-• ${yearsUS} of hands-on experience with US-based clients
-• Google certified in ${certifications.length} key areas: ${certifications.join(', ')}
-• Advanced training from ${training} - the Philippines' leading Google Ads authority
-• Currently: ${currentWork}
-
-**What this means for you:** You're working with someone who's been in the trenches, managing real campaigns with real budgets and delivering measurable results.
-
-Ready to see how this expertise can transform your business? Let's discuss your specific goals!`;
-            } else if (messageLower.includes('certification') || messageLower.includes('certified')) {
-                const certs = portfolioData?.certifications || ["Google Ads Search", "Google Ads Display", "Google Ads Video", "Google Ads Shopping"];
-                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
-                const year = portfolioData?.experience?.certYear || "2024";
-                
-                response = `Marlon's credentials are rock-solid! 🏆
-
-**Google Certifications:**
-• ${certs.join('\n• ')}
-
-**Advanced Training:**
-• Certified ${year} with continuous updates
-• Completed intensive training with ${training} - the Philippines' top Google Ads expert
-
-These aren't just certificates - they represent proven expertise in managing successful campaigns across different industries and budgets. When you work with Marlon, you're getting Google-approved strategies that actually work.
-
-Want to discuss how these skills can benefit your specific business?`;
-            } else if (messageLower.includes('hello') || messageLower.includes('hi') || messageLower.includes('hey')) {
-                const currentWork = portfolioData?.experience?.current || "managing a $10k/month Google Ads campaign";
-                const training = portfolioData?.experience?.training || "Ian Baillo's Pass Academy";
-                
-                response = `Hello! 👋 Welcome! I'm Marlon's AI assistant, and I'm thrilled you're here!
-
-Marlon is currently ${currentWork} and brings expertise from training with ${training.split("'s")[0]} - the Philippines' leading Google Ads authority.
-
-**I'm here to help you with:**
-• Understanding Google Ads strategies
-• Pricing and service packages
-• Campaign optimization tips
-• Scheduling your FREE audit
-• Any questions about growing your business with Google Ads
-
-What brings you here today? Whether you're struggling with your current campaigns or just exploring options, I'm here to help!`;
-            } else {
-                // Use knowledge base content for contextual responses
-                const knowledgeBase = portfolioContext || '';
-                
-                if (messageLower.includes('google ads') || messageLower.includes('campaign')) {
-                    response = `I understand you're asking about Google Ads! Based on Marlon's current work managing a $10K/month campaign for a nonprofit, here's what's working:
-
-**Key insights from recent campaigns:**
-- 78.5% optimization score achieved
-- $5.39 average cost per conversion
-- 15+ conversions generated through strategic keyword targeting
-
-**For your specific situation**, Marlon typically starts with understanding your current ad spend and goals. The strategies he's learned from Ian Baillo - Philippines' top Google Ads expert - focus heavily on intent-based keyword research and negative keyword optimization.
-
-**Quick question:** What's your current monthly ad budget range? This helps determine whether the Launchpad ($150/month), Growth ($300/month), or Total Control ($500+/month) package would be most suitable for your needs.`;
-                } else if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('pricing')) {
-            response = `💡 I have an interactive pricing tool that can give you a personalized quote!
-
-Let me show you exactly what you'd pay based on your budget:
-
-<button class="quick-action" onclick="showPricingCalculator()">📊 Get Custom Quote</button>
-<button class="quick-action" onclick="startServiceDiscovery()">🎯 Personalized Recommendation</button>
-
-Or if you prefer the quick breakdown:
-
-**Launchpad Package - $150/month**
-Perfect for $200-500/month ad budgets
-
-**Growth Package - $300/month** 
-Ideal for $500-1,500/month ad budgets
-
-**Total Control Package - $500+/month**
-For $1,500+ monthly budgets with full service
-
-Want to see which package fits your specific situation?`;
-        } else if (messageLower.includes('audit') || messageLower.includes('free')) {
-            response = `🎉 YES! Marlon offers a **FREE Google Ads + Website Audit** worth $200!
-
-**Your audit includes:**
-✅ Complete Google Ads account analysis
-✅ Keyword targeting effectiveness review
-✅ Landing page optimization opportunities
-✅ Competitor analysis insights
-✅ 30-day action plan to boost ROI
-
-This isn't a sales pitch - it's pure value to help your business grow.
-
-<button class="quick-action" onclick="bookConsultation()">📅 Book Free Audit</button>
-<button class="quick-action" onclick="showEmailCapture()">📧 Get Audit Checklist</button>
-
-What type of business do you run? This helps me prepare specific insights for your audit.`;
-        } else if (messageLower.includes('checklist') || messageLower.includes('download') || messageLower.includes('guide')) {
-            response = `🎁 Perfect! I've prepared a **Google Ads Checklist** that's helped businesses increase conversions by 200%!
-
-**The checklist covers:**
-• Keyword research secrets most agencies miss
-• Ad copy formulas that convert
-• Landing page optimization tips
-• Budget allocation strategies
-• Negative keyword goldmines
-
-<button class="quick-action" onclick="showEmailCapture()">📧 Get My Checklist</button>
-
-Just enter your email and I'll send it over immediately. No spam, ever!`;
-        } else if (messageLower.includes('consultation') || messageLower.includes('call') || messageLower.includes('meeting')) {
-            response = `🗓️ Excellent choice! Marlon offers **free 30-minute strategy calls** with zero obligation.
-
-**What to expect:**
-• Review your current Google Ads performance
-• Identify immediate opportunities
-• Get honest recommendations
-• Discuss budget and timeline
-• No sales pressure - just value
-
-<button class="quick-action" onclick="bookConsultation()">📅 Book Your Call</button>
-
-Or if you prefer, I can ask you a few quick questions to prepare a personalized quote first.`;
-        } else {
-            // Enhanced contextual response using conversation memory
-            updateContext(userMessage);
-            
-            let contextResponse = `I'm here to help! `;
-            
-            if (conversationMemory.userIndustry) {
-                contextResponse += `I see you have a ${conversationMemory.userIndustry} - that's great! `;
-            }
-            
-            if (conversationMemory.budgetRange) {
-                contextResponse += `With your ${conversationMemory.budgetRange} budget, I can give you specific recommendations. `;
-            }
-            
-            contextResponse += `Marlon specializes in Google Ads with proven results - currently managing a $10K/month campaign with 78.5% optimization score.
-
-**What can I help you with today?**
-
-<button class="quick-action" onclick="showPricingCalculator()">💰 Pricing Calculator</button>
-<button class="quick-action" onclick="startServiceDiscovery()">🎯 Personalized Quote</button>
-<button class="quick-action" onclick="bookConsultation()">📅 Free Strategy Call</button>
-<button class="quick-action" onclick="showEmailCapture()">📧 Free Checklist</button>
-
-Just let me know what's most important to you right now!`;
-            
-            response = contextResponse;
-        }
-            }
-            
-            // Simulate typing with more natural pauses
-            botMessageElement.textContent = '';
-            const words = response.split(' ');
-            let currentText = '';
-            
-            async function typeWords() {
-                for (let i = 0; i < words.length; i++) {
-                    await new Promise(resolve => setTimeout(resolve, 60 + Math.random() * 80));
-                    currentText += (i === 0 ? '' : ' ') + words[i];
-                    botMessageElement.textContent = currentText;
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
-            }
-            
-            await typeWords();
-            return response;
-        }
-        
-        // For GitHub Pages and local development, skip API calls and use mock responses
-        if (isGitHubPages || isLocalDevelopment) {
-            console.log('Using intelligent fallback responses for GitHub Pages');
-            return await getMockBotResponse(userMessage, botMessageElement);
-        }
-        
-        // Only attempt API calls for Netlify deployment
-        try {
-            const response = await fetch('/.netlify/functions/deepseek', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: userMessage,
-                    context: portfolioData
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Server error: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            return data.response;
-            
-        } catch (error) {
-            console.log('Using fallback responses for reliability');
-            return await getMockBotResponse(userMessage, botMessageElement);
-        }
-    }
+        displayMessage(`✅ **Checklist sent!**\n\nYour Google Ads checklist has been sent to ${email}. Check your inbox (and spam folder just in case)!\n\n**Bonus:** You'll also receive exclusive tips and case studies to help grow your campaigns.`, 'bot');
+    };
 
     /**
      * Handles the process of sending a message.
@@ -977,9 +538,18 @@ Just let me know what's most important to you right now!`;
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
         try {
-            botMessageElement.classList.remove('thinking');
             const botResponse = await getBotResponse(userMessage, botMessageElement);
-            await saveMessageToSupabase(userMessage, botResponse);
+            // Save to analytics (if available)
+            try {
+                if (window.gtag) {
+                    window.gtag('event', 'chat_message', {
+                        'event_category': 'engagement',
+                        'event_label': userMessage.substring(0, 50)
+                    });
+                }
+            } catch (e) {
+                console.log('Analytics not available');
+            }
         } catch (error) {
             console.error('Error in chat interaction:', error);
             botMessageElement.textContent = 'Sorry, I encountered an error. Please try again.';
@@ -993,6 +563,177 @@ Just let me know what's most important to you right now!`;
         }
     }
 
+    /**
+     * Gets the bot's response based on user input.
+     * @param {string} userMessage - The user's message.
+     * @param {HTMLElement} botMessageElement - The bot's message element for streaming.
+     * @returns {Promise<string>} The bot's response.
+     */
+    async function getBotResponse(userMessage, botMessageElement) {
+        const messageLower = userMessage.toLowerCase();
+        let response = '';
+
+        // Enhanced contextual responses
+        if (messageLower.includes('price') || messageLower.includes('cost') || messageLower.includes('package') || messageLower.includes('pricing')) {
+            response = `💰 **Google Ads Management Packages**
+
+**Launchpad Package - $150/month**
+Perfect for $200-500/month ad budgets
+
+**Growth Package - $300/month** 
+Ideal for $500-1,500/month ad budgets
+
+**Total Control Package - $500+/month**
+For $1,500+ monthly budgets with full service
+
+**Interactive Pricing Calculator:**
+<button class="quick-action" onclick="showPricingCalculator()">💰 Get Custom Quote</button>
+
+Want to see which package fits your specific situation?`;
+        } else if (messageLower.includes('audit') || messageLower.includes('free') || messageLower.includes('analysis')) {
+            response = `🎉 YES! Marlon offers a **FREE Google Ads + Website Audit** worth $200!
+
+**Your audit includes:**
+✅ Complete Google Ads account analysis
+✅ Keyword targeting effectiveness review
+✅ Landing page optimization opportunities
+✅ Competitor analysis insights
+✅ 30-day action plan to boost ROI
+
+This isn't a sales pitch - it's pure value to help your business grow.
+
+<button class="quick-action" onclick="bookConsultation()">📅 Book Free Audit</button>
+<button class="quick-action" onclick="showEmailCapture()">📧 Get Audit Checklist</button>
+
+What type of business do you run? This helps me prepare specific insights for your audit.`;
+        } else if (messageLower.includes('checklist') || messageLower.includes('download') || messageLower.includes('guide') || messageLower.includes('pdf')) {
+            response = `🎁 Perfect! I've prepared a **Google Ads Checklist** that's helped businesses increase conversions by 200%!
+
+**The checklist covers:**
+• Keyword research secrets most agencies miss
+• Ad copy formulas that convert
+• Landing page optimization tips
+• Budget allocation strategies
+• Negative keyword goldmines
+
+<button class="quick-action" onclick="showEmailCapture()">📧 Get My Checklist</button>
+
+Just enter your email and I'll send it over immediately. No spam, ever!`;
+        } else if (messageLower.includes('consultation') || messageLower.includes('call') || messageLower.includes('meeting') || messageLower.includes('schedule')) {
+            response = `🗓️ Excellent choice! Marlon offers **free 30-minute strategy calls** with zero obligation.
+
+**What to expect:**
+• Review your current Google Ads performance
+• Identify immediate opportunities
+• Get honest recommendations
+• Discuss budget and timeline
+• No sales pressure - just value
+
+<button class="quick-action" onclick="bookConsultation()">📅 Book Your Call</button>
+
+Or if you prefer, I can ask you a few quick questions to prepare a personalized quote first.`;
+        } else if (messageLower.includes('experience') || messageLower.includes('results') || messageLower.includes('track record')) {
+            response = `🏆 **Marlon's Proven Track Record**
+
+**Current Campaign Results:**
+• Managing $10,000/month Google Ads campaign
+• 78.5% optimization score (industry-leading)
+• $5.39 average cost per conversion
+• 18+ conversions generated monthly
+• Training from Ian Baillo (Philippines' top Google Ads expert)
+
+**Experience:**
+• 4+ years with US-based clients
+• Google Ads certified with advanced optimization training
+• Specializes in nonprofit and small business campaigns
+• Expert in conversion tracking and landing page optimization
+
+Want to see how these results could apply to your business?`;
+        } else if (messageLower.includes('certification') || messageLower.includes('qualified') || messageLower.includes('expert')) {
+            response = `✅ **Marlon's Qualifications**
+
+**Certifications:**
+• Google Ads Certified (Search, Display, Video, Shopping)
+• Advanced Google Ads Optimization Training
+• Conversion Tracking Specialist Certification
+• Landing Page Optimization Certified
+
+**Training:**
+• Trained by Ian Baillo - Philippines' #1 Google Ads expert
+• Continuous education on latest Google Ads features
+• Advanced bid strategy and automation training
+
+**Specializations:**
+• Small to medium business campaigns
+• Nonprofit Google Ad Grants management
+• E-commerce and local service businesses
+• Advanced conversion tracking setup
+
+Ready to leverage this expertise for your campaigns?`;
+        } else if (messageLower.includes('hello') || messageLower.includes('hi') || messageLower.includes('hey')) {
+            response = `👋 Hello! Welcome to Marlon's Google Ads assistant.
+
+I'm here to help you with:
+💰 **Pricing packages** - Find the perfect fit for your budget
+🎁 **Free audit** - Get a $200 Google Ads audit absolutely free
+📅 **Strategy calls** - Book free 30-minute consultations
+📧 **Resources** - Download exclusive checklists and guides
+
+**What brings you here today?** Are you looking to:
+1. Start new Google Ads campaigns
+2. Improve existing campaign performance
+3. Get a professional audit
+4. Learn about pricing and packages
+
+Just let me know what's most important to you!`;
+        } else {
+            // Enhanced contextual response using conversation memory
+            updateContext(userMessage);
+            
+            let contextResponse = `I'm here to help! `;
+            
+            if (conversationMemory.userIndustry) {
+                contextResponse += `I see you have a ${conversationMemory.userIndustry} - that's great! `;
+            }
+            
+            if (conversationMemory.budgetRange) {
+                contextResponse += `With your ${conversationMemory.budgetRange}, I can give you specific recommendations. `;
+            }
+            
+            contextResponse += `Marlon specializes in Google Ads with proven results - currently managing a $10K/month campaign with 78.5% optimization score.
+
+**What can I help you with today?**
+
+<button class="quick-action" onclick="showPricingCalculator()">💰 Pricing Calculator</button>
+<button class="quick-action" onclick="startServiceDiscovery()">🎯 Personalized Quote</button>
+<button class="quick-action" onclick="bookConsultation()">📅 Free Strategy Call</button>
+<button class="quick-action" onclick="showEmailCapture()">📧 Free Checklist</button>
+
+Just let me know what's most important to you!`;
+            
+            response = contextResponse;
+        }
+
+        // Simulate typing with more natural pauses
+        botMessageElement.textContent = '';
+        const words = response.split(' ');
+        let currentText = '';
+        
+        async function typeWords() {
+            for (let i = 0; i < words.length; i++) {
+                await new Promise(resolve => setTimeout(resolve, 60 + Math.random() * 80));
+                currentText += (i === 0 ? '' : ' ') + words[i];
+                botMessageElement.innerHTML = currentText.replace(/\n/g, '<br>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+        
+        await typeWords();
+        return response;
+    }
+
     // --- Initialization ---
     const isGitHubPages = window.location.hostname.includes('github.io');
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -1000,13 +741,12 @@ Just let me know what's most important to you right now!`;
     
     console.log('Chatbot initializing...');
     console.log('Environment:', isLocal ? 'Local Development' : isGitHubPages ? 'GitHub Pages' : isNetlify ? 'Netlify' : 'Production');
-    console.log('Netlify functions available:', isNetlify && !isLocal && !isGitHubPages);
     
     loadPortfolioData();
     
     // Casual welcome message
     setTimeout(() => {
-        const welcomeMessage = "Hello! I am Marlon's chatbot. How can I help you today?";
+        const welcomeMessage = "Hello! I'm Marlon's chatbot. How can I help you today?";
         displayMessage(welcomeMessage, 'bot');
     }, 800);
     
@@ -1016,9 +756,15 @@ Just let me know what's most important to you right now!`;
     
     console.log('Chatbot initialized and ready for interaction');
     
+    // Reset idle timer on any interaction
+    chatInput.addEventListener('input', resetIdleTimer);
+    chatInput.addEventListener('keypress', resetIdleTimer);
+    
     // Make functions globally available for onclick handlers
     window.showPricingCalculator = showPricingCalculator;
     window.startServiceDiscovery = startServiceDiscovery;
     window.bookConsultation = bookConsultation;
     window.showEmailCapture = showEmailCapture;
+    window.processDiscoveryAnswer = processDiscoveryAnswer;
+    window.deliverLeadMagnet = deliverLeadMagnet;
 });
