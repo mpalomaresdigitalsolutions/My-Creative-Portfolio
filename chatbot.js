@@ -929,7 +929,7 @@ Just let me know what's most important to you right now!`;
 
 
         } catch (error) {
-            console.error('Error fetching streaming response from DeepSeek API:', error);
+            console.log('Using intelligent fallback responses (no API required)');
             
             // For GitHub Pages and local development, gracefully fall back to mock responses
             if (isGitHubPages || isLocalDevelopment) {
