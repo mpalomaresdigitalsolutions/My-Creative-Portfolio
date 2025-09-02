@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marlon Palomares - Digital Marketing Specialist</title>
+    <link rel="preload" href="styles.min.css" as="style">
+    <link rel="preload" href="responsive.css" as="style">
+    <link rel="preload" href="chatbot-enhanced.css" as="style">
     <link rel="stylesheet" href="styles.min.css">
     <link rel="stylesheet" href="responsive.css">
     <link rel="stylesheet" href="chatbot-enhanced.css">
@@ -11,6 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="Profile.png" as="image">
     <meta name="description" content="Marlon Palomares - Digital Marketing Specialist & Web Developer with expertise in Google Ads, SEO, and GoHighLevel automation">
     <meta name="keywords" content="digital marketing, google ads, SEO, web development, GoHighLevel, automation">
     <meta name="author" content="Marlon Palomares">
@@ -111,13 +118,6 @@
 
         </aside>
 
-        <nav class="portfolio-nav">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
         <main class="main-content">
             <div class="content-section">
                 <div class="profile-section">
@@ -127,8 +127,7 @@
                     
                     <div class="contact-info">
                         <p><i class="fas fa-envelope"></i> Mpalomaresdigital@gmail.com</p>
-                        <p><i class="fas fa-keyboard"></i> 35 WPM (Improving to 55+)</p>
-                        <p><a href="#" onclick="showSection('website')"><i class="fas fa-globe"></i> View My Website</a></p>
+                    <p><a href="#" onclick="showSection('website')"><i class="fas fa-globe"></i> View My Website</a></p>
                         <p><a href="#" onclick="showSection('case-study')"><i class="fas fa-chart-line"></i> View My Case Study</a></p>
                         <p><a href="#" onclick="showSection('pricing')"><i class="fas fa-tags"></i> View Service Packages</a></p>
                     </div>
@@ -274,8 +273,8 @@
         </div>
     </div>
 
-    <script src="chatbot.js"></script>
-    <script src="interactive.js"></script>
+    <script src="chatbot.js" async></script>
+    <script src="interactive.js" async></script>
     <script>
         function showSection(section) {
             if (section === 'website') {

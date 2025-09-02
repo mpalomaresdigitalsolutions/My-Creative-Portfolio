@@ -3,632 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Google Ads Packages - Marlon Palomares</title>
-    <meta name="description" content="Professional Google Ads management packages designed for business growth and ROI maximization">
-    <link rel="stylesheet" href="styles.min.css">
-    <link rel="stylesheet" href="responsive.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Google Ads Starter Package - Perfect for Beginners</title>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #f59e0b;
-            --accent-color: #10b981;
-            --dark-color: #1e293b;
-            --light-gray: #f8fafc;
-            --border-color: #e2e8f0;
-            --text-muted: #64748b;
-            --success-color: #22c55e;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
-            color: var(--dark-color);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
         }
-
-        .pricing-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .pricing-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-        }
-
-        .pricing-header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #f0f9ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .pricing-header p {
-            font-size: 1.25rem;
-            opacity: 0.9;
+        .container {
             max-width: 600px;
             margin: 0 auto;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .pricing-card {
             background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
         }
-
-        .pricing-card.featured {
-            border: 3px solid var(--secondary-color);
-            transform: scale(1.05);
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-
-        .badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--secondary-color);
+        .price-box {
+            background: #4CAF50;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
         }
-
-        .package-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+        .features {
+            margin: 20px 0;
         }
-
-        .starter .package-icon {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-        }
-
-        .growth .package-icon {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-        }
-
-        .premium .package-icon {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            color: white;
-        }
-
-        .package-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .package-description {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .price-section {
-            margin-bottom: 2rem;
-        }
-
-        .price {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--dark-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .price-details {
-            color: var(--text-muted);
-            font-size: 1.125rem;
-        }
-
-        .features-list {
+        .features ul {
             list-style: none;
-            margin-bottom: 2rem;
+            padding: 0;
         }
-
-        .features-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
         }
-
-        .features-list li:last-child {
+        .features li:last-child {
             border-bottom: none;
         }
-
-        .features-list i {
-            color: var(--success-color);
-            margin-right: 0.75rem;
-            width: 20px;
-        }
-
-        .time-badge {
-            background: var(--light-gray);
-            color: var(--text-muted);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.875rem;
-            margin-left: auto;
-        }
-
         .cta-button {
             display: block;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            background: #2196F3;
             color: white;
             text-align: center;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.125rem;
-            font-weight: 600;
+            padding: 15px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
         }
-
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        .comparison-table {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin: 3rem 0;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow-x: auto;
-        }
-
-        .comparison-table h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--dark-color);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background: var(--light-gray);
-            font-weight: 600;
-        }
-
-        .check-icon {
-            color: var(--success-color);
-            font-size: 1.25rem;
-        }
-
-        .x-icon {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-        }
-
-        .guarantee-section {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin: 3rem 0;
-        }
-
-        .guarantee-icon {
-            font-size: 3rem;
-            color: var(--success-color);
-            margin-bottom: 1rem;
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-button:hover {
-            transform: translateX(-5px);
-        }
-
-        .back-button i {
-            margin-right: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .pricing-container {
-                padding: 1rem;
-            }
-            
-            .pricing-header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .pricing-card.featured {
-                transform: none;
-            }
-            
-            .pricing-card {
-                padding: 2rem;
-            }
-        }
-
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .floating-element {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            background: #1976D2;
         }
     </style>
 </head>
 <body>
-    <div class="floating-elements">
-        <div class="floating-element" style="width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s;"></div>
-        <div class="floating-element" style="width: 60px; height: 60px; top: 60%; right: 15%; animation-delay: 2s;"></div>
-        <div class="floating-element" style="width: 100px; height: 100px; top: 80%; left: 20%; animation-delay: 4s;"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Google Ads Packages</h1>
+            <p>Choose the right level for your business</p>
+        </div>
+        
+        <!-- Package A - Starter -->
+        <div class="price-box" style="background: #4CAF50;">
+            <h2>Package A - Starter</h2>
+            <div style="font-size: 2em; font-weight: bold;">$197</div>
+            <p>5 hours of work • One-time setup</p>
+            <small>Perfect for beginners</small>
+        </div>
+        
+        <div class="features">
+            <h3>Package A Includes:</h3>
+            <ul>
+                <li>✅ Complete Google Ads account setup (2 hours)</li>
+                <li>✅ 10 carefully chosen keywords for your business (1 hour)</li>
+                <li>✅ 3 ad variations that actually get clicks (1 hour)</li>
+                <li>✅ Simple landing page review (0.5 hours)</li>
+                <li>✅ First week monitoring + 30-min strategy call (0.5 hours)</li>
+            </ul>
+        </div>
+        
+        <!-- Package B - Growth -->
+        <div class="price-box" style="background: #FF9800; margin-top: 40px;">
+            <h2>Package B - Growth</h2>
+            <div style="font-size: 2em; font-weight: bold;">$497</div>
+            <p>12 hours of work • Complete optimization</p>
+            <small>Best for growing businesses</small>
+        </div>
+        
+        <div class="features">
+            <h3>Package B Includes:</h3>
+            <ul>
+                <li>✅ Everything in Package A (5 hours)</li>
+                <li>✅ Advanced keyword research (20 keywords) (2 hours)</li>
+                <li>✅ 5 additional ad variations + A/B testing (2 hours)</li>
+                <li>✅ Detailed competitor analysis (1 hour)</li>
+                <li>✅ Conversion tracking setup (1 hour)</li>
+                <li>✅ 2 weeks optimization + weekly reports (1 hour)</li>
+            </ul>
+        </div>
+        
+        <!-- Package C - Premium -->
+        <div class="price-box" style="background: #9C27B0; margin-top: 40px;">
+            <h2>Package C - Premium</h2>
+            <div style="font-size: 2em; font-weight: bold;">$997</div>
+            <p>25 hours of work • Full campaign management</p>
+            <small>For serious advertisers</small>
+        </div>
+        
+        <div class="features">
+            <h3>Package C Includes:</h3>
+            <ul>
+                <li>✅ Everything in Packages A & B (17 hours)</li>
+                <li>✅ Advanced audience targeting setup (2 hours)</li>
+                <li>✅ Remarketing campaign creation (2 hours)</li>
+                <li>✅ Google Analytics integration (1 hour)</li>
+                <li>✅ Custom reporting dashboard (1 hour)</li>
+                <li>✅ 1 month full management + optimization (2 hours)</li>
+            </ul>
+        </div>
+        
+        <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <strong>Choose based on your needs:</strong> Starter for testing, Growth for scaling, or Premium for complete campaign management.
+        </div>
+        
+        <a href="https://calendar.app.google/ecrh372MbNbBHbSf6" class="cta-button">Book Your Strategy Call</a>
+        
+        <p style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
+            Questions? Email me directly: mpalomaresdigitaksolutions@gmail.com
+        </p>
     </div>
-
-    <div class="pricing-container">
-        <a href="index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i>
-            Back to Portfolio
-        </a>
-
-        <div class="pricing-header">
-            <h1>Choose Your Growth Path</h1>
-            <p>Professional Google Ads packages designed to scale your business with proven ROI-focused strategies</p>
-        </div>
-
-        <div class="pricing-grid">
-            <!-- Starter Package -->
-            <div class="pricing-card starter">
-                <div class="package-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h2 class="package-name">Starter Launch</h2>
-                <p class="package-description">Perfect for testing Google Ads with minimal risk and maximum learning</p>
-                
-                <div class="price-section">
-                    <div class="price">$197</div>
-                    <div class="price-details">One-time investment • 5 hours of expert work</div>
-                </div>
-
-                <ul class="features-list">
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Complete Google Ads account setup
-                        <span class="time-badge">2 hrs</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        10 high-intent keywords research
-                        <span class="time-badge">1 hr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        3 conversion-focused ad variations
-                        <span class="time-badge">1 hr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Landing page optimization review
-                        <span class="time-badge">0.5 hr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        7-day monitoring + strategy call
-                        <span class="time-badge">0.5 hr</span>
-                    </li>
-                </ul>
-
-                <a href="https://calendar.app.google/ecrh372MbNbBHbSf6" class="cta-button">
-                    Start Your Journey
-                </a>
-            </div>
-
-            <!-- Growth Package -->
-            <div class="pricing-card growth featured">
-                <div class="badge">Most Popular</div>
-                <div class="package-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h2 class="package-name">Growth Accelerator</h2>
-                <p class="package-description">Comprehensive optimization for businesses ready to scale their advertising</p>
-                
-                <div class="price-section">
-                    <div class="price">$497</div>
-                    <div class="price-details">Complete optimization • 12 hours of strategic work</div>
-                </div>
-
-                <ul class="features-list">
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Everything in Starter Package
-                        <span class="time-badge">5 hrs</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Advanced keyword research (20 keywords)
-                        <span class="time-badge">2 hrs</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        5 additional ad variations + A/B testing
-                        <span class="time-badge">2 hrs</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Competitor analysis & market insights
-                        <span class="time-badge">1 hr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Conversion tracking & analytics setup
-                        <span class="time-badge">1 hr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        2 weeks optimization + weekly reports
-                        <span class="time-badge">1 hr</span>
-                    </li>
-                </ul>
-
-                <a href="https://calendar.app.google/ecrh372MbNbBHbSf6" class="cta-button">
-                    Accelerate Growth
-                </a>
-            </div>
-
-            <!-- Premium Package -->
-            <div class="pricing-card premium">
-                <div class="package-icon">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <h2 class="package-name">Premium Domination</h2>
-                <p class="package-description">Full-scale campaign management for market leaders and aggressive growth</p>
-                
-                <div class="price-section">
-                    <div class="price">$997</div>
-                    <div class="price-details">Complete management • 25 hours of expert execution</div>
-                </div>
-
-                <ul class="features-list">
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Everything in Growth Package
-                        <span class="time-badge">12 hrs</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Advanced audience targeting & segmentation
-                        <span class="time-badge">2 hrs</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Multi-platform remarketing campaigns
-                        <span class="time-badge">2 hrs</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Google Analytics 4 advanced tracking
-                        <span class="time-badge">1 hr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Custom reporting dashboard creation
-                        <span class="time-badge">1 hr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        1 month full management & scaling
-                        <span class="time-badge">7 hrs</span>
-                    </li>
-                </ul>
-
-                <a href="https://calendar.app.google/ecrh372MbNbBHbSf6" class="cta-button">
-                    Dominate Your Market
-                </a>
-            </div>
-        </div>
-
-        <div class="comparison-table">
-            <h2>Package Comparison</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Features</th>
-                        <th>Starter</th>
-                        <th>Growth</th>
-                        <th>Premium</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Account Setup</td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Keyword Research</td>
-                        <td>10 keywords</td>
-                        <td>20 keywords</td>
-                        <td>30+ keywords</td>
-                    </tr>
-                    <tr>
-                        <td>Ad Variations</td>
-                        <td>3 ads</td>
-                        <td>8 ads + A/B testing</td>
-                        <td>15+ ads + optimization</td>
-                    </tr>
-                    <tr>
-                        <td>Competitor Analysis</td>
-                        <td><i class="fas fa-times x-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Conversion Tracking</td>
-                        <td>Basic</td>
-                        <td>Advanced</td>
-                        <td>Custom dashboard</td>
-                    </tr>
-                    <tr>
-                        <td>Management Duration</td>
-                        <td>7 days</td>
-                        <td>2 weeks</td>
-                        <td>1 month</td>
-                    </tr>
-                    <tr>
-                        <td>Weekly Reports</td>
-                        <td><i class="fas fa-times x-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Remarketing</td>
-                        <td><i class="fas fa-times x-icon"></i></td>
-                        <td><i class="fas fa-times x-icon"></i></td>
-                        <td><i class="fas fa-check check-icon"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="guarantee-section">
-            <div class="guarantee-icon">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <h2>30-Day Performance Guarantee</h2>
-            <p>If you don't see measurable improvement in your Google Ads performance within 30 days, I'll work with you for free until you do. Your success is my priority.</p>
-            <p><strong>Ready to get started?</strong> Book your free strategy call to discuss which package is right for your business goals.</p>
-            <a href="https://calendar.app.google/ecrh372MbNbBHbSf6" class="cta-button" style="max-width: 300px; margin: 2rem auto 0;">
-                Book Your Strategy Call
-            </a>
-        </div>
-    </div>
-
-    <script>
-        // Add smooth scrolling and interactive elements
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Add click animation
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                    window.open(this.href, '_blank');
-                }, 150);
-            });
-        });
-
-        // Add hover effects to pricing cards
-        document.querySelectorAll('.pricing-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                if (!this.classList.contains('featured')) {
-                    this.style.transform = '';
-                } else {
-                    this.style.transform = 'scale(1.05)';
-                }
-            });
-        });
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.pricing-card, .comparison-table, .guarantee-section').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>

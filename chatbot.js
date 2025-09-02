@@ -145,6 +145,12 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
      */
     async function loadPortfolioData() {
         try {
+            // Check if we're running locally (file:// protocol)
+            const isLocal = window.location.protocol === 'file:';
+            if (isLocal) {
+                throw new Error('Local file protocol detected');
+            }
+            
             const response = await fetch('knowledge_base.md');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
