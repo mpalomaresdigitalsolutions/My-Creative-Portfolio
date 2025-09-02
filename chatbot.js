@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Initialize chat widget
-    const chatWidget = document.getElementById('chatbot-window');
-    const minimizeBtn = document.getElementById('chatbot-toggle');
-    const closeBtn = document.getElementById('chatbot-close');
-    const chatInput = document.getElementById('chatbot-input');
-    const sendBtn = document.getElementById('chatbot-send');
-    const chatMessages = document.getElementById('chatbot-messages');
+    const chatWidget = document.querySelector('.chatbot-window');
+    const minimizeBtn = document.querySelector('.chatbot-toggle');
+    const closeBtn = document.querySelector('.chatbot-close');
+    const chatInput = document.querySelector('#chatbot-input');
+    const sendBtn = document.querySelector('#chatbot-send');
+    const chatMessages = document.querySelector('#chatbot-messages');
 
     // Start with chat widget minimized
     let isMinimized = true;
@@ -750,11 +750,6 @@ Just let me know what's most important to you!`;
     
     loadPortfolioData();
     
-    // Casual welcome message
-    setTimeout(() => {
-        const welcomeMessage = "Hello! I'm Marlon's chatbot. How can I help you today?";
-        displayMessage(welcomeMessage, 'bot');
-    }, 800);
     
     // Ensure chat controls are enabled on initialization
     chatInput.disabled = false;
