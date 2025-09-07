@@ -84,7 +84,7 @@ RESPONSE FORMAT RULES:
 
 Example good responses:
 User: "struggling with campaigns" → "I see you're facing campaign challenges. Based on Marlon's recent work optimizing a $10K nonprofit campaign, here's what typically works..."
-User: "pricing" → "Since you mentioned pricing, let me share what's most relevant. For businesses at your stage, the Launchpad package at $150/month has been particularly effective..."
+User: "pricing" → "Since you mentioned pricing, let me share what's most relevant. For businesses at your stage, the Starter package at $197/month has been particularly effective..."
 
 Answer questions based ONLY on the provided portfolio information. Here is Marlon's comprehensive knowledge base: \n\n${portfolioContext}`;
 

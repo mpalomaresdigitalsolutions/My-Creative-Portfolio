@@ -18,66 +18,52 @@ A results-driven Google Ads specialist with hands-on campaign management experie
 5. **Keyword Research** - Target audience and keyword analysis
 6. **Conversion Tracking Setup** - Advanced tracking implementation
 
-### Service Packages & Pricing
+### Service Packages & Pricing (Updated 2025)
 
-#### Package A - Starter Package - $197 (One-Time Setup)
-**Target:** Google Ads newbies and small businesses starting out
-**Total Hours:** 5 hours dedicated work
+#### Package A – Starter – $197/month
+**Target:** Perfect for beginners and initial testing
+**Total Hours:** 6 hours monthly dedicated work
 **Hour Breakdown:**
-- Account setup & structure: 1.5 hours
-- Keyword research & selection: 1.5 hours
-- Ad copy variations (3-5 ads): 1 hour
-- Conversion tracking setup: 0.5 hours
-- Campaign launch & initial optimization: 0.5 hours
+- Complete Google Ads account audit & setup: 2 hours
+- 10 targeted keywords selected: 1 hour
+- 3 ad variations optimized for clicks: 1 hour
+- Basic landing page review: 0.5 hours
+- Conversion tracking setup: 1 hour
+- First week monitoring + 30-min strategy call: 0.5 hours
 
 **Includes:**
-- Complete Google Ads account setup
-- Strategic keyword research (up to 25 keywords)
-- 3-5 high-converting ad variations
-- Conversion tracking implementation
-- Campaign launch and initial optimization
-- Perfect for businesses with $200-$500 monthly ad budget
+- Complete Google Ads account audit and setup
+- Strategic keyword research with 10 targeted keywords
+- 3 high-converting ad variations optimized for clicks
+- Basic landing page conversion review
+- Full conversion tracking implementation
+- First week monitoring with 30-minute strategy call
+- Perfect for businesses starting with Google Ads
 
-#### Package B - Growth Package - $497 (One-Time Setup)
-**Target:** Growing businesses ready to scale
-**Total Hours:** 12 hours dedicated work
-**Hour Breakdown:**
-- Account setup & advanced structure: 2 hours
-- Comprehensive keyword research: 3 hours
-- Multiple ad variations (8-10 ads): 2 hours
-- Advanced conversion tracking: 1 hour
-- Display/remarketing campaign setup: 2 hours
-- Landing page recommendations: 1.5 hours
-- Campaign optimization & testing: 1.5 hours
+#### Package B – Growth – $397/month
+**Target:** For advertisers ready to grow campaigns with ongoing optimization
+**Total Hours:** 9 hours monthly dedicated work
+**Includes everything in Starter, plus:**
+- Advanced keyword research (20 keywords): 2 hours
+- 5 additional ad variations + A/B testing: 2 hours
+- Competitor analysis: 1 hour
+- Conversion tracking fine-tuning: 1 hour
+- 2 weeks optimization + weekly reports: 1 hour
+- Basic lead nurturing setup with GoHighLevel
+- Ongoing campaign optimization and performance monitoring
 
-**Includes:**
-- Everything in Package A
-- Additional Display and Remarketing campaigns
-- Advanced audience targeting
-- Landing page optimization suggestions
-- Perfect for businesses with $500-$1,500 monthly ad budget
-
-#### Package C - Premium Package - $997 (One-Time Setup)
-**Target:** Established businesses ready for comprehensive campaigns
-**Total Hours:** 25 hours dedicated work
-**Hour Breakdown:**
-- Complete account overhaul/setup: 4 hours
-- Extensive keyword research & competitor analysis: 5 hours
-- Advanced ad variations (15-20 ads): 4 hours
-- Sophisticated conversion tracking: 2 hours
-- Multiple campaign types setup: 4 hours
-- Shopping/Video campaign setup: 3 hours
-- Advanced audience segmentation: 2 hours
-- Comprehensive testing & optimization: 3 hours
-- Strategy documentation: 2 hours
-
-**Includes:**
-- Everything in Packages A & B
-- Shopping campaigns for e-commerce
-- Video campaigns for YouTube
-- Advanced audience segmentation
-- Comprehensive strategy documentation
-- Perfect for businesses with $1,500+ monthly ad budget
+#### Package C – Premium – $697/month
+**Target:** Full campaign management with insights and enhanced targeting
+**Total Hours:** 11 hours monthly dedicated work
+**Includes everything in Growth, plus:**
+- Audience targeting setup: 2 hours
+- Remarketing campaign creation: 2 hours
+- Google Analytics integration: 1 hour
+- Custom reporting: 1 hour
+- 1-month campaign management + daily performance checks: 2 hours
+- Monthly strategy call: 1 hour
+- Comprehensive campaign management with daily monitoring
+- Advanced reporting and strategic insights
 
 ### Key Achievements & Experience
 - **Current:** Managing $10,000/month Google Ads campaign for nonprofit

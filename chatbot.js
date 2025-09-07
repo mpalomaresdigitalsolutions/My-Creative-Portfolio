@@ -33,6 +33,11 @@ Hi! I'm Marlon's AI assistant, and I'm excited to offer you something special to
 
 **No strings attached** - just pure value to help your business grow.
 
+**Service Packages Available:**
+🚀 Starter: $197/month (6 hours dedicated work)
+📈 Growth: $397/month (9 hours dedicated work)  
+💎 Premium: $697/month (11 hours dedicated work)
+
 Ready to unlock your campaign's potential? Just ask me anything about Google Ads, digital marketing, or let's schedule your free audit! What's on your mind?`, 'bot');
             }, 500);
         }
@@ -161,63 +166,64 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
         } catch (error) {
             console.error('Error loading knowledge base:', error);
             // Use fallback context for local development
-            portfolioContext = `# Comprehensive Knowledge Base - Marlon Palomares Portfolio & Google Ads Expertise
+            portfolioContext = `# Comprehensive Knowledge Base - Marlon Palomares Portfolio & Google Ads Expertise (Updated 2025)
 
 ## Personal Information & Portfolio Overview
 
 **Name:** Marlon Palomares  
 **Title:** Google Ads Specialist  
-**Email:** Mpalomaresdigital@gmail.com  
+**Email:** marlonpalomares@protonmail.com  
 **Website:** https://mpalomaresdigitalsolutions.github.io/MPDIGITAL/
 
 ### Professional Summary
-A results-driven Google Ads specialist with hands-on campaign management experience, trained by Ian Baillo, the Philippines' top Google Ads expert. Currently managing a $10,000 monthly search campaign for a nonprofit through VolunteerMatch. Over 4 years of experience with US-based clients as a Customer Service and Technical Support Representative.
+Google Ads specialist with 6 months focused experience managing live campaigns. Google Ads certified with advanced training in local lead generation. Strong customer service background (4+ years) supporting high-volume client communications. Passionate about helping businesses get leads through Google Ads and committed to continuous learning and optimization.
 
 ### Core Services Offered
 1. **Google Ads Audit** - Comprehensive analysis and optimization recommendations
-2. **Google Ad Strategy** - Strategic planning and campaign development
+2. **Google Ad Strategy** - Strategic planning and campaign development  
 3. **Google Ads Optimization** - Performance improvement and ROI maximization
 4. **Copywriting** - Ad copy development and optimization
 5. **Keyword Research** - Target audience and keyword analysis
 6. **Conversion Tracking Setup** - Advanced tracking implementation
 
-### Service Packages & Pricing
+### Service Packages & Pricing (Updated 2025)
 
-#### The 'Launchpad' Package - $150/month
-**Target:** Small business with $200-$500 monthly ad budget
+#### Package A – Starter – $197/month
+**Target:** Perfect for beginners and initial testing
+**Total Hours:** 6 hours monthly dedicated work
 **Includes:**
-- One Google Search campaign setup
-- Keyword research (up to 25 keywords)
-- 3-5 high-quality ad creatives
-- Initial conversion tracking setup
-- Bi-weekly campaign monitoring and budget management
-- Negative keyword research
-- Ad copy A/B testing
-- Basic bid adjustments
-- Bi-weekly email updates and monthly performance summary
+- Complete Google Ads account audit and setup
+- Strategic keyword research with 10 targeted keywords
+- 3 high-converting ad variations optimized for clicks
+- Basic landing page conversion review
+- Full conversion tracking implementation
+- First week monitoring with 30-minute strategy call
+- Perfect for businesses starting with Google Ads
 
-#### The 'Growth' Package - $300/month
-**Target:** Growing business with $500-$1,500 monthly ad budget
-**Includes:**
-- Everything in Launchpad package
-- Additional campaign setup (Display or Remarketing)
-- Advanced keyword and audience research
-- Weekly optimization and aggressive bid strategies
-- Landing page suggestions
-- Weekly performance reports
+#### Package B – Growth – $397/month  
+**Target:** For advertisers ready to grow campaigns with ongoing optimization
+**Total Hours:** 9 hours monthly dedicated work
+**Includes everything in Starter, plus:**
+- Advanced keyword research (20 keywords)
+- 5 additional ad variations + A/B testing
+- Competitor analysis
+- Conversion tracking fine-tuning
+- 2 weeks optimization + weekly reports
+- Basic lead nurturing setup with GoHighLevel
+- Ongoing campaign optimization and performance monitoring
+
+#### Package C – Premium – $697/month
+**Target:** Full campaign management with insights and enhanced targeting
+**Total Hours:** 11 hours monthly dedicated work
+**Includes everything in Growth, plus:**
+- Audience targeting setup
+- Remarketing campaign creation
+- Google Analytics integration
+- Custom reporting
+- 1-month campaign management + daily performance checks
 - Monthly strategy call
-
-#### The 'Total Control' Package - $500+/month
-**Target:** Established business with $1,500+ monthly ad budget
-**Includes:**
-- Everything in Growth package
-- Multiple campaign types (Search, Display, Shopping, Video)
-- Comprehensive audience targeting and segmentation
-- Advanced conversion tracking with Google Analytics
-- Full-service landing page consultation
-- Daily/Bi-weekly budget and bid monitoring
-- Custom weekly and monthly reports
-- Priority communication
+- Comprehensive campaign management with daily monitoring
+- Advanced reporting and strategic insights
 
 ### Key Achievements & Experience
 - **Current:** Managing $10,000/month Google Ads campaign for nonprofit
