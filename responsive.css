@@ -209,6 +209,133 @@ h1 {
         font-size: 1.5rem;
     }
     
+    .title {
+        font-size: 0.9rem;
+    }
+    
+    .competencies-grid,
+    .certifications-grid,
+    .ghl-samples,
+    .references {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .contact-info p {
+        font-size: 0.9rem;
+        word-break: break-word;
+    }
+    
+    .content-section h2 {
+        font-size: 1.25rem;
+    }
+    
+    .experience-item h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Ultra-small mobile (max-width: 360px) */
+@media (max-width: 360px) {
+    .sidebar,
+    .main-content {
+        padding: 0.75rem;
+    }
+    
+    .profile-section {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .profile-img {
+        width: 100px;
+        height: 125px;
+    }
+    
+    .content-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Ensure single column layout for all mobile devices */
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        min-height: 100vh !important;
+    }
+    
+    .sidebar {
+        width: 100% !important;
+        order: 1;
+    }
+    
+    .main-content {
+        order: 2;
+    }
+    
+    /* Ensure all grid layouts become single column */
+    .competencies-grid,
+    .certifications-grid,
+    .ghl-samples,
+    .references {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+    }
+    
+    /* Ensure text doesn't overflow */
+    .contact-info p,
+    .content-section p,
+    .experience-item p,
+    .experience-item ul li {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Better button/touch targets */
+    .competency-item,
+    .certificate-item,
+    .ghl-sample,
+    .reference {
+        min-height: 44px;
+        padding: 0.75rem;
+    }
+    
+    /* Reduce font sizes slightly for better mobile fit */
+    .content-section h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .experience-item h3 {
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+    
+    /* Ensure images are responsive */
+    .certificate-image,
+    .ghl-sample img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+    }
+    
+    .profile-img {
+        width: 120px;
+        height: 150px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
     .content-section {
         padding: 1rem;
         margin-bottom: 1rem;
