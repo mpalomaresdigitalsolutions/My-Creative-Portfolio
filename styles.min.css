@@ -197,6 +197,26 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    max-height: 250px; /* Adjust as needed */
+    overflow-y: auto;
+}
+
+.competencies::-webkit-scrollbar {
+    width: 8px;
+}
+
+.competencies::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.competencies::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.competencies::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 }
 
 .competency-item {
