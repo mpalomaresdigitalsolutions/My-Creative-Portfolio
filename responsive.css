@@ -118,7 +118,6 @@ h1 {
         margin: 1rem;
         border-radius: var(--border-radius);
         box-shadow: var(--shadow-xl);
-        max-height: calc(100vh - 2rem);
     }
     
     .sidebar {
@@ -145,6 +144,42 @@ h1 {
     .references {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* GTM Integration Page Responsive Styles */
+.screenshot-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .screenshot-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.screenshot-item {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-md);
+}
+
+.screenshot-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 1rem;
+}
+
+.screenshot-caption {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.screenshot-caption strong {
+    color: var(--text-primary);
 }
 
 /* Desktop Styles (1024px and up) */
@@ -271,11 +306,11 @@ h1 {
     
     .sidebar {
         width: 100% !important;
-        order: 1;
+        order: 2;
     }
     
     .main-content {
-        order: 2;
+        order: 1;
     }
     
     /* Ensure all grid layouts become single column */
@@ -325,7 +360,7 @@ h1 {
         height: auto;
     }
 }
-    }
+/* Remove orphaned closing brace as it's not associated with any rule */
     
     .profile-img {
         width: 120px;
@@ -349,7 +384,7 @@ h1 {
     .education-item h3 {
         font-size: 1.2rem;
     }
-}
+/* Remove orphaned closing brace as it's not needed */
 
 /* Landscape Mobile Optimizations */
 @media (max-width: 768px) and (orientation: landscape) {

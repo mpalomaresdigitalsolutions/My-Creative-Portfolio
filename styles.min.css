@@ -60,7 +60,6 @@ body {
     color: var(--text-primary);
     border-right: 1px solid var(--border-color);
     position: relative;
-    overflow-y: auto;
 }
 
 .profile-section {
@@ -222,6 +221,12 @@ h1 {
 .competency-item i {
     font-size: 1.5em;
     color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.competency-item:hover i {
+    transform: scale(1.2) rotate(-10deg);
+    color: var(--secondary-color);
 }
 
 .competency-item:visited,
@@ -737,7 +742,6 @@ h1 {
     padding: 2.5rem;
     background: var(--bg-primary);
     overflow-y: auto;
-    max-height: 100vh;
 }
 
 .main-content::-webkit-scrollbar {

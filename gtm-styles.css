@@ -1,0 +1,129 @@
+/* GTM Integration Page Specific Styles */
+
+:root {
+    --gtm-primary: #4285F4; /* Google Blue */
+    --gtm-secondary: #34A853; /* Google Green */
+    --gtm-accent: #FBBC05; /* Google Yellow */
+    --gtm-dark: #202124;
+    --gtm-light: #f8f9fa;
+    --gtm-text: #5f6368;
+}
+
+/* Header Redesign */
+.header.gtm-header {
+    background: linear-gradient(135deg, var(--gtm-dark), #3c4043);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-radius: 0 0 25px 25px;
+    margin-bottom: 2rem;
+}
+
+.header.gtm-header .service-icon {
+    color: var(--gtm-primary);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.header.gtm-header .service-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.header.gtm-header .service-subtitle {
+    font-size: 1.2rem;
+    color: #e8eaed;
+}
+
+/* Stat Card Redesign */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: var(--gtm-light);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+}
+
+.stat-card .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gtm-primary);
+}
+
+.stat-card .stat-label {
+    font-size: 1rem;
+    color: var(--gtm-text);
+}
+
+/* Process Timeline */
+.process-steps {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.process-steps::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 100%;
+    width: 4px;
+    background: var(--gtm-primary);
+    border-radius: 2px;
+}
+
+.step {
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 2rem;
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gtm-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: 3px solid white;
+}
+
+.step h3 {
+    font-size: 1.3rem;
+    color: var(--gtm-dark);
+}
+
+/* Mobile adjustments for timeline */
+@media (max-width: 767px) {
+    .process-steps::before {
+        left: 15px;
+    }
+    .step {
+        padding-left: 45px;
+    }
+    .step-number {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+}
