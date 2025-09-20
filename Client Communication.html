@@ -315,6 +315,22 @@
             line-height: 1.5;
         }
 
+        .tool-item img {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-item p strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
         .example-tabs {
             display: flex;
             justify-content: center;
@@ -658,24 +674,34 @@
                 
                 <div class="tools-grid">
                     <div class="tool-item scroll-animate">
+                        <img src="images/monday.png" alt="Monday.com" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px;">
+                        <h4>Monday.com</h4>
+                        <p><strong>Visual workflow management that keeps everyone aligned.</strong> Track project progress, deadlines, and deliverables in real-time with customizable dashboards that give clients complete visibility into their campaigns.</p>
+                    </div>
+                    <div class="tool-item scroll-animate">
+                        <img src="images/notion.png" alt="Notion" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px;">
+                        <h4>Notion</h4>
+                        <p><strong>Your all-in-one workspace for strategy documentation and knowledge sharing.</strong> Centralize campaign briefs, meeting notes, and performance insights in a collaborative environment that evolves with your business.</p>
+                    </div>
+                    <div class="tool-item scroll-animate">
+                        <img src="images/slack.png" alt="Slack" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px;">
+                        <h4>Slack</h4>
+                        <p><strong>Real-time communication that eliminates email delays.</strong> Dedicated channels for instant updates, quick decisions, and seamless collaboration that keeps projects moving at digital speed.</p>
+                    </div>
+                    <div class="tool-item scroll-animate">
+                        <img src="images/teams.png" alt="Microsoft Teams" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px;">
+                        <h4>Microsoft Teams</h4>
+                        <p><strong>Enterprise-grade video conferencing and file sharing.</strong> Host strategic planning sessions, screen-share performance data, and collaborate on documents with enterprise security and reliability.</p>
+                    </div>
+                    <div class="tool-item scroll-animate">
+                        <img src="images/trello.png" alt="Trello" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px;">
+                        <h4>Trello</h4>
+                        <p><strong>Kanban-style project management for visual thinkers.</strong> See your entire marketing roadmap at a glance with drag-and-drop simplicity that makes complex campaigns feel manageable and organized.</p>
+                    </div>
+                    <div class="tool-item scroll-animate">
                         <i class="fab fa-google"></i>
                         <h4>Google Workspace</h4>
-                        <p>Shared drives, collaborative documents, and integrated calendar scheduling</p>
-                    </div>
-                    <div class="tool-item scroll-animate">
-                        <i class="fab fa-slack"></i>
-                        <h4>Slack Channels</h4>
-                        <p>Dedicated channels for project updates, quick questions, and team coordination</p>
-                    </div>
-                    <div class="tool-item scroll-animate">
-                        <i class="fas fa-trello"></i>
-                        <h4>Trello Boards</h4>
-                        <p>Visual project management with transparent task tracking and progress updates</p>
-                    </div>
-                    <div class="tool-item scroll-animate">
-                        <i class="fas fa-envelope"></i>
-                        <h4>Email Automation</h4>
-                        <p>Automated weekly summaries and milestone notifications with personalized content</p>
+                        <p><strong>The foundation of collaborative productivity.</strong> Shared drives, real-time document editing, and integrated calendar scheduling that keeps everyone synchronized and informed.</p>
                     </div>
                 </div>
             </section>
@@ -800,6 +826,29 @@
                 }
             });
         });
+
+        // Scroll-triggered animations for elements with .scroll-animate
+        (function () {
+            const animatedEls = document.querySelectorAll('.scroll-animate');
+            if (!animatedEls.length) return;
+
+            // Fallback for older browsers
+            if (!('IntersectionObserver' in window)) {
+                animatedEls.forEach(el => el.classList.add('animate'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedEls.forEach(el => observer.observe(el));
+        })();
     </script>
 </body>
 </html>
