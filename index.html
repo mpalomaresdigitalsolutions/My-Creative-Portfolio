@@ -25,73 +25,10 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <!-- Top Navigation Bar -->
-    <nav class="top-nav">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <img src="Profile.png" alt="Marlon Palomares" class="nav-avatar">
-                <span class="nav-name">Marlon Palomares</span>
-            </div>
-            
-            <div class="nav-menu" id="nav-menu">
-                <a href="#profile" class="nav-link active" data-section="profile">
-                    <i class="fas fa-user"></i> Profile
-                </a>
-                <a href="#competencies" class="nav-link" data-section="competencies">
-                    <i class="fas fa-cogs"></i> Services
-                </a>
-                <a href="#experience" class="nav-link" data-section="experience">
-                    <i class="fas fa-briefcase"></i> Experience
-                </a>
-                <a href="#certifications" class="nav-link" data-section="certifications">
-                    <i class="fas fa-certificate"></i> Certifications
-                </a>
-                <a href="case_study.html" class="nav-link" target="_blank">
-                    <i class="fas fa-chart-line"></i> Case Study
-                </a>
-                <a href="package-pricing.html" class="nav-link cta-button" target="_blank">
-                    <i class="fas fa-tags"></i> Get Quote
-                </a>
-            </div>
-            
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Breadcrumb Navigation -->
-    <div class="breadcrumb-container">
-        <nav class="breadcrumb">
-            <span class="breadcrumb-item active">
-                <i class="fas fa-home"></i> Portfolio
-            </span>
-            <span class="breadcrumb-separator">></span>
-            <span class="breadcrumb-current" id="breadcrumb-current">Profile</span>
-        </nav>
-    </div>
-
     <div class="container">
         <aside class="sidebar">
-            <!-- Quick Actions Section -->
-            <div class="quick-actions">
-                <h3><i class="fas fa-rocket"></i> Quick Actions</h3>
-                <div class="action-buttons">
-                    <a href="mailto:Mpalomaresdigital@gmail.com" class="action-btn primary">
-                        <i class="fas fa-envelope"></i> Contact Me
-                    </a>
-                    <a href="package-pricing.html" class="action-btn secondary" target="_blank">
-                        <i class="fas fa-tags"></i> View Packages
-                    </a>
-                    <a href="case_study.html" class="action-btn tertiary" target="_blank">
-                        <i class="fas fa-chart-line"></i> Case Study
-                    </a>
-                </div>
-            </div>
 
-            <div class="content-section" id="competencies">
+            <div class="content-section">
                 <h2><i class="fas fa-cogs"></i> Core Competencies</h2>
                 <div class="competencies">
                     <a href="Google Ads Optimization.html" class="competency-item">
@@ -154,7 +91,7 @@
                 </ul>
             </div>
 
-            <div class="content-section" id="certifications">
+            <div class="content-section">
                 <h2><i class="fas fa-certificate"></i> Certifications</h2>
                 <p>7 Professional Certifications - <a href="certifications.html">View All Certifications</a></p>
                 <div class="certifications-grid">
@@ -187,7 +124,7 @@
         </aside>
 
         <main class="main-content">
-            <div class="content-section" id="profile">
+            <div class="content-section">
                 <div class="profile-section">
                     <img src="Profile.png" alt="Profile Picture" class="profile-img">
                     <div class="headline-container">
@@ -209,7 +146,7 @@
                 <p>I also have basic knowledge of GoHighLevel (GHL), which I use to support lead nurturing through funnels and simple automations that improve follow-ups and increase conversions.</p>
             </div>
 
-            <div class="content-section" id="experience">
+            <div class="content-section">
                 <h2><i class="fas fa-briefcase"></i> Current Experience</h2>
                 <div class="experience-item">
                     <h3>Google Ads Campaign Manager/Sustainable Living Association</h3>
@@ -354,78 +291,6 @@
                 window.open('package-pricing.html', '_blank');
             }
         }
-
-        // Enhanced Navigation Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.getElementById('nav-menu');
-            const navLinks = document.querySelectorAll('.nav-link[data-section]');
-            const breadcrumbCurrent = document.getElementById('breadcrumb-current');
-
-            // Mobile menu toggle
-            navToggle.addEventListener('click', function() {
-                navMenu.classList.toggle('active');
-                navToggle.classList.toggle('active');
-            });
-
-            // Smooth scrolling and active state management
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetSection = this.getAttribute('data-section');
-                    const targetElement = document.getElementById(targetSection);
-                    
-                    if (targetElement) {
-                        // Remove active class from all nav links
-                        navLinks.forEach(navLink => navLink.classList.remove('active'));
-                        // Add active class to clicked link
-                        this.classList.add('active');
-                        
-                        // Update breadcrumb
-                        breadcrumbCurrent.textContent = this.textContent.trim();
-                        
-                        // Smooth scroll to section
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        
-                        // Close mobile menu if open
-                        navMenu.classList.remove('active');
-                        navToggle.classList.remove('active');
-                    }
-                });
-            });
-
-            // Intersection Observer for automatic active state updates
-            const observerOptions = {
-                root: null,
-                rootMargin: '-20% 0px -70% 0px',
-                threshold: 0
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const sectionId = entry.target.id;
-                        const correspondingNavLink = document.querySelector(`[data-section="${sectionId}"]`);
-                        
-                        if (correspondingNavLink) {
-                            navLinks.forEach(link => link.classList.remove('active'));
-                            correspondingNavLink.classList.add('active');
-                            breadcrumbCurrent.textContent = correspondingNavLink.textContent.trim();
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all sections
-            document.querySelectorAll('[id]').forEach(section => {
-                if (['profile', 'competencies', 'experience', 'certifications'].includes(section.id)) {
-                    observer.observe(section);
-                }
-            });
-        });
     </script>
     <script src="headline-animation.js"></script>
   </body>
