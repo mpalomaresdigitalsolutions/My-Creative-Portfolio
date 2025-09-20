@@ -153,7 +153,7 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
             // Check if we're running locally (file:// protocol)
             const isLocal = window.location.protocol === 'file:';
             if (isLocal) {
-                throw new Error('Local file protocol detected');
+                console.warn('Local file protocol detected. Using fallback knowledge base.');
             }
             
             const response = await fetch('knowledge_base.md');
