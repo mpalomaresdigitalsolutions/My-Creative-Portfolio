@@ -98,6 +98,29 @@
     }
 
     // Loading animation
+
+    function initCollapsibleSections() {
+        const headers = document.querySelectorAll('.sidebar .content-section h2');
+        headers.forEach(header => {
+            const content = header.nextElementSibling;
+            if (content) {
+                // Check if the section is 'Core Competencies' or 'Key Achievements' to be initially expanded
+                if (header.innerText.includes('Core Competencies') || header.innerText.includes('Key Achievements')) {
+                    content.style.display = 'block';
+                    header.classList.add('expanded');
+                } else {
+                    content.style.display = 'none';
+                }
+
+                header.classList.add('collapsible');
+                header.addEventListener('click', () => {
+                    const isVisible = content.style.display === 'block';
+                    content.style.display = isVisible ? 'none' : 'block';
+                    header.classList.toggle('expanded', !isVisible);
+                });
+            }
+        });
+    }
     function initLoadingAnimation() {
         const container = document.querySelector('.container');
         if (container) {
@@ -169,6 +192,7 @@
         initSkillCounters();
         initParallaxEffect();
         initTouchInteractions();
+        initCollapsibleSections();
         initLoadingAnimation();
         initDynamicBackground();
         initPerformanceOptimization();
