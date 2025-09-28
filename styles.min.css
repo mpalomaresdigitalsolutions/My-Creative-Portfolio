@@ -793,7 +793,7 @@ h1 {
 }
 
 /* Modern Footer */
-footer {
+.footer {
     text-align: center;
     padding: 1.5rem;
     margin-top: 2rem;
@@ -801,18 +801,14 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
-footer p {
-    margin: 0.5rem 0;
-}
-
-footer a {
+.footer a {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
 }
 
-footer a:hover {
+.footer a:hover {
     color: var(--secondary-color);
     text-decoration: underline;
 }
