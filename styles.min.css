@@ -818,12 +818,7 @@ footer a:hover {
 }
 
 /* Privacy Policy Styles */
-.privacy-container {
-    position: relative;
-    background: #f0f2f5;
-    padding: 40px 20px;
-    font-family: 'Arial', sans-serif;
-}
+.privacy-container { text-align: center; }
 
 .privacy-overlay {
     position: absolute;
