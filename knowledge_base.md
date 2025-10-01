@@ -109,7 +109,7 @@ A results-driven Google Ads specialist with hands-on campaign management experie
 - **Total Conversions:** 18+
 
 ### Contact & Scheduling
-**Booking Link:** https://calendar.app.google/ecrh372MbNbBHbSf6  
+**Booking Link:** https://calendar.app.google/j9dGSzcMANbs8wL88  
 **Email:** Mpalomaresdigital@gmail.com  
 **Availability:** Free strategy calls available for qualified prospects
 
@@ -307,7 +307,7 @@ The portfolio includes an AI-powered chatbot that provides information about:
 - Performance monitoring strategies
 
 ### Contact & Scheduling
-**Booking Link:** https://calendar.app.google/ecrh372MbNbBHbSf6  
+**Booking Link:** https://calendar.app.google/j9dGSzcMANbs8wL88  
 **Email:** Mpalomaresdigital@gmail.com  
 **Availability:** Free strategy calls available for qualified prospects
 

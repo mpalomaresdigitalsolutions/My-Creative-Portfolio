@@ -176,7 +176,7 @@ Ready to unlock your campaign's potential? Just ask me anything about Google Ads
 **Website:** https://mpalomaresdigitalsolutions.github.io/MPDIGITAL/
 
 ### Professional Summary
-Google Ads specialist with 6 months focused experience managing live campaigns. Google Ads certified with advanced training in local lead generation. Strong customer service background (4+ years) supporting high-volume client communications. Passionate about helping businesses get leads through Google Ads and committed to continuous learning and optimization.
+Google Ads specialist with 2 years focused experience managing live campaigns. Google Ads certified with advanced training in local lead generation. Strong customer service background (2 years) supporting high-volume client communications. Passionate about helping businesses get leads through Google Ads and committed to continuous learning and optimization.
 
 ### Core Services Offered
 1. **Google Ads Audit** - Comprehensive analysis and optimization recommendations
@@ -229,11 +229,11 @@ Google Ads specialist with 6 months focused experience managing live campaigns. 
 - **Current:** Managing $10,000/month Google Ads campaign for nonprofit
 - **Training:** Advanced Google Ads training from Ian Baillo (Philippines' top expert)
 - **Certification:** Google Ads certified with advanced optimization training
-- **Experience:** 4+ years with US-based clients in customer service and technical support
+- **Experience:** 2 years with US-based clients in customer service and technical support
 - **Performance:** 78.5% optimization score, $5.39 average cost per conversion, 15+ conversions generated
 
 ### Contact & Scheduling
-**Booking Link:** https://calendar.app.google/ecrh372MbNbBHbSf6  
+**Booking Link:** https://calendar.app.google/j9dGSzcMANbs8wL88  
 **Email:** Mpalomaresdigital@gmail.com  
 **Availability:** Free strategy calls available for qualified prospects
 
@@ -508,7 +508,7 @@ Creating a Google Ads campaign involves several key steps, from defining your ob
     window.bookConsultation = function() {
         displayMessage("🗓️ **Opening booking page...**\n\nYou'll be redirected to Calendly to schedule your free 30-minute strategy call with Marlon.", 'bot');
         setTimeout(() => {
-            window.open('https://calendar.app.google/ecrh372MbNbBHbSf6', '_blank');
+            window.open('https://calendar.app.google/j9dGSzcMANbs8wL88', '_blank');
         }, 1500);
     };
 
