@@ -177,6 +177,8 @@ h1 {
     text-decoration: underline;
 }
 
+
+
 .content-section h2.collapsible::after {
     content: '\f078'; /* Font Awesome chevron-down icon */
     font-family: 'Font Awesome 6 Free';
