@@ -1,0 +1,27 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node / JS
+node_modules/
+dist/
+build/
+.cache/
+npm-debug.log*
+yarn-error.log*
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Env / Secrets
+.env
+.env.*
+
+# Tests / Coverage
+coverage/
+
+# Misc
+*.log
+*.tmp
+*.swp
