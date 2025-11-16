@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Ads Specialist | Meta Ads Strategy | Funnels & Tracking</title>
+    <meta name="description" content="Digital Marketing Specialist portfolio showcasing expertise in Google Ads, Analytics, and creative marketing solutions.">
+    <meta name="keywords" content="digital marketing, google ads, analytics, creative portfolio, marketing specialist">
+    <title>Creative Portfolio - Digital Marketing Specialist</title>
     <link rel="preload" href="styles.min.css" as="style">
     <link rel="preload" href="responsive.css" as="style">
     <link rel="preload" href="chatbot-enhanced.css" as="style">
@@ -14,23 +16,28 @@
     <style>
         .book-call-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
             color: white !important;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: var(--space-4) var(--space-6);
+            border-radius: var(--radius-full);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+            margin-top: var(--space-6);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
             border: none;
         }
         
         .book-call-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-            background: linear-gradient(135deg, #ff5722, #ff6b35);
+            box-shadow: var(--shadow-xl);
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+        }
+        
+        .book-call-btn:focus {
+            outline: 2px solid var(--primary-300);
+            outline-offset: 2px;
         }
         
         .book-call-btn i {
@@ -44,57 +51,113 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="Profile.png" as="image">
+    <link rel="preload" href="critical.css" as="style">
+    <link rel="preload" href="styles.min.css" as="style">
+    <link rel="preload" href="responsive.css" as="style">
     <meta name="description" content="Marlon Palomares - Digital Marketing Specialist & Web Developer with expertise in Google Ads, SEO, and GoHighLevel automation">
+    <!-- Mobile UX meta -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="Profile.png">
     <meta name="keywords" content="digital marketing, google ads, SEO, web development, GoHighLevel, automation">
     <meta name="author" content="Marlon Palomares">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="critical.css">
+    <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="responsive.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="styles.min.css">
+        <link rel="stylesheet" href="responsive.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+    <script src="navigation.js" defer></script>
+    <script src="performance.js" defer></script>
+    <style>
+        .book-call-btn {
+            background: var(--primary-500, #3b82f6);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        .book-call-btn:hover {
+            background: var(--primary-600, #2563eb);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .book-call-btn:focus {
+            outline: 2px solid var(--primary-500, #3b82f6);
+            outline-offset: 2px;
+        }
+    </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <div class="container">
-        <aside class="sidebar">
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Profile and navigation">
 
             <div class="content-section">
                 <h2><i class="fas fa-cogs"></i> Core Competencies</h2>
                 <div class="competencies">
-                    <a href="Google Ads Optimization.html" class="competency-item">
-                        <i class="fab fa-google"></i>
+                    <a href="Google Ads Optimization.html" class="competency-item hover-lift stagger-1" aria-label="Google Ads Management services">
+                        <i class="fab fa-google" aria-hidden="true"></i>
                         <span>Google Ads Management</span>
                     </a>
-                    <a href="Keyword Research.html" class="competency-item">
-                        <i class="fas fa-search"></i>
+                    <a href="Keyword Research.html" class="competency-item hover-lift stagger-2" aria-label="Keyword Research services">
+                        <i class="fas fa-search" aria-hidden="true"></i>
                         <span>Keyword Research</span>
                     </a>
-                    <a href="Google Ads Optimization.html" class="competency-item">
-                        <i class="fas fa-chart-line"></i>
+                    <a href="Google Ads Optimization.html" class="competency-item hover-lift stagger-3" aria-label="Campaign Optimization services">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
                         <span>Campaign Optimization</span>
                     </a>
-                    <a href="meta.html" class="competency-item" title="Meta Ads Strategy">
-                        <i class="fab fa-facebook"></i>
+                    <a href="meta.html" class="competency-item hover-lift stagger-4" title="Meta Ads Strategy" aria-label="Meta Ads Strategy services">
+                        <i class="fab fa-facebook" aria-hidden="true"></i>
                         <span>Meta Ads Strategy</span>
                     </a>
-                    <a href="Copywriting.html" class="competency-item">
-                        <i class="fas fa-copy"></i>
+                    <a href="Copywriting.html" class="competency-item hover-lift stagger-5" aria-label="Ad Copywriting services">
+                        <i class="fas fa-copy" aria-hidden="true"></i>
                         <span>Ad Copywriting</span>
                     </a>
-                    <a href="Google Ads Audit.html" class="competency-item">
-                        <i class="fas fa-analytics"></i>
+                    <a href="Google Ads Audit.html" class="competency-item hover-lift stagger-1" aria-label="Performance Analysis services">
+                        <i class="fas fa-analytics" aria-hidden="true"></i>
                         <span>Performance Analysis</span>
                     </a>
-                    <a href="Conversion Tracking Setup.html" class="competency-item">
-                        <i class="fas fa-bullseye"></i>
+                    <a href="Conversion Tracking Setup.html" class="competency-item hover-lift stagger-2" aria-label="Conversion Tracking services">
+                        <i class="fas fa-bullseye" aria-hidden="true"></i>
                         <span>Conversion Tracking</span>
                     </a>
-                    <a href="GTM-integration.html" class="competency-item">
-                        <i class="fas fa-code-branch"></i>
+                    <a href="GTM-integration.html" class="competency-item hover-lift stagger-3" aria-label="Google Tag Manager services">
+                        <i class="fas fa-code-branch" aria-hidden="true"></i>
                         <span>Google Tag Manager</span>
                     </a>
-                    <a href="GHL Work samples.html" class="competency-item">
-                        <i class="fas fa-layer-group"></i>
+                    <a href="GHL Work samples.html" class="competency-item hover-lift stagger-4" aria-label="GoHighLevel Basics services">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i>
                         <span>GoHighLevel Basics</span>
                     </a>
-                    <a href="Client Communication.html" class="competency-item" title="Client Communication">
-                        <i class="fas fa-comments"></i>
+                    <a href="Client Communication.html" class="competency-item hover-lift stagger-5" title="Client Communication" aria-label="Client Communication services">
+                        <i class="fas fa-comments" aria-hidden="true"></i>
                         <span>Client Communication</span>
                     </a>
                 </div>
@@ -126,48 +189,47 @@
                 <p>7 Professional Certifications - <a href="certifications.html">View All Certifications</a></p>
                 <div class="certifications-grid">
                     <div class="certificate-item">
-                        <img src="images/Google Search.png" alt="Google Search Ads Certification" class="certificate-image">
+                        <img src="images/Google Search.png" alt="Google Search Ads Certification" class="certificate-image" width="120" height="120">
                         <div class="certificate-title">Google Search Ads</div>
             </div>
                     <div class="certificate-item">
-                        <img src="images/Google display.png" alt="Google Display Ads Certification" class="certificate-image">
+                        <img src="images/Google display.png" alt="Google Display Ads Certification" class="certificate-image" width="120" height="120">
                         <div class="certificate-title">Google Display Ads</div>
                     </div>
                     <div class="certificate-item">
-                        <img src="images/Google Video.png" alt="Google Video Ads Certification" class="certificate-image">
+                        <img src="images/Google Video.png" alt="Google Video Ads Certification" class="certificate-image" width="120" height="120">
                         <div class="certificate-title">Google Video Ads</div>
                     </div>
                     <div class="certificate-item">
-                        <img src="images/Google Analytics.png" alt="Google Analytics Certification" class="certificate-image">
+                        <img src="images/Google Analytics.png" alt="Google Analytics Certification" class="certificate-image" width="120" height="120">
                         <div class="certificate-title">Google Analytics</div>
                     </div>
                     <div class="certificate-item">
-                        <img src="images/Google Shopping.png" alt="Google Shopping Ads Certification" class="certificate-image">
+                        <img src="images/Google Shopping.png" alt="Google Shopping Ads Certification" class="certificate-image" width="120" height="120">
                         <div class="certificate-title">Google Shopping</div>
                     </div>
                     <div class="certificate-item">
-                        <img src="images/Semrush.png" alt="SEMrush Certification" class="certificate-image">
+                        <img src="images/Semrush.png" alt="SEMrush Certification" class="certificate-image" width="120" height="120">
                         <div class="certificate-title">SEMrush Certification</div>
                     </div>
                 </div>
 
         </aside>
 
-        <main class="main-content">
-            <div class="content-section">
-                <div class="profile-section">
-                    <img src="Profile.png" alt="Profile Picture" class="profile-img">
+        <main class="main-content" id="main-content">
+            <div class="content-section animate-fadeInUp">
+                <div class="profile-section hover-lift">
+                    <img src="Profile.png" alt="Professional headshot of Marlon Palomares, Digital Marketing Specialist" class="profile-img hover-scale" width="120" height="120">
                     <div class="headline-container">
                         <h1>Google Ads Specialist | Meta Ads Strategy | Funnels & Tracking</h1>
                       </div>
                     
                     <div class="contact-info">
-
-                <p><a href="#" onclick="showSection('website')"><i class="fas fa-globe"></i> View My Website</a></p>
-                        <p><a href="https://linktr.ee/MPDIGITALSOLUTIONS" target="_blank"><i class="fas fa-link"></i> View My Linktree</a></p>
-                        <p><a href="#" onclick="showSection('case-study')"><i class="fas fa-chart-line"></i> View My Case Study</a></p>
-                        <p><a href="#" onclick="showSection('pricing')"><i class="fas fa-tags"></i> View Service Packages</a></p>
-                        <p><a href="https://calendar.app.google/j9dGSzcMANbs8wL88" target="_blank" class="book-call-btn"><i class="fas fa-calendar-alt"></i> Book a Call</a></p>
+                        <p><a href="#" onclick="showSection('website')" aria-label="View my professional website"><i class="fas fa-globe" aria-hidden="true"></i> View My Website</a></p>
+                        <p><a href="https://linktr.ee/MPDIGITALSOLUTIONS" target="_blank" rel="noopener noreferrer" aria-label="View my Linktree profile"><i class="fas fa-link" aria-hidden="true"></i> View My Linktree</a></p>
+                        <p><a href="#" onclick="showSection('case-study')" aria-label="View my marketing case study"><i class="fas fa-chart-line" aria-hidden="true"></i> View My Case Study</a></p>
+                        <p><a href="#" onclick="showSection('pricing')" aria-label="View my service packages and pricing"><i class="fas fa-tags" aria-hidden="true"></i> View Service Packages</a></p>
+                        <p><a href="https://calendar.app.google/j9dGSzcMANbs8wL88" target="_blank" rel="noopener noreferrer" class="book-call-btn hover-lift" aria-label="Book a consultation call with me"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Book a Call</a></p>
                 </div>
                 </div>
                 <h2><i class="fas fa-user"></i> Professional Profile</h2>
@@ -285,8 +347,8 @@
         </button>
         
         <div class="chatbot-window" id="chatbot-window">
-            <div class="chatbot-header">
-                <img src="Profile.png" alt="Marlon's Avatar">
+            <div class="chatbot-header" tabindex="0" aria-label="Drag to move the chat window">
+                <img src="Profile.png" alt="Marlon's Avatar" width="32" height="32">
                 <div class="header-text">
                     <h3>Marlon's Assistant</h3>
                     <p>Google Ads Expert</p>
@@ -305,6 +367,8 @@
                 <input type="text" id="chatbot-input" placeholder="Ask me about Google Ads..." />
                 <button id="chatbot-send">➤</button>
             </div>
+            <!-- Resize handle for cross-browser resizing -->
+            <div class="chatbot-resize-handle" aria-hidden="true"></div>
         </div>
     </div>
 
@@ -322,5 +386,10 @@
         }
     </script>
     <script src="headline-animation.js"></script>
+    <!-- Sticky floating call button -->
+    <a href="https://calendar.app.google/j9dGSzcMANbs8wL88" target="_blank" rel="noopener noreferrer" class="sticky-call-btn" aria-label="Book a consultation call">
+      <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+      <span>Book a Call</span>
+    </a>
   </body>
 </html>

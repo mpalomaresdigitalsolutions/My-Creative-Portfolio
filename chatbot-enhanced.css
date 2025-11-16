@@ -62,11 +62,15 @@
 
 /* Chatbot Window Styles */
 .chatbot-window {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
+    position: fixed; /* allow moving anywhere on screen */
+    bottom: 90px;
+    right: 20px;
     width: 380px;
     height: 600px;
+    min-width: 300px;
+    min-height: 360px;
+    max-width: 95vw;
+    max-height: 90vh;
     background: #f0f2f5;
     border-radius: 20px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
@@ -74,6 +78,14 @@
     flex-direction: column;
     overflow: hidden;
     border: 1px solid #ddd;
+    resize: both; /* native resizing (desktop browsers) */
+    backdrop-filter: saturate(110%) blur(6px);
+}
+
+/* Visual feedback while dragging */
+.chatbot-window.dragging {
+    box-shadow: 0 22px 60px rgba(0,0,0,0.28);
+    opacity: 0.98;
 }
 
 .chatbot-header {
@@ -83,6 +95,8 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ddd;
+    cursor: move; /* indicate draggable header */
+    user-select: none;
 }
 
 .chatbot-header img {
@@ -137,6 +151,23 @@
     background: #f0f2f5;
     scrollbar-width: thin;
     scrollbar-color: #ccc #f1f1f1;
+}
+
+/* Custom resize handle for cross-browser support */
+.chatbot-resize-handle {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: se-resize;
+    background: linear-gradient(135deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%);
+    border-radius: 3px;
+    opacity: 0.6;
+}
+
+.chatbot-resize-handle:hover {
+    opacity: 0.9;
 }
 
 .chatbot-messages::-webkit-scrollbar {

@@ -6,6 +6,130 @@ document.addEventListener('DOMContentLoaded', async () => {
     const chatInput = document.querySelector('#chatbot-input');
     const sendBtn = document.querySelector('#chatbot-send');
     const chatMessages = document.querySelector('#chatbot-messages');
+    const chatHeader = document.querySelector('.chatbot-header');
+    const resizeHandle = document.querySelector('.chatbot-resize-handle');
+
+    // --- Draggable & Resizable Support ---
+    // Make the window draggable by header (mouse & touch)
+    const dragState = { dragging: false, offsetX: 0, offsetY: 0 };
+
+    function startDrag(evt) {
+        const e = evt.touches ? evt.touches[0] : evt;
+        // If widget is hidden, ignore drag
+        if (chatWidget.style.display === 'none') return;
+        dragState.dragging = true;
+        const rect = chatWidget.getBoundingClientRect();
+        dragState.offsetX = e.clientX - rect.left;
+        dragState.offsetY = e.clientY - rect.top;
+        // Switch to fixed positioning to allow free movement
+        chatWidget.style.position = 'fixed';
+        chatWidget.style.left = rect.left + 'px';
+        chatWidget.style.top = rect.top + 'px';
+        chatWidget.style.right = 'auto';
+        chatWidget.style.bottom = 'auto';
+        chatWidget.classList.add('dragging');
+        document.body.style.userSelect = 'none';
+    }
+
+    function onDrag(evt) {
+        if (!dragState.dragging) return;
+        const e = evt.touches ? evt.touches[0] : evt;
+        // Prevent scrolling while dragging on touch
+        if (evt.cancelable) evt.preventDefault();
+        let x = e.clientX - dragState.offsetX;
+        let y = e.clientY - dragState.offsetY;
+        const maxX = window.innerWidth - chatWidget.offsetWidth;
+        const maxY = window.innerHeight - chatWidget.offsetHeight;
+        x = Math.max(0, Math.min(maxX, x));
+        y = Math.max(0, Math.min(maxY, y));
+        chatWidget.style.left = x + 'px';
+        chatWidget.style.top = y + 'px';
+    }
+
+    function endDrag() {
+        if (!dragState.dragging) return;
+        dragState.dragging = false;
+        chatWidget.classList.remove('dragging');
+        document.body.style.userSelect = '';
+    }
+
+    // Attach drag listeners
+    chatHeader.addEventListener('mousedown', startDrag);
+    chatHeader.addEventListener('touchstart', startDrag, { passive: true });
+    document.addEventListener('mousemove', onDrag);
+    document.addEventListener('touchmove', onDrag, { passive: false });
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
+
+    // Keyboard accessibility: move window with arrow keys when header is focused
+    chatHeader.addEventListener('keydown', (e) => {
+        if (chatWidget.style.display === 'none') return;
+        const step = e.shiftKey ? 20 : 10;
+        const rect = chatWidget.getBoundingClientRect();
+        const pos = { left: rect.left, top: rect.top };
+        let handled = true;
+        switch (e.key) {
+            case 'ArrowUp':
+                pos.top = Math.max(0, rect.top - step); break;
+            case 'ArrowDown':
+                pos.top = Math.min(window.innerHeight - chatWidget.offsetHeight, rect.top + step); break;
+            case 'ArrowLeft':
+                pos.left = Math.max(0, rect.left - step); break;
+            case 'ArrowRight':
+                pos.left = Math.min(window.innerWidth - chatWidget.offsetWidth, rect.left + step); break;
+            default:
+                handled = false;
+        }
+        if (handled) {
+            chatWidget.style.position = 'fixed';
+            chatWidget.style.left = pos.left + 'px';
+            chatWidget.style.top = pos.top + 'px';
+            chatWidget.style.right = 'auto';
+            chatWidget.style.bottom = 'auto';
+            e.preventDefault();
+        }
+    });
+
+    // Resizing fallback via custom handle (for browsers where CSS resize is limited)
+    const resizeState = { resizing: false, startX: 0, startY: 0, startW: 0, startH: 0 };
+
+    function startResize(evt) {
+        const e = evt.touches ? evt.touches[0] : evt;
+        if (chatWidget.style.display === 'none') return;
+        resizeState.resizing = true;
+        resizeState.startX = e.clientX;
+        resizeState.startY = e.clientY;
+        resizeState.startW = chatWidget.offsetWidth;
+        resizeState.startH = chatWidget.offsetHeight;
+        document.body.style.userSelect = 'none';
+    }
+
+    function onResize(evt) {
+        if (!resizeState.resizing) return;
+        const e = evt.touches ? evt.touches[0] : evt;
+        if (evt.cancelable) evt.preventDefault();
+        const deltaX = e.clientX - resizeState.startX;
+        const deltaY = e.clientY - resizeState.startY;
+        const newW = Math.max(300, Math.min(window.innerWidth, resizeState.startW + deltaX));
+        const newH = Math.max(360, Math.min(window.innerHeight, resizeState.startH + deltaY));
+        chatWidget.style.width = newW + 'px';
+        chatWidget.style.height = newH + 'px';
+    }
+
+    function endResize() {
+        if (!resizeState.resizing) return;
+        resizeState.resizing = false;
+        document.body.style.userSelect = '';
+    }
+
+    if (resizeHandle) {
+        resizeHandle.addEventListener('mousedown', startResize);
+        resizeHandle.addEventListener('touchstart', startResize, { passive: true });
+        document.addEventListener('mousemove', onResize);
+        document.addEventListener('touchmove', onResize, { passive: false });
+        document.addEventListener('mouseup', endResize);
+        document.addEventListener('touchend', endResize);
+    }
 
     // Start with chat widget minimized
     let isMinimized = true;
